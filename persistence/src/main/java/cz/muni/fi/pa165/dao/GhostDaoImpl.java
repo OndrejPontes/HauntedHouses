@@ -7,23 +7,25 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * @author opontes
+ * @author Ondrej Ponteš
  */
 public class GhostDaoImpl implements GhostDao {
 
     @PersistenceContext
     private EntityManager em;
 
-    public void create(Ghost ghost) {
+    public Ghost create(Ghost ghost) {
         em.persist(ghost);
+        return getById(ghost.getId());
     }
 
-    public void update(Ghost ghost) {
-        em.merge(ghost);
+    public Ghost update(Ghost ghost) {
+        return em.merge(ghost);
     }
 
-    public void delete(Ghost ghost) {
+    public boolean delete(Ghost ghost) {
         em.remove(ghost);
+        return !em.contains(ghost);
     }
 
     public Ghost getById(long id) {

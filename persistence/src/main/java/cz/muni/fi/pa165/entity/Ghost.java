@@ -53,64 +53,72 @@ public class Ghost {
         return id;
     }
 
-    public void setId(int id) {
+    public Ghost setId(int id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Ghost setName(String name) {
         this.name = name;
+        return this;
     }
 
     public LocalDate getHauntsFrom() {
         return hauntsFrom;
     }
 
-    public void setHauntsFrom(LocalDate hauntsFrom) {
+    public Ghost setHauntsFrom(LocalDate hauntsFrom) {
         this.hauntsFrom = hauntsFrom;
+        return this;
     }
 
     public LocalDate getHauntsTo() {
         return hauntsTo;
     }
 
-    public void setHauntsTo(LocalDate hauntsTo) {
+    public Ghost setHauntsTo(LocalDate hauntsTo) {
         this.hauntsTo = hauntsTo;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Ghost setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public House getHauntedHouse() {
         return hauntedHouse;
     }
 
-    public void setHauntedHouse(House hauntedHouse) {
+    public Ghost setHauntedHouse(House hauntedHouse) {
         this.hauntedHouse = hauntedHouse;
+        return this;
     }
 
     public List<Ability> getAbilities() {
         return abilities;
     }
 
-    public void setAbilities(List<Ability> abilities) {
+    public Ghost setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
+        return this;
     }
 
     public List<Haunting> getHauntings() {
         return hauntings;
     }
 
-    public void setHauntings(List<Haunting> hauntings) {
+    public Ghost setHauntings(List<Haunting> hauntings) {
         this.hauntings = hauntings;
+        return this;
     }
 
     @Override
