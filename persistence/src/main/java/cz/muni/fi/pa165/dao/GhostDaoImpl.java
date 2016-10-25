@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entity.Ghost;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,23 +11,23 @@ import java.util.List;
 /**
  * @author Ondrej Ponteš
  */
+@Repository
+@Transactional
 public class GhostDaoImpl implements GhostDao {
 
     @PersistenceContext
     private EntityManager em;
 
-    public Ghost create(Ghost ghost) {
+    public void create(Ghost ghost) {
         em.persist(ghost);
-        return getById(ghost.getId());
     }
 
     public Ghost update(Ghost ghost) {
         return em.merge(ghost);
     }
 
-    public boolean delete(Ghost ghost) {
+    public void delete(Ghost ghost) {
         em.remove(ghost);
-        return !em.contains(ghost);
     }
 
     public Ghost getById(long id) {

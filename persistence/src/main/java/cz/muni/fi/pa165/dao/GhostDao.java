@@ -12,7 +12,7 @@ public interface GhostDao {
      * Create ghost
      * @param ghost Ghost object for creating
      */
-    public Ghost create(Ghost ghost);
+    public void create(Ghost ghost);
 
     /**
      * Updates ghost
@@ -24,7 +24,7 @@ public interface GhostDao {
      * Removes ghost
      * @param ghost Ghost object for deleting
      */
-    public boolean delete(Ghost ghost);
+    public void delete(Ghost ghost);
 
     /**
      * Gets ghost by id
