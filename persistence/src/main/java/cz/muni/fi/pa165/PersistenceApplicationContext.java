@@ -26,7 +26,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {GhostDao.class, HauntingDao.class})
-public class PersistenceApplicationContext {
+public class    PersistenceApplicationContext {
 
 
     @Bean

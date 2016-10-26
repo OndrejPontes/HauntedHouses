@@ -2,6 +2,7 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.dao.HauntingDao;
 import cz.muni.fi.pa165.entity.Haunting;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -37,22 +38,15 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     private Haunting h1;
     private Haunting h2;
     private Haunting h3;
-    private Haunting h4;
-    private Haunting h5;
 
-
-    @BeforeClass
+    @BeforeMethod
     public void setUp(){
         h1 = new Haunting(LocalDate.now().plus(1, ChronoUnit.DAYS), 5);
         h2 = new Haunting(LocalDate.now().plus(1, ChronoUnit.DAYS), 3);
         h3 = new Haunting(LocalDate.now().minus(1, ChronoUnit.DAYS), 1);
-        h4 = new Haunting(LocalDate.now().minus(4, ChronoUnit.DAYS), 9);
-        h5 = new Haunting(LocalDate.now(), 7);
 
         hauntingDao.create(h1);
         hauntingDao.create(h2);
-        hauntingDao.create(h4);
-        hauntingDao.create(h5);
     }
 
     @Test
@@ -63,7 +57,7 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void findByDateReturnCorrectHaunting(){
+    public void getByDateReturnCorrectHaunting(){
         List<Haunting> found = hauntingDao.getByDate(h1.getDate());
         assertThat(found).hasSize(2);
         assertThat(found).contains(h1);
@@ -71,17 +65,36 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void getByIDReturnCorrectHaunting(){
+        Haunting found = hauntingDao.getById(h1.getId());
+        assertThat(found).isEqualTo(h1);
+    }
+
+    @Test
+    public void getAllReturnCorrectHauntings(){
+        List<Haunting> hauntings = hauntingDao.getAll();
+        assertThat(hauntings).hasSize(2);
+        assertThat(hauntings).contains(h1);
+        assertThat(hauntings).contains(h2);
+    }
+
+    @Test
     public void isPossibleToUpdateHaunting(){
-        h4.setNumberOfPeoplePresent(111);
-        Haunting updated = hauntingDao.update(h4);
+        h1.setNumberOfPeoplePresent(111);
+        Haunting updated = hauntingDao.update(h1);
         assertThat(updated).hasFieldOrPropertyWithValue("numberOfPeoplePresent", 111);
     }
 
     @Test
     public void isPossibleToDeleteHaunting(){
-        assertThat(em.contains(h5)).isTrue();
-        hauntingDao.delete(h5);
-        assertThat(em.contains(h5)).isFalse();
+        assertThat(em.contains(h1)).isTrue();
+        hauntingDao.delete(h1);
+        assertThat(em.contains(h1)).isFalse();
+    }
+
+    @Test(expectedExceptions=ConstraintViolationException.class)
+    public void isForbiddenToPersistHauntingWithNullDate(){
+        hauntingDao.create(new Haunting().setDate(null));
     }
 
 }

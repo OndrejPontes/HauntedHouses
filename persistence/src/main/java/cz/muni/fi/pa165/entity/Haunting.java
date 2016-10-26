@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.entity;
 
-import com.sun.istack.internal.NotNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 

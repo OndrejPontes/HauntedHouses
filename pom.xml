@@ -9,6 +9,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
+    <modules>
+        <module>persistence</module>
+    </modules>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -21,9 +25,9 @@
         </dependencies>
     </dependencyManagement>
 
-    <modules>
-        <module>persistence</module>
-    </modules>
-
-
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
 </project>
