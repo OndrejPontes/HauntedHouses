@@ -105,7 +105,6 @@ public class Ability {
     }
 
     public Ability(Long id, String name, String description) {
-
         this.id = id;
         this.name = name;
         this.description = description;
@@ -115,23 +114,26 @@ public class Ability {
         return id;
     }
 
-    public void setId(Long id) {
+    public Ability setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Ability setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Ability setDescription(String description) {
         this.description = description;
+        return this;
     }
 }
