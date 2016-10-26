@@ -47,33 +47,43 @@ public class Ability {
                 break;
             case GHOSTLY_WAIL:
                 this.name="GHOSTLY_WAIL";
+                this.description="It allows the ghost to generate great sonic waves of ectoplasmic energy which destroy whatever they hit and more.";
                 break;
             case DUPLICATION:
                 this.name="DUPLICATION";
+                this.description="The ability of a ghost to make exact copies of themself, each possessing its personality and powers.";
                 break;
             case TELEPORTATION:
                 this.name="TELEPORTATION";
+                this.description="The power to move from place to place by thought.";
                 break;
             case CRYOKINESIS:
                 this.name="CRYOKINESIS";
+                this.description="The power for ghosts to fire or radiate intense cold, it can also be used to detect ghosts.";
                 break;
             case SHAPE_SHIFTING:
                 this.name="SHAPE_SHIFTING";
+                this.description="The power for a ghost to change its appearance, form or even characteristics.";
                 break;
             case TELEKINESIS:
                 this.name="TELEKINESIS";
+                this.description="Arguably the most powerful power, the power that allows ghosts to make objects move, float or break at will; can be restricted to certain objects.";
                 break;
             case SIZE_CHANGING:
                 this.name="SIZE_CHANGING";
+                this.description="Very powerful ghosts can make themselves bigger and smaller.";
                 break;
             case GHOST_PORTAL_CREATION:
                 this.name="GHOST_PORTAL_CREATION";
+                this.description="A very rare power that allows ghosts to personally create portals between Earth and The Ghost Zone at will.";
                 break;
             case GHOST_SHIELD:
                 this.name="GHOST_SHIELD";
+                this.description="Some ghosts can create a shield made out of Ectoplasmic Energy around themselves.";
                 break;
             case GHOST_STINGER:
                 this.name="GHOST_STINGER";
+                this.description="The power to zap a being or object that the ghost is hold/touching/connected to something else that the energy can run through with ectoplasmic energy.";
                 break;
         }
     }

@@ -3,38 +3,54 @@ package cz.muni.fi.pa165.dao;
 import cz.muni.fi.pa165.entity.Ability;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
  * Created by vojta on 10/25/16.
+ * @author vojta
  */
 public class AbilityDaoImpl implements AbilityDao {
 
     @PersistenceContext
     private EntityManager em;
 
-    public Ability findById(Long id) {
-        return null;
+    @Override
+    public void create(Ability Ability) {
+        em.persist(Ability);
     }
 
-    public void create(Ability a) {
-        em.persist(a);
+    @Override
+    public Ability update(Ability Ability) {
+        return em.merge(Ability);
     }
 
-    public void delete(Ability a) {
-
+    @Override
+    public void delete(Ability Ability) {
+        em.remove(Ability);
     }
 
-    public void update(Ability a) {
-        em.merge(a);
+    @Override
+    public Ability getById(long id) {
+        return em.find(Ability.class,id);
     }
 
-    public List<Ability> findAll() {
-        return null;
+    @Override
+    public Ability getByName(String name) {
+        try {
+            return em
+                    .createQuery("select a from Ability a where name = :name",
+                            Ability.class).setParameter("name", name)
+                    .getSingleResult();
+        } catch (NoResultException nrf) {
+            return null;
+        }
     }
 
-    public Ability findByName(String name) {
-        return null;
+    @Override
+    public List<Ability> getAll() {
+        return em.createQuery("select a from Ability a", Ability.class)
+                .getResultList();
     }
 }

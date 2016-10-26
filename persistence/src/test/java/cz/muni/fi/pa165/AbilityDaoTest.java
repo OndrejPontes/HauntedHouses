@@ -28,10 +28,10 @@ import static org.assertj.core.api.Assertions.*;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
-
+/*
     @PersistenceContext
     public EntityManager em;
-/*
+
     @Autowired
     public AbilityDao abilityDao;
 
@@ -130,5 +130,6 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(abilitiesFlying).hasSize(1);
         assertThat(abilitiesFlying).contains(ability2);
     }
+*/
 
 }
