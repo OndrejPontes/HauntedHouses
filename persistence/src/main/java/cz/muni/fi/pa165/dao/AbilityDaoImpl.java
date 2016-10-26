@@ -8,8 +8,7 @@ import javax.persistence.PersistenceContext;
 import java.util.List;
 
 /**
- * Created by vojta on 10/25/16.
- * @author vojta
+ * @author Vojta David
  */
 public class AbilityDaoImpl implements AbilityDao {
 

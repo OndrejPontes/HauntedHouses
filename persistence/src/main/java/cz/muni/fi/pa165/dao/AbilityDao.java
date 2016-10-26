@@ -5,8 +5,7 @@ import cz.muni.fi.pa165.entity.Ability;
 import java.util.List;
 
 /**
- * Created by vojta on 10/25/16.
- * @author vojta
+ * @author Vojta David
  */
 public interface AbilityDao {
     /**

@@ -3,7 +3,7 @@ package cz.muni.fi.pa165.entity;
 import cz.muni.fi.pa165.enums.GHOST_ABILITIES;
 
 /**
- * @author vojtadavid
+ * @author Vojta David
  */
 
 public class Ability {

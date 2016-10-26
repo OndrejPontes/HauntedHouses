@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.enums;
 
 /**
- * Created by vojta on 10/25/16.
+ * @author Vojta David
  */
 public enum GHOST_ABILITIES {
     FLIGHT,INTANGIBILITY,INVISIBILITY,OVERSHADOWING,GHOST_RAY,SUPERNATURAL_PHYSICAL_ABILITIES,GOING_GHOST,
