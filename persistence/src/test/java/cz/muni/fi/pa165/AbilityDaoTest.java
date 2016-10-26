@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165;
 
+import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.entity.Ability;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ import java.util.List;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
-/*
+
     @PersistenceContext
     public EntityManager em;
 
@@ -114,5 +115,5 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
         Assert.assertEquals(abilityDao.findByName("hhh").size(), 0);
         Assert.assertEquals(abilityDao.findByName("Flying").size(), 1);
     }
-*/
+
 }
