@@ -9,13 +9,14 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+
+import static org.assertj.core.api.Assertions.*;
 
 
 /**
@@ -26,10 +27,10 @@ import java.util.List;
 @TestExecutionListeners(TransactionalTestExecutionListener.class)
 @Transactional
 public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
-/*
+
     @PersistenceContext
     public EntityManager em;
-
+/*
     @Autowired
     public AbilityDao abilityDao;
 
@@ -60,59 +61,73 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
 
 
     @Test(expectedExceptions=ConstraintViolationException.class)
-    public void testNullAbilityNameNotAllowed(){
+    public void nullAbilityNameNotAllowed(){
         Ability ability = new Ability();
         ability.setName(null);
         abilityDao.create(ability);
     }
 
     @Test(expectedExceptions=DataAccessException.class)
-    public void testNameIsUnique(){
+    public void nameHasToBeUnique(){
         Ability ability = new Ability();
         ability.setName("Flying");
         abilityDao.create(ability);
     }
 
     @Test()
-    public void testCreate(){
+    public void createAbility(){
         Ability ability = new Ability();
         ability.setName("Duplication");
+        assertThat(ability.getId()).isNull();
         abilityDao.create(ability);
-        Assert.assertEquals(abilityDao.findById(ability.getId()).getName(),"Duplication");
+        assertThat(ability.getId()).isNotNull();
+        assertThat(abilityDao.findById(ability.getId())).hasFieldOrPropertyWithValue("name", "Duplication");
     }
 
     @Test()
-    public void testDelete(){
-        Assert.assertNotNull(abilityDao.findById(ability1.getId()));
+    public void deleteAbility(){
+        assertThat(abilityDao.findById(ability1.getId())).isNotNull();
         abilityDao.delete(ability1);
-        Assert.assertNull(abilityDao.findById(ability1.getId()));
+        assertThat(abilityDao.findById(ability1.getId())).isNull();
     }
 
     @Test
-    public void testUpdate(){
+    public void updateAbility(){
         ability1.setName("Shadowing");
         abilityDao.update(ability1);
-        Assert.assertEquals(abilityDao.findById(ability1.getId()).getName(),"Shadowing");
+        assertThat(abilityDao.findById(ability1.getId())).hasFieldOrPropertyWithValue("name", "Shadowing");
     }
 
     @Test
-    public void testFindAll() {
+    public void findAllAbilities() {
         List<Ability> allAbilities = abilityDao.findAll();
-        Assert.assertEquals(allAbilities.size(), 4);
+        assertThat(allAbilities).hasSize(4);
+        assertThat(allAbilities).contains(ability1);
+        assertThat(allAbilities).contains(ability2);
+        assertThat(allAbilities).contains(ability3);
+        assertThat(allAbilities).contains(ability4);
     }
 
     @Test
-    public void testFindById() {
+    public void findAbilityById() {
         Ability ability = abilityDao.findById(ability1.getId());
-        Assert.assertEquals(ability.getName(), "Overshadowing");
-        Assert.assertEquals(ability.getDescription(), "The power to take over another body");
+        assertThat(ability).hasFieldOrPropertyWithValue("name","Overshadowing");
+        assertThat(ability).hasFieldOrPropertyWithValue("description","The power to take over another body");
     }
 
     @Test
-    public void testFindByName() {
-        Assert.assertEquals(abilityDao.findByName("ity").size(), 2);
-        Assert.assertEquals(abilityDao.findByName("hhh").size(), 0);
-        Assert.assertEquals(abilityDao.findByName("Flying").size(), 1);
+    public void findAbilityByName() {
+
+        List<Ability> abilitiesIty = abilityDao.findByName("ity");
+        assertThat(abilitiesIty).hasSize(2);
+        assertThat(abilitiesIty).contains(ability3);
+        assertThat(abilitiesIty).contains(ability4);
+
+        assertThat(abilityDao.findByName("hhh")).hasSize(0);
+
+        List<Ability> abilitiesFlying = abilityDao.findByName("Flying");
+        assertThat(abilitiesFlying).hasSize(1);
+        assertThat(abilitiesFlying).contains(ability2);
     }
 */
 }

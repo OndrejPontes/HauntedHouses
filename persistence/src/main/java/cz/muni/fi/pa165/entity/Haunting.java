@@ -41,66 +41,70 @@ public class Haunting {
         return id;
     }
 
-    public void setId(Long id) {
+    public Haunting setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public Haunting setDate(LocalDate date) {
         this.date = date;
+        return this;
     }
 
     public int getNumberOfPeoplePresent() {
         return numberOfPeoplePresent;
     }
 
-    public void setNumberOfPeoplePresent(int numberOfPeoplePresent) {
+    public Haunting setNumberOfPeoplePresent(int numberOfPeoplePresent) {
         this.numberOfPeoplePresent = numberOfPeoplePresent;
+        return this;
     }
 
     public House getHauntedHouse() {
         return hauntedHouse;
     }
 
-    public void setHauntedHouse(House hauntedHouse) {
+    public Haunting setHauntedHouse(House hauntedHouse) {
         this.hauntedHouse = hauntedHouse;
+        return this;
     }
 
     public List<Ghost> getGhosts() {
         return ghosts;
     }
 
-    public void setGhosts(List<Ghost> ghosts) {
+    public Haunting setGhosts(List<Ghost> ghosts) {
         this.ghosts = ghosts;
+        return this;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || !getClass().isInstance(o)) return false;
 
         Haunting haunting = (Haunting) o;
 
-        if (numberOfPeoplePresent != haunting.numberOfPeoplePresent) return false;
-        if (!id.equals(haunting.id)) return false;
-        if (!date.equals(haunting.date)) return false;
-        if (hauntedHouse != null ? !hauntedHouse.equals(haunting.hauntedHouse) : haunting.hauntedHouse != null)
+        if (getNumberOfPeoplePresent() != haunting.getNumberOfPeoplePresent()) return false;
+        if (!getId().equals(haunting.getId())) return false;
+        if (getDate() != null ? !getDate().equals(haunting.getDate()) : haunting.getDate() != null) return false;
+        if (getHauntedHouse() != null ? !getHauntedHouse().equals(haunting.getHauntedHouse()) : haunting.getHauntedHouse() != null)
             return false;
-        return ghosts != null ? ghosts.equals(haunting.ghosts) : haunting.ghosts == null;
+        return getGhosts() != null ? getGhosts().equals(haunting.getGhosts()) : haunting.getGhosts() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + date.hashCode();
-        result = 31 * result + numberOfPeoplePresent;
-        result = 31 * result + (hauntedHouse != null ? hauntedHouse.hashCode() : 0);
-        result = 31 * result + (ghosts != null ? ghosts.hashCode() : 0);
+        int result = getId().hashCode();
+        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
+        result = 31 * result + getNumberOfPeoplePresent();
+        result = 31 * result + (getHauntedHouse() != null ? getHauntedHouse().hashCode() : 0);
+        result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
         return result;
     }
-
 }
