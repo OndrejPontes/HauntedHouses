@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165;
 
+import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.entity.Ability;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,5 +130,5 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(abilitiesFlying).hasSize(1);
         assertThat(abilitiesFlying).contains(ability2);
     }
-*/
+
 }
