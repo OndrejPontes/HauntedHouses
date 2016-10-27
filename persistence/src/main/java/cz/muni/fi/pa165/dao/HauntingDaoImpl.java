@@ -8,11 +8,13 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.time.LocalDate;
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Monika Mociarikova
  */
 @Repository
+@Transactional
 public class HauntingDaoImpl implements HauntingDao {
 
     @PersistenceContext

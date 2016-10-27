@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class House {
 
     @NotNull
     @Temporal(TemporalType.DATE)
-    private LocalDate hauntingFrom;
+    private Date hauntingFrom;
 
     @NotNull
     private String history;
@@ -35,7 +36,7 @@ public class House {
 
     public House() { }
 
-    public House(String name, String address, LocalDate hauntingFrom, String history) {
+    public House(String name, String address, Date hauntingFrom, String history) {
         this.name = name;
         this.address = address;
         this.hauntingFrom = hauntingFrom;
@@ -69,11 +70,11 @@ public class House {
         return this;
     }
 
-    public LocalDate getHauntingFrom() {
+    public Date getHauntingFrom() {
         return hauntingFrom;
     }
 
-    public House setHauntingFrom(LocalDate hauntingFrom) {
+    public House setHauntingFrom(Date hauntingFrom) {
         this.hauntingFrom = hauntingFrom;
         return this;
     }

@@ -10,6 +10,7 @@ public class Ability {
     private Long id;
     private String name;
     private String description;
+    
 
     public Ability() {
     }

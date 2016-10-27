@@ -4,6 +4,7 @@ package cz.muni.fi.pa165.entity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class Haunting {
 
     @NotNull
     @Temporal(TemporalType.DATE)
-    private LocalDate date;
+    private Date date;
 
     @NotNull
     private int numberOfPeoplePresent;
@@ -32,7 +33,7 @@ public class Haunting {
     public Haunting(){
     }
 
-    public Haunting(LocalDate date, int numberOfPeoplePresent) {
+    public Haunting(Date date, int numberOfPeoplePresent) {
         this.date = date;
         this.numberOfPeoplePresent = numberOfPeoplePresent;
     }
@@ -46,11 +47,11 @@ public class Haunting {
         return this;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public Haunting setDate(LocalDate date) {
+    public Haunting setDate(Date date) {
         this.date = date;
         return this;
     }

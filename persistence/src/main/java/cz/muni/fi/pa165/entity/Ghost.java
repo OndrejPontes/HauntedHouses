@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,12 +20,12 @@ public class Ghost {
     private String name;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate hauntsFrom;
+    @Temporal(TemporalType.TIME)
+    private Date hauntsFrom;
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate hauntsTo;
+    @Temporal(TemporalType.TIME)
+    private Date hauntsTo;
 
     @NotNull
     private String description;
@@ -32,16 +33,16 @@ public class Ghost {
     @ManyToOne
     private House hauntedHouse;
 
-    @ManyToMany
+   /* @ManyToMany
     private List<Ability> abilities = new ArrayList<Ability>();
-
-    @ManyToMany
+*/
+    @ManyToMany(mappedBy="ghosts")
     private List<Haunting> hauntings = new ArrayList<Haunting>();
 
     public Ghost() {
     }
 
-    public Ghost(String name, LocalDate hauntsFrom, LocalDate hauntsTo, String description) {
+    public Ghost(String name, Date hauntsFrom, Date hauntsTo, String description) {
         this.name = name;
         this.hauntsFrom = hauntsFrom;
         this.hauntsTo = hauntsTo;
@@ -66,20 +67,20 @@ public class Ghost {
         return this;
     }
 
-    public LocalDate getHauntsFrom() {
+    public Date getHauntsFrom() {
         return hauntsFrom;
     }
 
-    public Ghost setHauntsFrom(LocalDate hauntsFrom) {
+    public Ghost setHauntsFrom(Date hauntsFrom) {
         this.hauntsFrom = hauntsFrom;
         return this;
     }
 
-    public LocalDate getHauntsTo() {
+    public Date getHauntsTo() {
         return hauntsTo;
     }
 
-    public Ghost setHauntsTo(LocalDate hauntsTo) {
+    public Ghost setHauntsTo(Date hauntsTo) {
         this.hauntsTo = hauntsTo;
         return this;
     }
@@ -101,7 +102,7 @@ public class Ghost {
         this.hauntedHouse = hauntedHouse;
         return this;
     }
-
+/*
     public List<Ability> getAbilities() {
         return abilities;
     }
@@ -110,7 +111,7 @@ public class Ghost {
         this.abilities = abilities;
         return this;
     }
-
+*/
     public List<Haunting> getHauntings() {
         return hauntings;
     }
@@ -132,9 +133,7 @@ public class Ghost {
         if (!hauntsFrom.equals(ghost.hauntsFrom)) return false;
         if (!hauntsTo.equals(ghost.hauntsTo)) return false;
         if (!description.equals(ghost.description)) return false;
-        if (hauntedHouse != null ? !hauntedHouse.equals(ghost.hauntedHouse) : ghost.hauntedHouse != null) return false;
-        if (abilities != null ? !abilities.equals(ghost.abilities) : ghost.abilities != null) return false;
-        return hauntings != null ? hauntings.equals(ghost.hauntings) : ghost.hauntings == null;
+        if (hauntedHouse != null ? !hauntedHouse.equals(ghost.hauntedHouse) : ghost.hauntedHouse != null) return false;        return hauntings != null ? hauntings.equals(ghost.hauntings) : ghost.hauntings == null;
 
     }
 
@@ -147,7 +146,6 @@ public class Ghost {
         result = prime * result + hauntsTo.hashCode();
         result = prime * result + description.hashCode();
         result = prime * result + (hauntedHouse != null ? hauntedHouse.hashCode() : 0);
-        result = prime * result + (abilities != null ? abilities.hashCode() : 0);
         result = prime * result + (hauntings != null ? hauntings.hashCode() : 0);
         return result;
     }

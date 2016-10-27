@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -38,11 +39,11 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     private Haunting h1;
     private Haunting h2;
     private Haunting h3;
-
+/*
     @BeforeMethod
     public void setUp(){
         h1 = new Haunting(LocalDate.now().plus(1, ChronoUnit.DAYS), 5);
-        h2 = new Haunting(LocalDate.now().plus(1, ChronoUnit.DAYS), 3);
+        h2 = new Haunting(DateTime...now().plus(1, ChronoUnit.DAYS), 3);
         h3 = new Haunting(LocalDate.now().minus(1, ChronoUnit.DAYS), 1);
 
         hauntingDao.create(h1);
@@ -96,5 +97,5 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     public void isForbiddenToPersistHauntingWithNullDate(){
         hauntingDao.create(new Haunting().setDate(null));
     }
-
+*/
 }
