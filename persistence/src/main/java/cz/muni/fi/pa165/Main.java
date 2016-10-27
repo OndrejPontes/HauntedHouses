@@ -10,6 +10,9 @@ import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  *
  * @author xmociar
@@ -23,7 +26,12 @@ public class Main {
         HauntingDao hauntingDao = applicationContext.getBean(HauntingDao.class);
         Haunting hauting = new Haunting();
         hauting.setNumberOfPeoplePresent(9);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2016,Calendar.OCTOBER,27);
+        hauting.setDate(calendar.getTime());
         hauntingDao.create(hauting);
+
+        System.out.println(calendar.getTime().toString());
         
 	}
     

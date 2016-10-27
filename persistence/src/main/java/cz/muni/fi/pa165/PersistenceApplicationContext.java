@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165;
 
+import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.dao.GhostDao;
 import cz.muni.fi.pa165.dao.HauntingDao;
 import cz.muni.fi.pa165.dao.HouseDao;
@@ -27,7 +28,7 @@ import javax.sql.DataSource;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories
-@ComponentScan(basePackageClasses = {GhostDao.class, HauntingDao.class, HouseDao.class})
+@ComponentScan(basePackageClasses = {GhostDao.class, HauntingDao.class, HouseDao.class, AbilityDao.class})
 public class    PersistenceApplicationContext {
 
 

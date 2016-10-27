@@ -12,37 +12,37 @@ public interface GhostDao {
      * Create ghost
      * @param ghost Ghost object for creating
      */
-    public void create(Ghost ghost);
+     void create(Ghost ghost);
 
     /**
      * Updates ghost
      * @param ghost Ghost object for updating
      */
-    public Ghost update(Ghost ghost);
+     Ghost update(Ghost ghost);
 
     /**
      * Removes ghost
      * @param ghost Ghost object for deleting
      */
-    public void delete(Ghost ghost);
+     void delete(Ghost ghost);
 
     /**
      * Gets ghost by id
      * @param id of ghost to be found
      * @return Ghost object with specified id
      */
-    public Ghost getById(long id);
+     Ghost getById(long id);
 
     /**
      * Gets ghost by name
      * @param name of ghost to be found
      * @return list of Ghost object with specified name
      */
-    public List<Ghost> getByName(String name);
+     List<Ghost> getByName(String name);
 
     /**
      * Gets all ghosts
      * @return list of all ghosts.
      */
-    public List<Ghost> getAll();
+     List<Ghost> getAll();
 }

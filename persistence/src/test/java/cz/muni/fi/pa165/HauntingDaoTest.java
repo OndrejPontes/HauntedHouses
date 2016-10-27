@@ -17,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,12 +40,18 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     private Haunting h1;
     private Haunting h2;
     private Haunting h3;
-/*
+
     @BeforeMethod
     public void setUp(){
-        h1 = new Haunting(LocalDate.now().plus(1, ChronoUnit.DAYS), 5);
-        h2 = new Haunting(DateTime...now().plus(1, ChronoUnit.DAYS), 3);
-        h3 = new Haunting(LocalDate.now().minus(1, ChronoUnit.DAYS), 1);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2016,Calendar.OCTOBER,27);
+        h1 = new Haunting(calendar.getTime(), 5);
+
+        calendar.set(2016,Calendar.OCTOBER,27);
+        h2 = new Haunting(calendar.getTime(), 3);
+
+        calendar.set(2016,Calendar.NOVEMBER,06);
+        h3 = new Haunting(calendar.getTime(), 1);
 
         hauntingDao.create(h1);
         hauntingDao.create(h2);
@@ -97,5 +104,5 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     public void isForbiddenToPersistHauntingWithNullDate(){
         hauntingDao.create(new Haunting().setDate(null));
     }
-*/
+
 }

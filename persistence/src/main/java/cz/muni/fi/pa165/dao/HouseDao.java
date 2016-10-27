@@ -27,7 +27,7 @@ public interface HouseDao {
      * @param house - the entity
      * @return true if the deletion was successful, false otherwise
      */
-    boolean delete(House house);
+    void delete(House house);
 
     /**
      * Finds the entity in the database by it's id
