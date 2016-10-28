@@ -1,6 +1,8 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entity.Ability;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -10,6 +12,8 @@ import java.util.List;
 /**
  * @author Vojta David
  */
+@Repository
+@Transactional
 public class AbilityDaoImpl implements AbilityDao {
 
     @PersistenceContext

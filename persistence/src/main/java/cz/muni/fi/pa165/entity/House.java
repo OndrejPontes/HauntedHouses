@@ -5,6 +5,7 @@ import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +26,7 @@ public class House {
 
     @NotNull
     @Temporal(TemporalType.DATE)
-    private LocalDate hauntingFrom;
+    private Date hauntingFrom;
 
     @NotNull
     private String history;
@@ -35,7 +36,7 @@ public class House {
 
     public House() { }
 
-    public House(String name, String address, LocalDate hauntingFrom, String history) {
+    public House(String name, String address, Date hauntingFrom, String history) {
         this.name = name;
         this.address = address;
         this.hauntingFrom = hauntingFrom;
@@ -69,11 +70,11 @@ public class House {
         return this;
     }
 
-    public LocalDate getHauntingFrom() {
+    public Date getHauntingFrom() {
         return hauntingFrom;
     }
 
-    public House setHauntingFrom(LocalDate hauntingFrom) {
+    public House setHauntingFrom(Date hauntingFrom) {
         this.hauntingFrom = hauntingFrom;
         return this;
     }
@@ -103,23 +104,24 @@ public class House {
 
         House house = (House) o;
 
-        if (!id.equals(house.id)) return false;
-        if (!name.equals(house.name)) return false;
-        if (!address.equals(house.address)) return false;
-        if (!hauntingFrom.equals(house.hauntingFrom)) return false;
-        if (!history.equals(house.history)) return false;
-        return hauntings != null ? hauntings.equals(house.hauntings) : house.hauntings == null;
+        if (getId() != null ? !getId().equals(house.getId()) : house.getId() != null) return false;
+        if (getName() != null ? !getName().equals(house.getName()) : house.getName() != null) return false;
+        if (getAddress() != null ? !getAddress().equals(house.getAddress()) : house.getAddress() != null) return false;
+        if (getHauntingFrom() != null ? !getHauntingFrom().equals(house.getHauntingFrom()) : house.getHauntingFrom() != null)
+            return false;
+        if (getHistory() != null ? !getHistory().equals(house.getHistory()) : house.getHistory() != null) return false;
+        return getHauntings() != null ? getHauntings().equals(house.getHauntings()) : house.getHauntings() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + address.hashCode();
-        result = 31 * result + hauntingFrom.hashCode();
-        result = 31 * result + history.hashCode();
-        result = 31 * result + (hauntings != null ? hauntings.hashCode() : 0);
+        int result = getId() != null ? getId().hashCode() : 0;
+        result = 31 * result + (getName() != null ? getName().hashCode() : 0);
+        result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
+        result = 31 * result + (getHauntingFrom() != null ? getHauntingFrom().hashCode() : 0);
+        result = 31 * result + (getHistory() != null ? getHistory().hashCode() : 0);
+        result = 31 * result + (getHauntings() != null ? getHauntings().hashCode() : 0);
         return result;
     }
 
