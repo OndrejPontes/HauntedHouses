@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,18 +15,18 @@ public class Ghost {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     @Temporal(TemporalType.TIME)
     private Date hauntsFrom;
 
-    @NotNull
+    @Column(nullable = false)
     @Temporal(TemporalType.TIME)
     private Date hauntsTo;
 
-    @NotNull
+    @Column(nullable = false)
     private String description;
 
     @ManyToOne
@@ -36,7 +35,7 @@ public class Ghost {
     @ManyToMany
     private List<Ability> abilities = new ArrayList<Ability>();
 
-    @ManyToMany(mappedBy="ghosts")
+    @ManyToMany(mappedBy = "ghosts")
     private List<Haunting> hauntings = new ArrayList<Haunting>();
 
     public Ghost() {

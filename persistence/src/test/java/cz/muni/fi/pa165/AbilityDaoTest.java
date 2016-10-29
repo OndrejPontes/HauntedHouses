@@ -2,8 +2,6 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.enums.GHOST_ABILITIES;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,9 +14,10 @@ import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 /**
@@ -63,22 +62,22 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
     }
 
 
-    @Test(expectedExceptions=ConstraintViolationException.class)
-    public void nullAbilityNameNotAllowed(){
+    @Test(expectedExceptions = PersistenceException.class)
+    public void nullAbilityNameNotAllowed() {
         Ability ability = new Ability();
         ability.setName(null);
         abilityDao.create(ability);
     }
 
-    @Test(expectedExceptions=DataAccessException.class)
-    public void nameHasToBeUnique(){
+    @Test(expectedExceptions = DataAccessException.class)
+    public void nameHasToBeUnique() {
         Ability ability = new Ability();
         ability.setName("Flying");
         abilityDao.create(ability);
     }
 
     @Test()
-    public void createAbility(){
+    public void createAbility() {
         Ability ability = new Ability();
         ability.setName("Duplication");
         assertThat(ability.getId()).isNull();
@@ -88,14 +87,14 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test()
-    public void deleteAbility(){
+    public void deleteAbility() {
         assertThat(abilityDao.getById(ability1.getId())).isNotNull();
         abilityDao.delete(ability1);
         assertThat(abilityDao.getById(ability1.getId())).isNull();
     }
 
     @Test
-    public void updateAbility(){
+    public void updateAbility() {
         ability1.setName("Shadowing");
         abilityDao.update(ability1);
         assertThat(abilityDao.getById(ability1.getId())).hasFieldOrPropertyWithValue("name", "Shadowing");
@@ -114,8 +113,8 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
     @Test
     public void findAbilityById() {
         Ability ability = abilityDao.getById(ability1.getId());
-        assertThat(ability).hasFieldOrPropertyWithValue("name","Overshadowing");
-        assertThat(ability).hasFieldOrPropertyWithValue("description","The power to take over another body");
+        assertThat(ability).hasFieldOrPropertyWithValue("name", "Overshadowing");
+        assertThat(ability).hasFieldOrPropertyWithValue("description", "The power to take over another body");
     }
 
     @Test

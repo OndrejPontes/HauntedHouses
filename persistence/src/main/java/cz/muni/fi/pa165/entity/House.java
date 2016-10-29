@@ -1,9 +1,7 @@
 package cz.muni.fi.pa165.entity;
 
-import javax.validation.constraints.NotNull;
-
 import javax.persistence.*;
-import java.time.LocalDate;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +16,13 @@ public class House {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     private String address;
 
-    @NotNull
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date hauntingFrom;
 
@@ -34,7 +32,8 @@ public class House {
     @OneToMany
     private List<Haunting> hauntings = new ArrayList<>();
 
-    public House() { }
+    public House() {
+    }
 
     public House(String name, String address, Date hauntingFrom, String history) {
         this.name = name;

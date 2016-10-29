@@ -2,26 +2,22 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.dao.HauntingDao;
 import cz.muni.fi.pa165.entity.Haunting;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 import org.springframework.transaction.annotation.Transactional;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import javax.persistence.PersistenceException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author opontes
@@ -50,7 +46,7 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
         calendar.set(2016,Calendar.OCTOBER,27);
         h2 = new Haunting(calendar.getTime(), 3);
 
-        calendar.set(2016,Calendar.NOVEMBER,06);
+        calendar.set(2016,Calendar.NOVEMBER,6);
         h3 = new Haunting(calendar.getTime(), 1);
 
         hauntingDao.create(h1);
@@ -100,9 +96,31 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(em.contains(h1)).isFalse();
     }
 
-    @Test(expectedExceptions=ConstraintViolationException.class)
+    @Test(expectedExceptions= PersistenceException.class)
     public void isForbiddenToPersistHauntingWithNullDate(){
         hauntingDao.create(new Haunting().setDate(null));
     }
 
+    @Test
+    public void getByIdReturnNullOnNonExistingId(){
+        Haunting found = hauntingDao.getById(-1L);
+        assertThat(found).isNull();
+    }
+
+    @Test
+    public void deleteByNonExistingIdShouldNotDeleteAnything(){
+        hauntingDao.delete(new Haunting());
+        List<Haunting> hauntings = hauntingDao.getAll();
+        assertThat(hauntings).hasSize(2);
+        assertThat(hauntings).contains(h1);
+        assertThat(hauntings).contains(h2);
+    }
+
+    @Test
+    public void getNullByIncorrectDate(){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(2006,Calendar.OCTOBER,27);
+        List<Haunting> found = hauntingDao.getByDate(calendar.getTime());
+        assertThat(found).isEmpty();
+    }
 }

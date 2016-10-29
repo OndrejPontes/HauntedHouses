@@ -1,10 +1,10 @@
 package cz.muni.fi.pa165.entity;
 
 import com.sun.istack.internal.NotNull;
-import cz.muni.fi.pa165.enums.GHOST_ABILITIES;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Vojta David
@@ -17,10 +17,10 @@ public class Ability {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false, unique = true)
     private String name;
 
-    @NotNull
+    @Column(nullable = false)
     private String description;
 
     @ManyToMany(mappedBy = "abilities")

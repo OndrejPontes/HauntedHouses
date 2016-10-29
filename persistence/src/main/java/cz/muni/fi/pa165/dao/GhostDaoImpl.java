@@ -35,7 +35,7 @@ public class GhostDaoImpl implements GhostDao {
     }
 
     public List<Ghost> getByName(String name) {
-        return em.createQuery("select ghost from Ghost ghost where ghost.name = :name")
+        return em.createQuery("select ghost from Ghost ghost where ghost.name = :name", Ghost.class)
                 .setParameter("name", name)
                 .getResultList();
     }

@@ -2,15 +2,14 @@ package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Monika Mociarikova
@@ -44,9 +43,9 @@ public class HauntingDaoImpl implements HauntingDao {
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date);
-        calendar.set(Calendar.HOUR_OF_DAY,23);
-        calendar.set(Calendar.MINUTE,59);
-        calendar.set(Calendar.SECOND,59);
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
         query.setParameter("endDate", calendar.getTime());
         return query.getResultList();
     }

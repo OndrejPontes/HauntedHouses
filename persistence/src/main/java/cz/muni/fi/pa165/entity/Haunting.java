@@ -13,14 +13,14 @@ import java.util.List;
 public class Haunting {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     private Date date;
 
-    @NotNull
+    @Column(nullable = false)
     private int numberOfPeoplePresent;
 
     @ManyToOne
@@ -29,7 +29,7 @@ public class Haunting {
     @ManyToMany
     private List<Ghost> ghosts;
 
-    public Haunting(){
+    public Haunting() {
     }
 
     public Haunting(Date date, int numberOfPeoplePresent) {

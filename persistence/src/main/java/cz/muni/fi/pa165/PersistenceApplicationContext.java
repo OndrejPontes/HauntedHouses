@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.dao.GhostDao;
 import cz.muni.fi.pa165.dao.HauntingDao;
 import cz.muni.fi.pa165.dao.HouseDao;
-
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -29,7 +28,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {GhostDao.class, HauntingDao.class, HouseDao.class, AbilityDao.class})
-public class    PersistenceApplicationContext {
+public class PersistenceApplicationContext {
 
 
     @Bean

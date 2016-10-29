@@ -36,7 +36,7 @@ public class AbilityDaoImpl implements AbilityDao {
 
     @Override
     public Ability getById(long id) {
-        return em.find(Ability.class,id);
+        return em.find(Ability.class, id);
     }
 
     @Override

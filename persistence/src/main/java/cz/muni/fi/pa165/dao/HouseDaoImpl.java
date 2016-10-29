@@ -1,13 +1,12 @@
 package cz.muni.fi.pa165.dao;
 
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-
 import cz.muni.fi.pa165.entity.House;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * @author Jirka Kruml
@@ -56,6 +55,6 @@ public class HouseDaoImpl implements HouseDao {
 
     @Override
     public List<House> getAll() {
-        return em.createQuery("select house from House house").getResultList();
+        return em.createQuery("select house from House house", House.class).getResultList();
     }
 }
