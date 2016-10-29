@@ -13,7 +13,7 @@ import java.util.List;
 public class Ghost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -48,11 +48,11 @@ public class Ghost {
         this.description = description;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public Ghost setId(int id) {
+    public Ghost setId(Long id) {
         this.id = id;
         return this;
     }
@@ -145,7 +145,7 @@ public class Ghost {
 
     @Override
     public int hashCode() {
-        int result = getId();
+        int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getHauntsFrom() != null ? getHauntsFrom().hashCode() : 0);
         result = 31 * result + (getHauntsTo() != null ? getHauntsTo().hashCode() : 0);
