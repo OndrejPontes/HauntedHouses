@@ -31,8 +31,7 @@ public class Ability {
     }
 
 
-    public Ability(Long id, String name, String description) {
-        this.id = id;
+    public Ability(String name, String description) {
         this.name = name;
         this.description = description;
     }
