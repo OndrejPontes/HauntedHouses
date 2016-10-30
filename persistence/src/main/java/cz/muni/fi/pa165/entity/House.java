@@ -25,16 +25,13 @@ public class House {
     @Temporal(TemporalType.DATE)
     private Date hauntingFrom;
 
-    @Column(nullable = false)
-    private String history;
-
-    @OneToMany
-    private List<Haunting> hauntings = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER)
+    private List<Haunting> history = new ArrayList<>();
 
     public House() {
     }
 
-    public House(String name, String address, Date hauntingFrom, String history) {
+    public House(String name, String address, Date hauntingFrom, List<Haunting> history) {
         this.name = name;
         this.address = address;
         this.hauntingFrom = hauntingFrom;
@@ -77,21 +74,12 @@ public class House {
         return this;
     }
 
-    public String getHistory() {
+    public List<Haunting> getHistory() {
         return history;
     }
 
-    public House setHistory(String history) {
+    public House setHauntings(List<Haunting> history) {
         this.history = history;
-        return this;
-    }
-
-    public List<Haunting> getHauntings() {
-        return hauntings;
-    }
-
-    public House setHauntings(List<Haunting> hauntings) {
-        this.hauntings = hauntings;
         return this;
     }
 
@@ -107,8 +95,7 @@ public class House {
         if (getAddress() != null ? !getAddress().equals(house.getAddress()) : house.getAddress() != null) return false;
         if (getHauntingFrom() != null ? !getHauntingFrom().equals(house.getHauntingFrom()) : house.getHauntingFrom() != null)
             return false;
-        if (getHistory() != null ? !getHistory().equals(house.getHistory()) : house.getHistory() != null) return false;
-        return getHauntings() != null ? getHauntings().equals(house.getHauntings()) : house.getHauntings() == null;
+        return getHistory() != null ? getHistory().equals(house.getHistory()) : house.getHistory() == null;
 
     }
 
@@ -119,7 +106,6 @@ public class House {
         result = 31 * result + (getAddress() != null ? getAddress().hashCode() : 0);
         result = 31 * result + (getHauntingFrom() != null ? getHauntingFrom().hashCode() : 0);
         result = 31 * result + (getHistory() != null ? getHistory().hashCode() : 0);
-        result = 31 * result + (getHauntings() != null ? getHauntings().hashCode() : 0);
         return result;
     }
 
@@ -130,8 +116,7 @@ public class House {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", hauntingFrom=" + hauntingFrom +
-                ", history='" + history + '\'' +
-                ", hauntings=" + hauntings +
+                ", history=" + history +
                 '}';
     }
 }
