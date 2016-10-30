@@ -1,6 +1,12 @@
 package cz.muni.fi.pa165;
 
+import cz.muni.fi.pa165.dao.AbilityDao;
+import cz.muni.fi.pa165.dao.GhostDao;
+import cz.muni.fi.pa165.dao.HauntingDao;
 import cz.muni.fi.pa165.dao.HouseDao;
+import cz.muni.fi.pa165.entity.Ability;
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.entity.House;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -13,6 +19,8 @@ import org.testng.annotations.Test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,68 +39,96 @@ public class HouseDaoTest extends AbstractTestNGSpringContextTests {
     public EntityManager em;
 
     @Autowired
-    public HouseDao houseDao;
+    private HouseDao houseDao;
 
-    private House h1;
-    private House h2;
+    @Autowired
+    private AbilityDao abilityDao;
+
+    @Autowired
+    private GhostDao ghostDao;
+
+    @Autowired
+    private HauntingDao hauntingDao;
+
+    private House house;
 
 
     @BeforeMethod
     public void createHouses() {
+//        Ability a1 = new Ability("Shadowing", "super skill by ghost ltc.");
+//        abilityDao.create(a1);
+//
+//        Calendar from = Calendar.getInstance();
+//        from.set(2016, Calendar.OCTOBER, 01);
+//        Calendar to = Calendar.getInstance();
+//        to.set(2016, Calendar.OCTOBER, 30);
+//
+//        Ghost g1 = new Ghost("G1", from.getTime(), to.getTime(), "uz mi z toho strasi v kebuli");
+//
+//        List<Ability> abilityList = new ArrayList<>();
+//        abilityList.add(a1);
+//        g1.setAbilities(abilityList);
+//
+//        List<Ghost> ghostList = new ArrayList<>();
+//        ghostList.add(g1);
+//
+//        ghostDao.create(g1);
+//
+//        Haunting haunting = new Haunting(from.getTime(),1);
+//        haunting.setGhosts(ghostList);
+//        haunting.setHauntedHouse(house);
+//
+//        hauntingDao.create(haunting);
+//
+//        List<Haunting> hauntingList = new ArrayList<>();
+//        hauntingList.add(haunting);
 
-        h1 = new House();
-        h2 = new House();
-        h1.setName("SCALA");
-        h2.setName("MORGAL");
+
+        house =  new House();
+        house.setName("SCALA");
+        house.setAddress("MORAVAK");
+//        house.setHauntingFrom(from.getTime());
+//        house.setHauntings(hauntingList);
+        house.setHistory("Brief history of time");
+        house.setHauntingFrom(Calendar.getInstance().getTime());
 
 
     }
+
     @Test
     public void createHouseTest() {
-        assertThat(h1.getId()).isNull();
-        houseDao.create(h1);
-        assertThat(h1.getId()).isNotNull();
-    }
-
-    @Test
-    public void deleteHouseTest() {
-        houseDao.create(h1);
-        houseDao.delete(h1);
-
-        assertThat(houseDao.getByName("SCALA")).isNull();
-    }
-
-    @Test
-    public void getByNameTest() {
-        houseDao.create(h1);
-        assertThat(houseDao.getByName("SCALA")).isEqualTo(h1);
-    }
-
-    @Test
-    public void updateHouseTest() {
-        houseDao.create(h1);
-        House h = houseDao.update(h1.setAddress("MORAVAK"));
-        assertThat(houseDao.getByAddress("MORAVAK")).isEqualTo(h);
-    }
-
-    @Test
-    public void getAllTest() {
-        houseDao.create(h1);
-        houseDao.create(h2);
-
-        List<House> all = houseDao.getAll();
-
-        assertThat(all.size()).isEqualTo(2);
-        assertThat(all.contains(h1));
-        assertThat(all.contains(h2));
+        assertThat(house.getId()).isNull();
+        houseDao.create(house);
+        assertThat(house.getId()).isNotNull();
 
     }
 
     @Test
-    public void getByAdressTest(){
-        h1.setAddress("MORAVAK");
-        houseDao.create(h1);
-        assertThat(houseDao.getByAddress("MORAVAK")).isEqualTo(h1);
+    public void deleteTest(){
+        houseDao.create(house);
+        houseDao.delete(house);
+        assertThat(houseDao.getAll()).hasSize(0);
     }
+
+    @Test
+    public void getAllTest(){
+        houseDao.create(house);
+        assertThat(houseDao.getAll()).hasSize(1);
+    }
+
+    @Test
+    public void getByNameTest(){
+        houseDao.create(house);
+        assertThat(houseDao.getByName("SCALA")).isEqualTo(house);
+    }
+
+//    @Test
+//    public void getByNameTest(){
+//        houseDao.create(house);
+//        assertThat(houseDao.getByName("SCALA").getName()).isEqualTo("SCALA");
+//    }
+
+
+
 
 }
