@@ -41,57 +41,16 @@ public class HouseDaoTest extends AbstractTestNGSpringContextTests {
     @Autowired
     private HouseDao houseDao;
 
-    @Autowired
-    private AbilityDao abilityDao;
-
-    @Autowired
-    private GhostDao ghostDao;
-
-    @Autowired
-    private HauntingDao hauntingDao;
-
     private House house;
 
 
     @BeforeMethod
     public void createHouses() {
-//        Ability a1 = new Ability("Shadowing", "super skill by ghost ltc.");
-//        abilityDao.create(a1);
-//
-//        Calendar from = Calendar.getInstance();
-//        from.set(2016, Calendar.OCTOBER, 01);
-//        Calendar to = Calendar.getInstance();
-//        to.set(2016, Calendar.OCTOBER, 30);
-//
-//        Ghost g1 = new Ghost("G1", from.getTime(), to.getTime(), "uz mi z toho strasi v kebuli");
-//
-//        List<Ability> abilityList = new ArrayList<>();
-//        abilityList.add(a1);
-//        g1.setAbilities(abilityList);
-//
-//        List<Ghost> ghostList = new ArrayList<>();
-//        ghostList.add(g1);
-//
-//        ghostDao.create(g1);
-//
-//        Haunting haunting = new Haunting(from.getTime(),1);
-//        haunting.setGhosts(ghostList);
-//        haunting.setHauntedHouse(house);
-//
-//        hauntingDao.create(haunting);
-//
-//        List<Haunting> hauntingList = new ArrayList<>();
-//        hauntingList.add(haunting);
-
-
         house =  new House();
         house.setName("SCALA");
         house.setAddress("MORAVAK");
-//        house.setHauntingFrom(from.getTime());
-//        house.setHauntings(hauntingList);
         house.setHistory("Brief history of time");
         house.setHauntingFrom(Calendar.getInstance().getTime());
-
 
     }
 
@@ -101,6 +60,13 @@ public class HouseDaoTest extends AbstractTestNGSpringContextTests {
         houseDao.create(house);
         assertThat(house.getId()).isNotNull();
 
+    }
+
+    @Test
+    public void updateTest(){
+        houseDao.create(house);
+        houseDao.update(houseDao.getByName("SCALA").setName("MORGAL"));
+        assertThat(houseDao.getByName("MORGAL").getName()).isEqualTo("MORGAL");
     }
 
     @Test
@@ -122,13 +88,10 @@ public class HouseDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(houseDao.getByName("SCALA")).isEqualTo(house);
     }
 
-//    @Test
-//    public void getByNameTest(){
-//        houseDao.create(house);
-//        assertThat(houseDao.getByName("SCALA").getName()).isEqualTo("SCALA");
-//    }
-
-
-
+    @Test
+    public void getByAdress(){
+        houseDao.create(house);
+        assertThat(houseDao.getByAddress("MORAVAK")).isEqualTo(house);
+    }
 
 }
