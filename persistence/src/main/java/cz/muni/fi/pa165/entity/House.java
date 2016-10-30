@@ -21,7 +21,7 @@ public class House {
     @Column(nullable = false, unique = true)
     private String address;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @Temporal(TemporalType.DATE)
     private Date hauntingFrom;
 
