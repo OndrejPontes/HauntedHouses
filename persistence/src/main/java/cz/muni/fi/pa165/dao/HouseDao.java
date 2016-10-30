@@ -37,18 +37,18 @@ public interface HouseDao {
     House getById(long id);
 
     /**
-     * Finds a house in the database by it's name
-     * @param name - the name of the house
-     * @return - the house by the given name
+     * Finds a list of houses in the database by their name
+     * @param name - the name of the houses
+     * @return - the list of houses by the given name
      */
-    House getByName(String name);
+    List<House> getByName(String name);
 
     /**
-     * Finds a house in the database by it's address
-     * @param address - the address of the house
-     * @return - the house by the given address
+     * Finds a list of houses in the database by their address
+     * @param address - the address of the houses
+     * @return - the list of hosues by the given address
      */
-    House getByAddress(String address);
+    List<House> getByAddress(String address);
 
     /**
      * @return a collection of all houses stored in the database

@@ -54,7 +54,7 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
         House house = new House("Dreamhouse",
                 "Dream Street n.2",
                 date.parse("29-10-2016"),
-                "You really don't want to know what horrible things happened in this house!");
+                null);
 
         houseDao.create(house);
 

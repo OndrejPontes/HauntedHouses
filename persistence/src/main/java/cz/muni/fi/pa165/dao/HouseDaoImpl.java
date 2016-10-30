@@ -39,17 +39,15 @@ public class HouseDaoImpl implements HouseDao {
     }
 
     @Override
-    public House getByName(String name) {
-        return (House) em.createQuery("select House from House house where House.name = :name")
-                .setMaxResults(1)
+    public List<House> getByName(String name) {
+        return em.createQuery("select House from House house where House.name = :name")
                 .getResultList();
     }
 
     @Override
-    public House getByAddress(String address) {
-        return (House) em.createQuery("select House from House house where House.address = :address")
+    public List<House> getByAddress(String address) {
+        return em.createQuery("select House from House house where House.address = :address")
                 .setParameter("address", address)
-                .setMaxResults(1)
                 .getResultList();
     }
 
