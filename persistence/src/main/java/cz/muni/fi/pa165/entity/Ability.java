@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.entity;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ public class Ability {
     private String description;
 
     @ManyToMany(mappedBy = "abilities")
-    private List<Ghost> ghosts = new ArrayList<Ghost>();
+    private List<Ghost> ghosts = new ArrayList<>();
     
 
     public Ability() {

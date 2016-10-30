@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -76,7 +78,6 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
                 .setHauntsTo(time.parse("15:00"))
                 .setHauntedHouse(house)
                 .setAbilities(abilities);
-
     }
 
 
@@ -111,6 +112,36 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void getByIdTest() {
+        ghostDao.create(ghost);
+        assertThat(ghostDao.getById(ghost.getId())).isEqualTo(ghost);
+    }
+
+    @Test(expectedExceptions = PersistenceException.class)
+    public void nameCannotBeNull() {
+        ghost.setName(null);
+        ghostDao.create(ghost);
+    }
+
+    @Test(expectedExceptions = PersistenceException.class)
+    public void descriptionCannotBeNull() {
+        ghost.setDescription(null);
+        ghostDao.create(ghost);
+    }
+
+    @Test(expectedExceptions = PersistenceException.class)
+    public void hauntingFromCannotBeNull() {
+        ghost.setHauntsFrom(null);
+        ghostDao.create(ghost);
+    }
+
+    @Test(expectedExceptions = PersistenceException.class)
+    public void hauntingToCannotBeNull() {
+        ghost.setHauntsTo(null);
+        ghostDao.create(ghost);
+    }
+
+    @Test
     public void getAllTest() {
         ghostDao.create(ghost);
         ghostDao.create(ghost2);
@@ -119,6 +150,5 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
         assertThat(all.size()).isEqualTo(2);
         assertThat(all.contains(ghost));
         assertThat(all.contains(ghost2));
-
     }
 }

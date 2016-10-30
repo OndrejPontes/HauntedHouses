@@ -3,7 +3,6 @@ package cz.muni.fi.pa165;
 import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.entity.Ability;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -51,9 +50,16 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
 
         ability1.setName("Overshadowing");
         ability1.setDescription("The power to take over another body");
-        ability2.setName("Flying");
-        ability3.setName("Invisibility");
-        ability4.setName("Intangibility");
+
+        ability2.setName("Flying")
+                .setDescription("The power to defy gravity, and propel themselves through the air. " +
+                        "Flight is one of the most basic powers. Most ghosts (if not all) can fly or float.");
+
+        ability3.setName("Invisibility")
+                .setDescription("The power that causes the ghost to become completely transparent to all forms of vision.");
+
+        ability4.setName("Intangibility")
+                .setDescription("The power to phase through all forms of matter, but not always energy.");
 
         abilityDao.create(ability1);
         abilityDao.create(ability2);
@@ -69,17 +75,22 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
         abilityDao.create(ability);
     }
 
-    @Test(expectedExceptions = DataAccessException.class)
+
+
+    @Test(expectedExceptions = PersistenceException.class)
     public void nameHasToBeUnique() {
         Ability ability = new Ability();
-        ability.setName("Flying");
+        ability.setName("Flying")
+            .setDescription("The power to defy gravity, and propel themselves through the air. " +
+                    "Flight is one of the most basic powers. Most ghosts (if not all) can fly or float.");
         abilityDao.create(ability);
     }
 
     @Test()
     public void createAbility() {
         Ability ability = new Ability();
-        ability.setName("Duplication");
+        ability.setName("Duplication")
+                .setDescription("The ability of a ghost to make exact copies of themself, each possessing its personality and powers.");
         assertThat(ability.getId()).isNull();
         abilityDao.create(ability);
         assertThat(ability.getId()).isNotNull();
