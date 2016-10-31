@@ -41,6 +41,9 @@ public class AbilityDaoImpl implements AbilityDao {
 
     @Override
     public Ability getByName(String name) {
+        if(name == null)
+            throw new IllegalArgumentException("name cannot be null");
+
         try {
             return em
                     .createQuery("select a from Ability a where name = :name",

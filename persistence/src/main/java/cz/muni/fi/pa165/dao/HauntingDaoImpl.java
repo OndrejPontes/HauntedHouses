@@ -38,6 +38,9 @@ public class HauntingDaoImpl implements HauntingDao {
     }
 
     public List<Haunting> getByDate(Date date) {
+        if(date == null)
+            throw new IllegalArgumentException("date cannot be null");
+
         TypedQuery<Haunting> query = em.createQuery("select h from Haunting h where h.date between :startDate and :endDate", Haunting.class);
         query.setParameter("startDate", date);
 

@@ -35,6 +35,9 @@ public class GhostDaoImpl implements GhostDao {
     }
 
     public List<Ghost> getByName(String name) {
+        if(name == null)
+            throw new IllegalArgumentException("name cannot be null");
+
         return em.createQuery("select ghost from Ghost ghost where ghost.name = :name", Ghost.class)
                 .setParameter("name", name)
                 .getResultList();

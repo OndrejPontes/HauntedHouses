@@ -81,6 +81,26 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
     }
 
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullParam() {
+        ghostDao.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullParam() {
+        ghostDao.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNullParam() {
+        ghostDao.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getByNameNullParam() {
+        ghostDao.getByName(null);
+    }
+
     @Test
     public void createGhostTest() {
         assertThat(ghost.getId()).isNull();
