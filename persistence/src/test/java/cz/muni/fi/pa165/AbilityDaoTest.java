@@ -68,13 +68,32 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
     }
 
 
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void createNullParam() {
+        abilityDao.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void updateNullParam() {
+        abilityDao.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void deleteNullParam() {
+        abilityDao.delete(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void getByNameNullParam() {
+        abilityDao.getByName(null);
+    }
+
     @Test(expectedExceptions = PersistenceException.class)
     public void nullAbilityNameNotAllowed() {
         Ability ability = new Ability();
         ability.setName(null);
         abilityDao.create(ability);
     }
-
 
 
     @Test(expectedExceptions = PersistenceException.class)
@@ -126,6 +145,10 @@ public class AbilityDaoTest extends AbstractTestNGSpringContextTests {
         Ability ability = abilityDao.getById(ability1.getId());
         assertThat(ability).hasFieldOrPropertyWithValue("name", "Overshadowing");
         assertThat(ability).hasFieldOrPropertyWithValue("description", "The power to take over another body");
+
+        Ability ability2 = abilityDao.getById(-3L);
+        assertThat(ability2).isNull();
+
     }
 
     @Test
