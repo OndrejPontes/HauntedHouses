@@ -1,6 +1,11 @@
 # HauntedHouses
 PA165 project
 
+# Instalation\Run
+```bash
+mvn clean install
+```
+
 # Description
 Existuje nekolik domu v kterych strasi podivna strasidla. Kazde strasidlo ma sve schopnosti a muze je mit i vic 
 strasidel. Kazde strasidlo muze strasit pouze v jednom dome. Dum je definovan nazvem, adresou (neni entita), datum 
