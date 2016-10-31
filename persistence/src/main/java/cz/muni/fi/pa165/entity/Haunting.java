@@ -107,4 +107,15 @@ public class Haunting {
         result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString(){
+        return "Haunting{" +
+                "id =" + id +
+                ", date ='" + date.toString() + '\'' +
+                ", number of people present ='" + numberOfPeoplePresent + '\'' +
+                ", haunted house =" + hauntedHouse +
+                ", ghosts ='" + ghosts + '\'' +
+                '}';
+    }
 }
