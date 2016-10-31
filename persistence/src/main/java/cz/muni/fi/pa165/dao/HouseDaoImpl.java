@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -40,17 +41,30 @@ public class HouseDaoImpl implements HouseDao {
 
     @Override
     public House getByName(String name) {
-        return (House) em.createQuery("select House from House house where House.name = :name")
-                .setMaxResults(1)
-                .getResultList();
+        if(name == null)
+            throw new IllegalArgumentException("name cannot be null");
+
+        try {
+            return (House) em.createQuery("select house from House house where house.name = :name")
+                    .setParameter("name", name)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     @Override
     public House getByAddress(String address) {
-        return (House) em.createQuery("select House from House house where House.address = :address")
-                .setParameter("address", address)
-                .setMaxResults(1)
-                .getResultList();
+        if(address == null)
+            throw new IllegalArgumentException("address cannot be null");
+
+        try {
+            return (House) em.createQuery("select house from House house where house.address = :address")
+                    .setParameter("address", address)
+                    .getSingleResult();
+        } catch(NoResultException ex) {
+            return null;
+        }
     }
 
     @Override
