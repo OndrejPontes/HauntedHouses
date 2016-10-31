@@ -52,47 +52,72 @@ public class HouseDaoTest extends AbstractTestNGSpringContextTests {
                 .setHistory("Brief history of time")
                 .setHauntingFrom(Calendar.getInstance().getTime());
 
+        houseDao.create(house);
+
     }
 
     @Test
     public void createHouseTest() {
-        assertThat(house.getId()).isNull();
-        houseDao.create(house);
-        assertThat(house.getId()).isNotNull();
+        House h1 = new House()
+                .setName("House")
+                .setAddress("Adress")
+                .setHistory("Brief history of time")
+                .setHauntingFrom(Calendar.getInstance().getTime());
+
+        assertThat(h1.getId()).isNull();
+        houseDao.create(h1);
+        assertThat(h1.getId()).isNotNull();
 
     }
 
     @Test
     public void updateTest(){
-        houseDao.create(house);
-        house.setName("MORGAL");
-        House updated = houseDao.update(house);
-        assertThat(houseDao.getByName("MORGAL")).isEqualTo(updated);
+        this.house.setName("NoName");
+        houseDao.update(this.house);
+        assertThat(houseDao.getById(house.getId())).hasFieldOrPropertyWithValue("name", "NoName");
     }
 
     @Test
     public void deleteTest(){
-        houseDao.create(house);
-        houseDao.delete(house);
-        assertThat(houseDao.getAll()).hasSize(0);
+        House h1 = new House()
+                .setName("PtaciHnizdo")
+                .setAddress("Babisov")
+                .setHistory("Brief history of time")
+                .setHauntingFrom(Calendar.getInstance().getTime());
+
+        assertThat(h1.getId()).isNull();
+        houseDao.create(h1);
+        assertThat(h1.getId()).isNotNull();
+        houseDao.delete(h1);
+        assertThat(houseDao.getById(h1.getId())).isNull();
+
     }
 
     @Test
     public void getAllTest(){
-        houseDao.create(house);
         assertThat(houseDao.getAll()).hasSize(1);
     }
 
     @Test
     public void getByNameTest(){
-        houseDao.create(house);
-        assertThat(houseDao.getByName("SCALA")).isEqualTo(house);
+        House h1 = new House()
+                .setName("Pyramidenkogel")
+                .setAddress("austria")
+                .setHistory("Brief history of time")
+                .setHauntingFrom(Calendar.getInstance().getTime());
+        houseDao.create(h1);
+        assertThat(houseDao.getByName("Pyramidenkogel")).isEqualTo(h1);
     }
 
     @Test
     public void getByAdress(){
-        houseDao.create(house);
-        assertThat(houseDao.getByAddress("MORAVAK")).isEqualTo(house);
+        House h1 = new House()
+                .setName("GliwiceRadioTower")
+                .setAddress("Poland")
+                .setHistory("The Gliwice Radio Tower is 118 m")
+                .setHauntingFrom(Calendar.getInstance().getTime());
+        houseDao.create(h1);
+        assertThat(houseDao.getByAddress("Poland")).isEqualTo(h1);
     }
 
 }
