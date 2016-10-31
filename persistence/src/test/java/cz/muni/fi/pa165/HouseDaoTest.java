@@ -72,9 +72,15 @@ public class HouseDaoTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void updateTest(){
-        this.house.setName("NoName");
-        houseDao.update(this.house);
-        assertThat(houseDao.getById(house.getId())).hasFieldOrPropertyWithValue("name", "NoName");
+        House h1 = new House()
+                .setName("TRUBA")
+                .setAddress("stramberk")
+                .setHistory("Brief history of time")
+                .setHauntingFrom(Calendar.getInstance().getTime());
+        houseDao.create(h1);
+        h1.setAddress("STRAMBERK");
+        houseDao.update(h1);
+        assertThat(houseDao.getById(h1.getId())).hasFieldOrPropertyWithValue("name", "NoName");
     }
 
     @Test
