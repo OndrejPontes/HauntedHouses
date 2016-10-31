@@ -41,15 +41,8 @@ public class HauntingDaoImpl implements HauntingDao {
         if(date == null)
             throw new IllegalArgumentException("date cannot be null");
 
-        TypedQuery<Haunting> query = em.createQuery("select h from Haunting h where h.date between :startDate and :endDate", Haunting.class);
-        query.setParameter("startDate", date);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(date);
-        calendar.set(Calendar.HOUR_OF_DAY, 23);
-        calendar.set(Calendar.MINUTE, 59);
-        calendar.set(Calendar.SECOND, 59);
-        query.setParameter("endDate", calendar.getTime());
+        TypedQuery<Haunting> query = em.createQuery("select h from Haunting h where h.date = :date", Haunting.class);
+        query.setParameter("date", date);
         return query.getResultList();
     }
 
