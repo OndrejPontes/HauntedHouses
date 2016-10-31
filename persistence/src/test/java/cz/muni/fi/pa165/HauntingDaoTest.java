@@ -54,14 +54,14 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void treeHauntingWereCreated(){
+    public void shouldCreateHaunting(){
         assertThat(h3.getId()).isNull();
         hauntingDao.create(h3);
         assertThat(h3.getId()).isNotNull();
     }
 
     @Test
-    public void getByDateReturnCorrectHaunting(){
+    public void shouldReturnCorrectHauntingByName(){
         List<Haunting> found = hauntingDao.getByDate(h1.getDate());
         assertThat(found).hasSize(2);
         assertThat(found).contains(h1);
@@ -69,13 +69,13 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getByIDReturnCorrectHaunting(){
+    public void shouldReturnCorrectHauntingById(){
         Haunting found = hauntingDao.getById(h1.getId());
         assertThat(found).isEqualTo(h1);
     }
 
     @Test
-    public void getAllReturnCorrectHauntings(){
+    public void shouldReturnAllHaunting(){
         List<Haunting> hauntings = hauntingDao.getAll();
         assertThat(hauntings).hasSize(2);
         assertThat(hauntings).contains(h1);
@@ -83,32 +83,32 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void isPossibleToUpdateHaunting(){
+    public void canUpdateHaunting(){
         h1.setNumberOfPeoplePresent(111);
         Haunting updated = hauntingDao.update(h1);
-        assertThat(updated).hasFieldOrPropertyWithValue("numberOfPeoplePresent", 111);
+        assertThat(updated).hasFieldOrPropertyWithValue("numberOfPeoplePresent", h1.getNumberOfPeoplePresent());
     }
 
     @Test
-    public void isPossibleToDeleteHaunting(){
+    public void canDeleteHaunting(){
         assertThat(em.contains(h1)).isTrue();
         hauntingDao.delete(h1);
         assertThat(em.contains(h1)).isFalse();
     }
 
     @Test(expectedExceptions= PersistenceException.class)
-    public void isForbiddenToPersistHauntingWithNullDate(){
+    public void cantDeleteHauntingWithoutDate(){
         hauntingDao.create(new Haunting().setDate(null));
     }
 
     @Test
-    public void getByIdReturnNullOnNonExistingId(){
+    public void shouldReturnNullByNonexistentId(){
         Haunting found = hauntingDao.getById(-1L);
         assertThat(found).isNull();
     }
 
     @Test
-    public void deleteByNonExistingIdShouldNotDeleteAnything(){
+    public void shouldNotDeleteAnythingWithHauntingWithoutId(){
         hauntingDao.delete(new Haunting());
         List<Haunting> hauntings = hauntingDao.getAll();
         assertThat(hauntings).hasSize(2);
@@ -117,10 +117,35 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getNullByIncorrectDate(){
+    public void shouldReturnEmptyListOfHauntingByDateWhichIsNotInDatabase(){
         Calendar calendar = Calendar.getInstance();
         calendar.set(2006,Calendar.OCTOBER,27);
         List<Haunting> found = hauntingDao.getByDate(calendar.getTime());
         assertThat(found).isEmpty();
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenCreatingNull(){
+        hauntingDao.create(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenFindingByIdWithNull(){
+        hauntingDao.getById(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenFindingByDateWithNull(){
+        hauntingDao.getByDate(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenUpdatingWithNull(){
+        hauntingDao.update(null);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void shouldThrowIllegalArgumentExceptionWhenDeletingWithNull(){
+        hauntingDao.delete(null);
     }
 }
