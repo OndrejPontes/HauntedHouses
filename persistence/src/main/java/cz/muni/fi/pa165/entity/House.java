@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -87,7 +88,7 @@ public class House {
     }
 
     public List<Haunting> getHauntings() {
-        return hauntings;
+        return Collections.unmodifiableList(hauntings);
     }
 
     public House setHauntings(List<Haunting> hauntings) {

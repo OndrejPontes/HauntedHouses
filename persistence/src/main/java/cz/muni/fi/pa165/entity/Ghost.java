@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -32,10 +33,10 @@ public class Ghost {
     private House hauntedHouse;
 
     @ManyToMany
-    private List<Ability> abilities = new ArrayList<Ability>();
+    private List<Ability> abilities = new ArrayList<>();
 
     @ManyToMany(mappedBy = "ghosts")
-    private List<Haunting> hauntings = new ArrayList<Haunting>();
+    private List<Haunting> hauntings = new ArrayList<>();
 
     public Ghost() {
     }
@@ -102,11 +103,11 @@ public class Ghost {
     }
 
     public List<Ability> getAbilities() {
-        return abilities;
+        return Collections.unmodifiableList(abilities);
     }
 
     public Ghost setAbilities(List<Ability> abilities) {
-        this.abilities = abilities;
+        this.abilities = Collections.unmodifiableList(abilities);
         return this;
     }
 
@@ -153,5 +154,19 @@ public class Ghost {
         result = 31 * result + (getAbilities() != null ? getAbilities().hashCode() : 0);
         result = 31 * result + (getHauntings() != null ? getHauntings().hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Ghost{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", hauntsFrom=" + hauntsFrom +
+                ", hauntsTo=" + hauntsTo +
+                ", description='" + description + '\'' +
+                ", hauntedHouse=" + hauntedHouse +
+                ", abilities=" + abilities +
+                ", hauntings=" + hauntings +
+                '}';
     }
 }

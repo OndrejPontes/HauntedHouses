@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,7 +63,7 @@ public class Ability {
     }
 
     public List<Ghost> getGhosts() {
-        return ghosts;
+        return Collections.unmodifiableList(ghosts);
     }
 
     public Ability setGhosts(List<Ghost> ghosts) {

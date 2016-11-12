@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class Haunting {
     }
 
     public List<Ghost> getGhosts() {
-        return ghosts;
+        return Collections.unmodifiableList(ghosts);
     }
 
     public Haunting setGhosts(List<Ghost> ghosts) {
