@@ -8,28 +8,28 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * copied from example project
+ * @author MonikaMociarikova
  */
 public class MappingServiceImpl implements MappingService {
 
     @Autowired
-    private Mapper dozer;
+    private Mapper mapper;
 
-    public  <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass) {
+    public Mapper getMapper(){
+        return mapper;
+    }
+
+    public  <T> List<T> mapCollection(Collection<?> collection, Class<T> classToBeMapped) {
         List<T> mappedCollection = new ArrayList<>();
-        for (Object object : objects) {
-            mappedCollection.add(dozer.map(object, mapToClass));
+        for (Object object : collection) {
+            mappedCollection.add(mapper.map(object, classToBeMapped));
         }
         return mappedCollection;
     }
 
-    public  <T> T mapTo(Object u, Class<T> mapToClass)
+    public  <T> T mapObject(Object object, Class<T> classToBeMapped)
     {
-        return dozer.map(u,mapToClass);
-    }
-
-    public Mapper getMapper(){
-        return dozer;
+        return mapper.map(object,classToBeMapped);
     }
 
 }

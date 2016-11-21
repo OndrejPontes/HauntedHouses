@@ -6,13 +6,12 @@ import java.util.List;
 import org.dozer.Mapper;
 
 /**
- * copied from example project
+ * @author MonikaMociarikova
  */
 public interface MappingService {
 
-     <T> List<T> mapTo(Collection<?> objects, Class<T> mapToClass);
+     <T> List<T> mapCollection(Collection<?> collection, Class<T> classToBeMapped);
 
-     <T> T mapTo(Object u, Class<T> mapToClass);
+     <T> T mapObject(Object object, Class<T> classToBeMapped);
 
-    Mapper getMapper();
 }
