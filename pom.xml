@@ -11,8 +11,8 @@
 
     <modules>
         <module>persistence</module>
-        <module>test</module>
         <module>api</module>
+        <module>services</module>
     </modules>
 
     <dependencyManagement>
