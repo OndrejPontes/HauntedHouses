@@ -79,7 +79,7 @@ public class Haunting {
     }
 
     public Haunting setGhosts(List<Ghost> ghosts) {
-        this.ghosts = ghosts;
+        this.ghosts = Collections.unmodifiableList(ghosts);
         return this;
     }
 
