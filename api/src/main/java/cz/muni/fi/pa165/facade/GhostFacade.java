@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.facade;
 
-import main.java.cz.muni.fi.pa165.dto.GhostCreateDTO;
-import main.java.cz.muni.fi.pa165.dto.GhostDTO;
-import main.java.cz.muni.fi.pa165.dto.GhostUpdateDTO;
+import cz.muni.fi.pa165.dto.GhostCreateDTO;
+import cz.muni.fi.pa165.dto.GhostDTO;
+import cz.muni.fi.pa165.dto.GhostUpdateDTO;
 
 import java.util.Collection;
 

@@ -11,7 +11,7 @@
 
     <modules>
         <module>persistence</module>
-        <module>test</module>
+        <module>services</module>
         <module>api</module>
     </modules>
 
