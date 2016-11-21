@@ -22,8 +22,10 @@ public class HauntingServiceImpl implements HauntingService {
     private HauntingDao hauntingDao;
 
     @Override
-    public void create(Haunting haunting) {
+    public Haunting create(Haunting haunting) {
+
         hauntingDao.create(haunting);
+        return haunting;
     }
 
     @Override
