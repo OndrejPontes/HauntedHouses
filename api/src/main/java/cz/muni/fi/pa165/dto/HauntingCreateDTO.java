@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.dto;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class HauntingCreateDTO {
     private List<HouseDTO> possibleHouses = new ArrayList<>();
 
     @NotNull
-    private Long ghostId;
+    private Long[] ghostsIds;
     private List<GhostDTO> possibleGhosts = new ArrayList<>();
 
     public List<HouseDTO> getPossibleHouses() {
@@ -53,12 +54,12 @@ public class HauntingCreateDTO {
         return this;
     }
 
-    public Long getGhostId() {
-        return ghostId;
+    public Long[] getGhostsIds() {
+        return ghostsIds;
     }
 
-    public HauntingCreateDTO setGhostId(Long ghostId) {
-        this.ghostId = ghostId;
+    public HauntingCreateDTO setGhostsIds(Long[] ghostsIds) {
+        this.ghostsIds = ghostsIds;
         return this;
     }
 
@@ -82,12 +83,14 @@ public class HauntingCreateDTO {
 
 
     @Override
-    public String toString(){
+    public String toString() {
         return "HauntingCreateDTO{" +
-                ", date ='" + date.toString() + '\'' +
-                ", number of people present ='" + numberOfPeoplePresent + '\'' +
-                ", haunted house ID =" + hauntedHouseId +
-                ", ghost ID ='" + ghostId + '\'' +
+                "date=" + date +
+                ", numberOfPeoplePresent=" + numberOfPeoplePresent +
+                ", hauntedHouseId=" + hauntedHouseId +
+                ", possibleHouses=" + possibleHouses +
+                ", ghostsIds=" + Arrays.toString(ghostsIds) +
+                ", possibleGhosts=" + possibleGhosts +
                 '}';
     }
 
@@ -102,7 +105,7 @@ public class HauntingCreateDTO {
         if (getDate() != null ? !getDate().equals(that.getDate()) : that.getDate() != null) return false;
         if (getHauntedHouseId() != null ? !getHauntedHouseId().equals(that.getHauntedHouseId()) : that.getHauntedHouseId() != null)
             return false;
-        return getGhostId() != null ? getGhostId().equals(that.getGhostId()) : that.getGhostId() == null;
+        return Arrays.deepEquals(getGhostsIds(), that.getGhostsIds());
 
     }
 
@@ -111,7 +114,7 @@ public class HauntingCreateDTO {
         int result = getDate() != null ? getDate().hashCode() : 0;
         result = 31 * result + getNumberOfPeoplePresent();
         result = 31 * result + (getHauntedHouseId() != null ? getHauntedHouseId().hashCode() : 0);
-        result = 31 * result + (getGhostId() != null ? getGhostId().hashCode() : 0);
+        result = 31 * result + Arrays.hashCode(getGhostsIds());
         return result;
     }
 }

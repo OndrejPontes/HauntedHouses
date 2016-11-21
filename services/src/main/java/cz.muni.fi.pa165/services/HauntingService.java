@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public interface HauntingService {
 
-    void create(Haunting haunting);
+    Haunting create(Haunting haunting);
 
     void remove(Haunting haunting);
 
@@ -25,4 +25,6 @@ public interface HauntingService {
     List<Haunting> findByDate (Date date);
 
     List<Haunting> findAll();
+
+
 }
