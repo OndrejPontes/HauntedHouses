@@ -30,6 +30,10 @@ public interface HouseDao {
     void delete(House house);
 
     /**
+     * Removes the entity from the database by its id
+     */
+    void delete(Long id);
+    /**
      * Finds the entity in the database by it's id
      * @param id - the id of the entity
      * @return - the entity by the given id

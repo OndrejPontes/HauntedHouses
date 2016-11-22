@@ -34,6 +34,10 @@ public class HouseDaoImpl implements HouseDao {
         em.remove(house);
     }
 
+    public void delete(Long id) {
+        em.remove(getById(id));
+    }
+
     @Override
     public House getById(long id) {
         return em.find(House.class, id);

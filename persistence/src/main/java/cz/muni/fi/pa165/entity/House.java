@@ -91,8 +91,13 @@ public class House {
         return Collections.unmodifiableList(hauntings);
     }
 
-    public House setHauntings(List<Haunting> hauntings) {
-        this.hauntings = hauntings;
+    public House addHaunting(Haunting haunting) {
+        hauntings.add(haunting);
+        return this;
+    }
+
+    public House removeHaunting(Haunting haunting) {
+        hauntings.remove(haunting);
         return this;
     }
 
