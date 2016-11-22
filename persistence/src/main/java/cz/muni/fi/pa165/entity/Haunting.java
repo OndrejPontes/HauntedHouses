@@ -2,11 +2,7 @@ package cz.muni.fi.pa165.entity;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Monika Mociarikova
@@ -20,7 +16,7 @@ public class Haunting {
 
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
-    private Date date;
+    private Calendar date;
 
     @Column(nullable = false)
     private int numberOfPeoplePresent;
@@ -34,7 +30,7 @@ public class Haunting {
     public Haunting() {
     }
 
-    public Haunting(Date date, int numberOfPeoplePresent) {
+    public Haunting(Calendar date, int numberOfPeoplePresent) {
         this.date = date;
         this.numberOfPeoplePresent = numberOfPeoplePresent;
     }
@@ -48,11 +44,11 @@ public class Haunting {
         return this;
     }
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public Haunting setDate(Date date) {
+    public Haunting setDate(Calendar date) {
         this.date = date;
         return this;
     }
