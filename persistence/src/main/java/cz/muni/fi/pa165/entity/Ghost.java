@@ -120,6 +120,14 @@ public class Ghost {
         return this;
     }
 
+    public void addHaunting(Haunting haunting) {
+        hauntings.add(haunting);
+    }
+
+    public void removeHaunting(Haunting haunting) {
+        hauntings.remove(haunting);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

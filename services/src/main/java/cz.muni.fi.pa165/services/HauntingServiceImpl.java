@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.services;
 
 import cz.muni.fi.pa165.dao.HauntingDao;
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
 
 import java.util.Date;
@@ -31,6 +32,16 @@ public class HauntingServiceImpl implements HauntingService {
     @Override
     public void remove(Haunting haunting) {
         hauntingDao.delete(haunting);
+    }
+
+    @Override
+    public void addGhost(Haunting haunting, Ghost ghost) {
+
+    }
+
+    @Override
+    public void removeGhost(Ghost ghost) {
+
     }
 
     @Override

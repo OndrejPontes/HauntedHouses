@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.services;
 
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -17,6 +18,10 @@ public interface HauntingService {
     Haunting create(Haunting haunting);
 
     void remove(Haunting haunting);
+
+    void addGhost(Haunting haunting, Ghost ghost);
+
+    void removeGhost(Haunting haunting, Ghost ghost);
 
     Haunting update(Haunting haunting);
 
