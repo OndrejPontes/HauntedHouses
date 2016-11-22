@@ -17,7 +17,7 @@ import java.util.Collection;
  * @author Vojta David, vojtadavid
  */
 public class HouseServiceTest extends AbstractTestNGSpringContextTests {
-    
+
     @Mock
     private HouseDao houseDao;
     @Autowired
