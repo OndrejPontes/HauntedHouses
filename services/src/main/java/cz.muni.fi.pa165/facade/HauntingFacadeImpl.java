@@ -1,11 +1,11 @@
-package cz.muni.fi.pa165.facades;
+package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
-import cz.muni.fi.pa165.facade.HauntingFacade;
+import cz.muni.fi.pa165.services.GhostService;
 import cz.muni.fi.pa165.services.HauntingService;
 import cz.muni.fi.pa165.services.MappingService;
 
@@ -31,8 +31,8 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Inject
     private HauntingService hauntingService;
 
-    @Inject
-    private HouseService houseService;
+//    @Inject
+//    private HouseService houseService;
 
     @Inject
     private GhostService ghostService;
@@ -43,10 +43,10 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Override
     public Long createHaunting(HauntingCreateDTO haunting) {
         Haunting hauntingToCreate = mappingService.mapObject(haunting,Haunting.class);
-        hauntingToCreate.setHauntedHouse(houseService.getHouseById(haunting.getHauntedHouseId()));
+//        hauntingToCreate.setHauntedHouse(houseService.getHouseById(haunting.getHauntedHouseId()));
         List<Ghost> ghosts = new ArrayList<>();
         for (Long id : haunting.getGhostsIds()) {
-            ghosts.add(ghostService.getGhostById(id));
+            ghosts.add(ghostService.getById(id));
         }
         hauntingToCreate.setGhosts(ghosts);
 

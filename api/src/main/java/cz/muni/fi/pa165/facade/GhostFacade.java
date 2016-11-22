@@ -10,15 +10,15 @@ import java.util.Collection;
  * @author Ondrej Ponteš
  */
 public interface GhostFacade {
+    Long createGhost(GhostCreateDTO ghostCreateDTO);
+
     Collection<GhostDTO> getAllGhosts();
 
     Collection<GhostDTO> getGhostsByName(String ghostName);
 
-    GhostDTO getGhostById(Long forestId);
-
-    GhostDTO createGhost(GhostCreateDTO ghostCreateDTO);
+    GhostDTO getGhostById(Long ghostId);
 
     void updateGhost(GhostUpdateDTO ghostUpdateDTO);
 
-    void deleteGhost(Long ghostId);
+    void deleteGhost(GhostDTO ghostId);
 }

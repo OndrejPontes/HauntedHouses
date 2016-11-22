@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
 /**
- * @author opontes
+ * @author Ondrej Ponteš
  */
 public class UserAuthenticateDTO {
     private String nickname;

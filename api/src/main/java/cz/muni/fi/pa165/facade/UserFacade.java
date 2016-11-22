@@ -6,7 +6,7 @@ import cz.muni.fi.pa165.dto.UserDTO;
 import java.util.Collection;
 
 /**
- * @author opontes
+ * @author Ondrej Ponteš
  */
 public interface UserFacade {
     UserDTO findUserById(Long userId);

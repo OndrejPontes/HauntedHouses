@@ -18,8 +18,9 @@ public class GhostDaoImpl implements GhostDao {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(Ghost ghost) {
+    public Long create(Ghost ghost) {
         em.persist(ghost);
+        return ghost.getId();
     }
 
     public Ghost update(Ghost ghost) {
