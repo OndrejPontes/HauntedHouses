@@ -1,4 +1,4 @@
-package cz.muni.fi.pa165.facades;
+package cz.muni.fi.pa165.facade;
 
 import java.util.Collection;
 
@@ -9,7 +9,6 @@ import cz.muni.fi.pa165.dto.HouseDTO;
 import cz.muni.fi.pa165.dto.HouseUpdateDTO;
 import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.entity.House;
-import cz.muni.fi.pa165.facade.HouseFacade;
 import cz.muni.fi.pa165.services.HauntingService;
 import cz.muni.fi.pa165.services.HouseService;
 import cz.muni.fi.pa165.services.MappingService;
