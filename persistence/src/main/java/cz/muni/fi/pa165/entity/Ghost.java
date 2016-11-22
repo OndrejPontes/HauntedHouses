@@ -107,17 +107,12 @@ public class Ghost {
     }
 
     public Ghost setAbilities(List<Ability> abilities) {
-        this.abilities = Collections.unmodifiableList(abilities);
+        this.abilities = abilities;
         return this;
     }
 
     public List<Haunting> getHauntings() {
-        return hauntings;
-    }
-
-    public Ghost setHauntings(List<Haunting> hauntings) {
-        this.hauntings = hauntings;
-        return this;
+        return Collections.unmodifiableList(hauntings);
     }
 
     public void addHaunting(Haunting haunting) {
