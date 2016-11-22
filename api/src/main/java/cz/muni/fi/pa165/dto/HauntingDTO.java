@@ -10,7 +10,6 @@ import java.util.List;
  */
 public class HauntingDTO {
 
-
     private Long id;
 
     private Date date;
