@@ -18,49 +18,50 @@ import java.util.Collection;
  */
 public class HouseServiceTest extends AbstractTestNGSpringContextTests {
 
-    @Mock
-    private HouseDao houseDao;
-    @Autowired
-    @InjectMocks
-    private HouseService houseService;
-
-
-
-    @BeforeMethod
-    public void init() {
-
-    }
-
-    @BeforeClass
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-    }
-    @Test
-    public void getAllTest(){
-
-    }
-    @Test
-    public voidgetByNameTest(){
-
-    }
-    @Test
-    public voidgetByAddressTest(){
-
-    }
-    @Test
-    public voidgetByIdTest(){
-
-    }
-    @Test
-    public voidcreateTest(){
-
-    }
-    @Test
-    public void updateTest(){
-
-    }
-    @Test
-    public void deleteTest(){
-
-    }
+//    @Mock
+//    private HouseDao houseDao;
+//    @Autowired
+//    @InjectMocks
+//    private HouseService houseService;
+//
+//
+//
+//    @BeforeMethod
+//    public void init() {
+//
+//    }
+//
+//    @BeforeClass
+//    public void setup() {
+//
+//        MockitoAnnotations.initMocks(this);
+//    }
+//    @Test
+//    public void getAllTest(){
+//
+//    }
+//    @Test
+//    public void getByNameTest(){
+//
+//    }
+//    @Test
+//    public void getByAddressTest(){
+//
+//    }
+//    @Test
+//    public void getByIdTest(){
+//
+//    }
+//    @Test
+//    public void createTest(){
+//
+//    }
+//    @Test
+//    public void updateTest(){
+//
+//    }
+//    @Test
+//    public void deleteTest(){
+//
+//    }
 }
