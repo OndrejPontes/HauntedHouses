@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.services;
 
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.stereotype.Service;
-import java.util.Date;
+
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -18,13 +20,17 @@ public interface HauntingService {
 
     void remove(Haunting haunting);
 
+    void addGhost(Haunting haunting, Ghost ghost);
+
+    void removeGhost(Haunting haunting, Ghost ghost);
+
     Haunting update(Haunting haunting);
 
-    Haunting findById(Long id);
+    Haunting getById(Long id);
 
-    List<Haunting> findByDate (Date date);
+    List<Haunting> getByDate(Calendar date);
 
-    List<Haunting> findAll();
+    List<Haunting> getAll();
 
 
 }

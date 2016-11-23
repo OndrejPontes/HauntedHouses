@@ -54,7 +54,7 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public void addHaunting(Long hauntingId, Long houseId) {
-        Haunting haunting = hauntingService.findById(hauntingId);
+        Haunting haunting = hauntingService.getById(hauntingId);
         House house = houseService.getById(houseId);
 
         house.addHaunting(haunting);
@@ -63,7 +63,7 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public void removeHaunting(Long hauntingId, Long houseId) {
-        Haunting haunting = hauntingService.findById(hauntingId);
+        Haunting haunting = hauntingService.getById(hauntingId);
         House house = houseService.getById(houseId);
 
         house.removeHaunting(haunting);

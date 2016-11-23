@@ -6,7 +6,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class Main {
@@ -20,7 +19,7 @@ public class Main {
         hauting.setNumberOfPeoplePresent(9);
         Calendar calendar = Calendar.getInstance();
         calendar.set(2016,Calendar.OCTOBER,27);
-        hauting.setDate(calendar.getTime());
+        hauting.setDate(calendar);
         hauntingDao.create(hauting);
 
         System.out.println(calendar.getTime().toString());
