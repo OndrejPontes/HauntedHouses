@@ -5,10 +5,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Ondrej Ponteš
+ * Created by vojta on 22.11.16.
  */
-public class AbilityDTO {
-
+public class AbilityUpdateDTO {
     private Long id;
 
     private String name;
@@ -17,21 +16,11 @@ public class AbilityDTO {
 
     private List<GhostDTO> ghosts = new ArrayList<>();
 
-
-    public AbilityDTO() {
-    }
-
-
-    public AbilityDTO(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
     public Long getId() {
         return id;
     }
 
-    public AbilityDTO setId(Long id) {
+    public AbilityUpdateDTO setId(Long id) {
         this.id = id;
         return this;
     }
@@ -40,7 +29,7 @@ public class AbilityDTO {
         return name;
     }
 
-    public AbilityDTO setName(String name) {
+    public AbilityUpdateDTO setName(String name) {
         this.name = name;
         return this;
     }
@@ -49,7 +38,7 @@ public class AbilityDTO {
         return description;
     }
 
-    public AbilityDTO setDescription(String description) {
+    public AbilityUpdateDTO setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -58,7 +47,7 @@ public class AbilityDTO {
         return Collections.unmodifiableList(ghosts);
     }
 
-    public AbilityDTO setGhosts(List<GhostDTO> ghosts) {
+    public AbilityUpdateDTO setGhosts(List<GhostDTO> ghosts) {
         this.ghosts = ghosts;
         return this;
     }
