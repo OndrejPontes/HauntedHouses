@@ -20,46 +20,26 @@ public class HauntingCreateDTO {
     private int numberOfPeoplePresent;
 
     @NotNull
-    private Long hauntedHouseId;
-    private List<HouseDTO> possibleHouses = new ArrayList<>();
+    private List<HouseDTO> houses = new ArrayList<>();
 
     @NotNull
-    private Long[] ghostsIds;
-    private List<GhostDTO> possibleGhosts = new ArrayList<>();
+    private List<GhostDTO> ghosts = new ArrayList<>();
 
-    public List<HouseDTO> getPossibleHouses() {
-        return possibleHouses;
+    public List<HouseDTO> getHouses() {
+        return houses;
     }
 
-    public HauntingCreateDTO setPossibleHouses(List<HouseDTO> possibleHouses) {
-        this.possibleHouses = possibleHouses;
+    public HauntingCreateDTO setHouses(List<HouseDTO> houses) {
+        this.houses = houses;
         return this;
     }
 
-    public Long getHauntedHouseId() {
-        return hauntedHouseId;
+    public List<GhostDTO> getGhosts() {
+        return ghosts;
     }
 
-    public HauntingCreateDTO setHauntedHouseId(Long hauntedHouseId) {
-        this.hauntedHouseId = hauntedHouseId;
-        return this;
-    }
-
-    public List<GhostDTO> getPossibleGhosts() {
-        return possibleGhosts;
-    }
-
-    public HauntingCreateDTO setPossibleGhosts(List<GhostDTO> possibleGhosts) {
-        this.possibleGhosts = possibleGhosts;
-        return this;
-    }
-
-    public Long[] getGhostsIds() {
-        return ghostsIds;
-    }
-
-    public HauntingCreateDTO setGhostsIds(Long[] ghostsIds) {
-        this.ghostsIds = ghostsIds;
+    public HauntingCreateDTO setGhosts(List<GhostDTO> ghosts) {
+        this.ghosts = ghosts;
         return this;
     }
 
@@ -87,10 +67,8 @@ public class HauntingCreateDTO {
         return "HauntingCreateDTO{" +
                 "date=" + date +
                 ", numberOfPeoplePresent=" + numberOfPeoplePresent +
-                ", hauntedHouseId=" + hauntedHouseId +
-                ", possibleHouses=" + possibleHouses +
-                ", ghostsIds=" + Arrays.toString(ghostsIds) +
-                ", possibleGhosts=" + possibleGhosts +
+                ", houses=" + houses +
+                ", ghosts=" + ghosts +
                 '}';
     }
 
@@ -103,9 +81,8 @@ public class HauntingCreateDTO {
 
         if (getNumberOfPeoplePresent() != that.getNumberOfPeoplePresent()) return false;
         if (getDate() != null ? !getDate().equals(that.getDate()) : that.getDate() != null) return false;
-        if (getHauntedHouseId() != null ? !getHauntedHouseId().equals(that.getHauntedHouseId()) : that.getHauntedHouseId() != null)
-            return false;
-        return Arrays.deepEquals(getGhostsIds(), that.getGhostsIds());
+        if (getHouses() != null ? !getHouses().equals(that.getHouses()) : that.getHouses() != null) return false;
+        return getGhosts() != null ? getGhosts().equals(that.getGhosts()) : that.getGhosts() == null;
 
     }
 
@@ -113,8 +90,8 @@ public class HauntingCreateDTO {
     public int hashCode() {
         int result = getDate() != null ? getDate().hashCode() : 0;
         result = 31 * result + getNumberOfPeoplePresent();
-        result = 31 * result + (getHauntedHouseId() != null ? getHauntedHouseId().hashCode() : 0);
-        result = 31 * result + Arrays.hashCode(getGhostsIds());
+        result = 31 * result + (getHouses() != null ? getHouses().hashCode() : 0);
+        result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
         return result;
     }
 }

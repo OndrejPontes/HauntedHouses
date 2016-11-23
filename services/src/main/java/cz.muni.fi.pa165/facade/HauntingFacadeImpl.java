@@ -31,12 +31,6 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Inject
     private HauntingService hauntingService;
 
-    @Inject
-    private HouseService houseService;
-
-    @Inject
-    private GhostService ghostService;
-
     //@Autowired
     @Inject
     private MappingService mappingService;
@@ -44,11 +38,6 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Override
     public Long createHaunting(HauntingCreateDTO haunting) {
         Haunting hauntingToCreate = mappingService.mapObject(haunting,Haunting.class);
-        hauntingToCreate.setHauntedHouse(houseService.getById(haunting.getHauntedHouseId()));
-        for (Long id : haunting.getGhostsIds()) {
-            hauntingToCreate.addGhost(ghostService.getById(id));
-        }
-
         Haunting createdHaunting = hauntingService.create(hauntingToCreate);
         return createdHaunting.getId();
     }
@@ -56,10 +45,6 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Override
     public void updateHaunting(HauntingUpdateDTO haunting) {
         Haunting hauntingToUpdate = mappingService.mapObject(haunting,Haunting.class);
-        hauntingToUpdate.setHauntedHouse(houseService.getById(haunting.getHauntedHouseId()));
-        for (Long id : haunting.getGhostsIds()) {
-            hauntingToUpdate.addGhost(ghostService.getById(id));
-        }
         hauntingService.update(hauntingToUpdate);
     }
 
