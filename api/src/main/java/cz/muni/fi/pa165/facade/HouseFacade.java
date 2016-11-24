@@ -1,10 +1,9 @@
 package cz.muni.fi.pa165.facade;
 
-import java.util.Collection;
-
 import cz.muni.fi.pa165.dto.HouseCreateDTO;
 import cz.muni.fi.pa165.dto.HouseDTO;
-import cz.muni.fi.pa165.dto.HouseUpdateDTO;
+
+import java.util.Collection;
 
 /**
  * @author Jirka Kruml
@@ -25,7 +24,7 @@ public interface HouseFacade {
 
     void removeHaunting(Long hauntingId, Long houseId);
 
-    void update(HouseUpdateDTO house);
+    void update(HouseDTO house);
 
     void delete(Long id);
 

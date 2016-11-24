@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
-import cz.muni.fi.pa165.dto.GhostUpdateDTO;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.services.GhostService;
 import cz.muni.fi.pa165.services.MappingService;
@@ -35,7 +34,7 @@ public class GhostFacadeImpl implements GhostFacade {
     }
 
     @Override
-    public void updateGhost(GhostUpdateDTO ghostUpdateDTO) {
+    public void updateGhost(GhostDTO ghostUpdateDTO) {
         Ghost ghost = mappingService.mapObject(ghostUpdateDTO, Ghost.class);
         ghostService.update(ghost);
     }

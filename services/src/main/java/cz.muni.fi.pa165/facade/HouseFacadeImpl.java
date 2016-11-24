@@ -1,19 +1,17 @@
 package cz.muni.fi.pa165.facade;
 
-import java.util.Collection;
-
-import org.springframework.beans.factory.annotation.Autowired;
-
 import cz.muni.fi.pa165.dto.HouseCreateDTO;
 import cz.muni.fi.pa165.dto.HouseDTO;
-import cz.muni.fi.pa165.dto.HouseUpdateDTO;
 import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.entity.House;
 import cz.muni.fi.pa165.services.HauntingService;
 import cz.muni.fi.pa165.services.HouseService;
 import cz.muni.fi.pa165.services.MappingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collection;
 
 /**
  * @author Jirka Kruml
@@ -75,7 +73,7 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public void update(HouseUpdateDTO house) {
+    public void update(HouseDTO house) {
         houseService.update(mappingService.mapObject(house, House.class));
     }
 

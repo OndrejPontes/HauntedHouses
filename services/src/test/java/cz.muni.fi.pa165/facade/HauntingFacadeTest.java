@@ -162,4 +162,11 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
         assertThat(foundHaunting).hasFieldOrPropertyWithValue("ghosts", foundHaunting.getGhosts());
         assertThat(foundHaunting).hasFieldOrPropertyWithValue("hauntedHouse", foundHaunting.getHauntedHouse());
     }
+
+    @Test
+    public void shouldCreateUpdateAndFindHaunting(){
+        HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
+        HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
+        hauntingFacade.updateHaunting(foundHaunting);
+    }
 }

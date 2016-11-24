@@ -2,10 +2,7 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.AbilityCreateDTO;
 import cz.muni.fi.pa165.dto.AbilityDTO;
-import cz.muni.fi.pa165.dto.AbilityUpdateDTO;
-import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.services.AbilityService;
 import cz.muni.fi.pa165.services.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +32,7 @@ public class AbilityFacadeImpl implements AbilityFacade {
     }
 
     @Override
-    public void update(AbilityUpdateDTO abilityUpdateDTO) {
+    public void update(AbilityDTO abilityUpdateDTO) {
         Ability ability = mappingService.mapObject(abilityUpdateDTO, Ability.class);
         abilityService.update(ability);
     }

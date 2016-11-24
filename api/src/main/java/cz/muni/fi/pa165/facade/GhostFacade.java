@@ -2,7 +2,6 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
-import cz.muni.fi.pa165.dto.GhostUpdateDTO;
 
 import java.util.Collection;
 
@@ -18,7 +17,7 @@ public interface GhostFacade {
 
     GhostDTO getGhostById(Long ghostId);
 
-    void updateGhost(GhostUpdateDTO ghostUpdateDTO);
+    void updateGhost(GhostDTO ghostDTO);
 
     void deleteGhost(GhostDTO ghostId);
 }

@@ -3,14 +3,10 @@ package cz.muni.fi.pa165.facade;
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
-import cz.muni.fi.pa165.dto.HauntingUpdateDTO;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
-import cz.muni.fi.pa165.services.GhostService;
 import cz.muni.fi.pa165.services.HauntingService;
-import cz.muni.fi.pa165.services.HouseService;
 import cz.muni.fi.pa165.services.MappingService;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +37,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
     }
 
     @Override
-    public void updateHaunting(HauntingUpdateDTO haunting) {
+    public void updateHaunting(HauntingDTO haunting) {
         Haunting hauntingToUpdate = mappingService.mapObject(haunting, Haunting.class);
         hauntingService.update(hauntingToUpdate);
     }
