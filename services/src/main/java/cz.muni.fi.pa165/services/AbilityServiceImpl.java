@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.services;
 
 import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.entity.Ability;
+import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,32 +19,57 @@ public class AbilityServiceImpl implements AbilityService {
     private AbilityDao abilityDao;
 
     @Override
-    public void create(Ability ability) {
-        abilityDao.create(ability);
+    public Ability create(Ability ability) {
+        try {
+            abilityDao.create(ability);
+            return ability;
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot create ability",e);
+        }
     }
 
     @Override
     public Ability update(Ability ability) {
-        return abilityDao.update(ability);
+        try {
+            return abilityDao.update(ability);
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot update ability",e);
+        }
     }
 
     @Override
     public void delete(Ability ability) {
-        abilityDao.delete(ability);
+        try {
+            abilityDao.delete(ability);
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot delete ability",e);
+        }
     }
 
     @Override
     public Ability getById(long id) {
-        return abilityDao.getById(id);
+        try {
+            return abilityDao.getById(id);
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot getById ability",e);
+        }
     };
 
     @Override
     public Ability getByName(String name) {
-        return abilityDao.getByName(name);
+        try {
+            return abilityDao.getByName(name);
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot getByName ability",e);
+        }
     }
 
     @Override
     public List<Ability> getAll() {
-        return abilityDao.getAll();
+        try {
+            return abilityDao.getAll();
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot getAll ability",e);
+        }
     }
 }

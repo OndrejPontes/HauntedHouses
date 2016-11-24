@@ -10,6 +10,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cz.muni.fi.pa165.exception.HauntingDataAccessException;
+import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +32,7 @@ public class HauntingServiceImpl implements HauntingService {
             hauntingDao.create(haunting);
             return haunting;
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot create haunting ", ex);
+            throw new ServiceImplDAOException("Cannot create haunting ", ex);
         }
     }
 
@@ -40,19 +41,19 @@ public class HauntingServiceImpl implements HauntingService {
         try {
             hauntingDao.delete(haunting);
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot remove haunting ", ex);
+            throw new ServiceImplDAOException("Cannot remove haunting ", ex);
         }
     }
 
     @Override
     public void addGhost(Haunting haunting, Ghost ghost) {
         if (haunting.getGhosts().contains(ghost)) {
-            throw new HauntingDataAccessException("Ghost is already in a collection. ");
+            throw new ServiceImplDAOException("Ghost is already in a collection. ");
         }
         try {
             haunting.addGhost(ghost);
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot add ghost ", ex);
+            throw new ServiceImplDAOException("Cannot add ghost ", ex);
         }
     }
 
@@ -61,7 +62,7 @@ public class HauntingServiceImpl implements HauntingService {
         try {
             haunting.removeGhost(ghost);
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot remove ghost ", ex);
+            throw new ServiceImplDAOException("Cannot remove ghost ", ex);
         }
     }
 
@@ -70,7 +71,7 @@ public class HauntingServiceImpl implements HauntingService {
         try {
             return hauntingDao.update(haunting);
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot update haunting ", ex);
+            throw new ServiceImplDAOException("Cannot update haunting ", ex);
         }
     }
 
@@ -79,7 +80,7 @@ public class HauntingServiceImpl implements HauntingService {
         try {
             return hauntingDao.getById(id);
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot find haunting by id ", ex);
+            throw new ServiceImplDAOException("Cannot find haunting by id ", ex);
         }
     }
 
@@ -88,7 +89,7 @@ public class HauntingServiceImpl implements HauntingService {
         try {
             return hauntingDao.getByDate(date.getTime());
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot find haunting by date ", ex);
+            throw new ServiceImplDAOException("Cannot find haunting by date ", ex);
         }
     }
 
@@ -97,7 +98,7 @@ public class HauntingServiceImpl implements HauntingService {
         try {
             return hauntingDao.getAll();
         }catch (Exception ex) {
-            throw new HauntingDataAccessException("Cannot find all hauntings ", ex);
+            throw new ServiceImplDAOException("Cannot find all hauntings ", ex);
         }
     }
 }
