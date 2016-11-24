@@ -1,9 +1,5 @@
 package cz.muni.fi.pa165.dto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * @author Vojta David, vojtadavid
  */

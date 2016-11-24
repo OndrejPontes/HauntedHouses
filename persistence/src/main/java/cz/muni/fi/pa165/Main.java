@@ -19,7 +19,7 @@ public class Main {
         hauting.setNumberOfPeoplePresent(9);
         Calendar calendar = Calendar.getInstance();
         calendar.set(2016,Calendar.OCTOBER,27);
-        hauting.setDate(calendar);
+        hauting.setDate(calendar.getTime());
         hauntingDao.create(hauting);
 
         System.out.println(calendar.getTime().toString());

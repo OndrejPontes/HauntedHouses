@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.entity.House;
 import cz.muni.fi.pa165.services.GhostService;
 import cz.muni.fi.pa165.services.HauntingService;
 import cz.muni.fi.pa165.services.HouseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.annotations.BeforeMethod;
 
 import org.testng.annotations.BeforeClass;
@@ -42,7 +43,7 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
     @Mock
     private HouseService houseService;
 
-    @InjectMocks
+    @Autowired
     private final HauntingFacade hauntingFacade = new HauntingFacadeImpl();
 
     private HauntingDTO haunting;
@@ -148,8 +149,14 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void shouldCreateHaunting(){
-        Long id = hauntingFacade.createHaunting(hauntingCreateDTO);
-        assertThat(id).isNotNull();
+    public void shouldCreateAndFindHaunting(){
+        HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
+        assertThat(haunting).isNotNull();
+        HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
+        assertThat(createdHaunting).isEqualTo(foundHaunting);
+        assertThat(foundHaunting).hasFieldOrPropertyWithValue("date", haunting1.getDate());
+        assertThat(foundHaunting).hasFieldOrPropertyWithValue("numberOfPeoplePresent", haunting1.getNumberOfPeoplePresent());
+        assertThat(foundHaunting).hasFieldOrPropertyWithValue("ghosts", haunting1.getGhosts());
+        assertThat(foundHaunting).hasFieldOrPropertyWithValue("house", haunting1.getHauntedHouse());
     }
 }

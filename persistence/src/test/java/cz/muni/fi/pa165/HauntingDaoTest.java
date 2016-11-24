@@ -41,13 +41,13 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     public void setUp(){
         Calendar calendar = Calendar.getInstance();
         calendar.set(2016,Calendar.OCTOBER,27);
-        h1 = new Haunting(calendar, 5);
+        h1 = new Haunting(calendar.getTime(), 5);
 
         calendar.set(2016,Calendar.OCTOBER,27);
-        h2 = new Haunting(calendar, 3);
+        h2 = new Haunting(calendar.getTime(), 3);
 
         calendar.set(2016,Calendar.NOVEMBER,6);
-        h3 = new Haunting(calendar, 1);
+        h3 = new Haunting(calendar.getTime(), 1);
 
         hauntingDao.create(h1);
         hauntingDao.create(h2);
@@ -120,7 +120,7 @@ public class HauntingDaoTest extends AbstractTestNGSpringContextTests {
     public void shouldReturnEmptyListOfHauntingByDateWhichIsNotInDatabase(){
         Calendar calendar = Calendar.getInstance();
         calendar.set(2006,Calendar.OCTOBER,27);
-        List<Haunting> found = hauntingDao.getByDate(calendar);
+        List<Haunting> found = hauntingDao.getByDate(calendar.getTime());
         assertThat(found).isEmpty();
     }
 

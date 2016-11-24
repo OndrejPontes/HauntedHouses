@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class HauntingDaoImpl implements HauntingDao {
         return em.find(Haunting.class, id);
     }
 
-    public List<Haunting> getByDate(Calendar date) {
+    public List<Haunting> getByDate(Date date) {
         if(date == null)
             throw new IllegalArgumentException("date cannot be null");
 

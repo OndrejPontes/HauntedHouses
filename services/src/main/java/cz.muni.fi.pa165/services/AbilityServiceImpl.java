@@ -17,7 +17,6 @@ public class AbilityServiceImpl implements AbilityService {
     @Autowired
     private AbilityDao abilityDao;
 
-
     @Override
     public void create(Ability ability) {
         abilityDao.create(ability);

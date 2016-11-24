@@ -86,7 +86,7 @@ public class HauntingServiceImpl implements HauntingService {
     @Override
     public List<Haunting> getByDate(Calendar date) {
         try {
-            return hauntingDao.getByDate(date);
+            return hauntingDao.getByDate(date.getTime());
         }catch (Exception ex) {
             throw new HauntingDataAccessException("Cannot find haunting by date ", ex);
         }

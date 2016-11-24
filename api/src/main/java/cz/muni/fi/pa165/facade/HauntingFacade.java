@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
 import cz.muni.fi.pa165.dto.HauntingUpdateDTO;
+import cz.muni.fi.pa165.entity.Haunting;
 
 import java.util.Calendar;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
  */
 public interface HauntingFacade {
 
-    Long createHaunting(HauntingCreateDTO haunting);
+    HauntingDTO createHaunting(HauntingCreateDTO haunting);
 
     void updateHaunting(HauntingUpdateDTO haunting);
 

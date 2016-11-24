@@ -15,8 +15,8 @@ public class Haunting {
     private Long id;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Calendar date;
+    @Temporal(TemporalType.TIME)
+    private Date date;
 
     @Column(nullable = false)
     private int numberOfPeoplePresent;
@@ -30,7 +30,7 @@ public class Haunting {
     public Haunting() {
     }
 
-    public Haunting(Calendar date, int numberOfPeoplePresent) {
+    public Haunting(Date date, int numberOfPeoplePresent) {
         this.date = date;
         this.numberOfPeoplePresent = numberOfPeoplePresent;
     }
@@ -44,11 +44,11 @@ public class Haunting {
         return this;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public Haunting setDate(Calendar date) {
+    public Haunting setDate(Date date) {
         this.date = date;
         return this;
     }

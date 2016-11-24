@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.dao;
 import cz.muni.fi.pa165.entity.Haunting;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public interface HauntingDao {
      * @param date of haunting to be found
      * @return list of Haunting objects with specified date
      */
-     List<Haunting> getByDate (Calendar date);
+     List<Haunting> getByDate (Date date);
 
     /**
      * Gets all hauntings
