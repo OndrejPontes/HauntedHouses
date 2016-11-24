@@ -7,6 +7,8 @@ import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.services.GhostService;
 import cz.muni.fi.pa165.services.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -15,6 +17,8 @@ import java.util.List;
 /**
  * @author Ondrej Ponteš
  */
+@Service
+@Transactional
 public class GhostFacadeImpl implements GhostFacade {
 
     @Autowired

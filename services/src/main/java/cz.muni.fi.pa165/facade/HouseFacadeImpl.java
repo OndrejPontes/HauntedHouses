@@ -12,10 +12,14 @@ import cz.muni.fi.pa165.entity.House;
 import cz.muni.fi.pa165.services.HauntingService;
 import cz.muni.fi.pa165.services.HouseService;
 import cz.muni.fi.pa165.services.MappingService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Jirka Kruml
  */
+@Service
+@Transactional
 public class HouseFacadeImpl implements HouseFacade {
 
     @Autowired

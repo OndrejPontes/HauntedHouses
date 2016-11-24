@@ -10,12 +10,16 @@ import java.util.List;
 import javax.inject.Inject;
 
 import cz.muni.fi.pa165.exception.HauntingDataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author MonikaMociarikova
  *
  * Implementation of the (@link HauntingService)
  */
+@Service
+@Transactional
 public class HauntingServiceImpl implements HauntingService {
 
     @Inject

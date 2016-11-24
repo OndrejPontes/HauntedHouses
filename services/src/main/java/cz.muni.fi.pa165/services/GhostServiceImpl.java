@@ -4,6 +4,8 @@ import cz.muni.fi.pa165.dao.GhostDao;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.exception.ScaryDataAccessException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
@@ -12,6 +14,8 @@ import java.util.List;
 /**
  * @author Ondrej Ponteš
  */
+@Service
+@Transactional
 public class GhostServiceImpl implements GhostService {
     @Autowired
     private GhostDao ghostDao;

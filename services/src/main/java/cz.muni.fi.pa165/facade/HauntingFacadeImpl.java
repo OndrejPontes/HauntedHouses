@@ -18,11 +18,9 @@ import javax.inject.Inject;
 import java.util.Calendar;
 import java.util.List;
 
-
 /**
  * @author MonikaMociarikova
  */
-
 @Service
 @Transactional
 public class HauntingFacadeImpl implements HauntingFacade{
@@ -37,14 +35,14 @@ public class HauntingFacadeImpl implements HauntingFacade{
 
     @Override
     public Long createHaunting(HauntingCreateDTO haunting) {
-        Haunting hauntingToCreate = mappingService.mapObject(haunting,Haunting.class);
+        Haunting hauntingToCreate = mappingService.mapObject(haunting, Haunting.class);
         Haunting createdHaunting = hauntingService.create(hauntingToCreate);
         return createdHaunting.getId();
     }
 
     @Override
     public void updateHaunting(HauntingUpdateDTO haunting) {
-        Haunting hauntingToUpdate = mappingService.mapObject(haunting,Haunting.class);
+        Haunting hauntingToUpdate = mappingService.mapObject(haunting, Haunting.class);
         hauntingService.update(hauntingToUpdate);
     }
 
@@ -60,7 +58,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
 
     @Override
     public void removeHaunting(HauntingDTO haunting) {
-        Haunting hauntingToDelete = mappingService.mapObject(haunting,Haunting.class);
+        Haunting hauntingToDelete = mappingService.mapObject(haunting, Haunting.class);
         hauntingService.remove(hauntingToDelete);
     }
 
@@ -73,7 +71,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
 
     @Override
     public List<HauntingDTO> findHauntingByDate(Calendar date) {
-        return mappingService.mapCollection(hauntingService.getByDate(date),HauntingDTO.class);
+        return mappingService.mapCollection(hauntingService.getByDate(date), HauntingDTO.class);
     }
 
     @Override

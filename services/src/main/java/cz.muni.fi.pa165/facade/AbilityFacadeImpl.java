@@ -17,8 +17,8 @@ import java.util.List;
 /**
  * @author Vojta David, vojtadavid
  */
-@Transactional
 @Service
+@Transactional
 public class AbilityFacadeImpl implements AbilityFacade {
     @Autowired
     private MappingService mappingService;

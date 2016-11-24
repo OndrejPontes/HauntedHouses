@@ -3,12 +3,16 @@ package cz.muni.fi.pa165.services;
 import cz.muni.fi.pa165.dao.AbilityDao;
 import cz.muni.fi.pa165.entity.Ability;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * @author Vojta David, vojtadavid
  */
+@Service
+@Transactional
 public class AbilityServiceImpl implements AbilityService {
     @Autowired
     private AbilityDao abilityDao;
