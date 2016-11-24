@@ -67,6 +67,8 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
     private HauntingDTO hauntingDTO1;
     private HauntingDTO hauntingDTO2;
 
+    private HauntingCreateDTO hauntingCreateDTO;
+
     @BeforeClass
     public void setup(){
         MockitoAnnotations.initMocks(this);
@@ -104,19 +106,33 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
         house1 = new House()
                 .setId(1L)
                 .setName("Lucky Hotel")
-                .setAddress("Kounicova DC");
+                .setAddress("Kounicova DC")
+                .setHistory("Some history");
 
         house2 = new House()
                 .setId(2L)
                 .setName("Train station")
                 .setAddress("Silicon valley");
 
-        calendar1.set(2016,Calendar.JANUARY,22);
+        houseDTO1 = new HouseDTO()
+                .setId(house1.getId())
+                .setName(house1.getName())
+                .setAddress(house1.getAddress())
+                .setHauntingFrom(house1.getHauntingFrom())
+                .setHistory(house1.getHistory());
+
+        calendar1.set(2016, JANUARY, 22);
         hauntingDTO1 = new HauntingDTO()
                 .setNumberOfPeoplePresent(4)
                 .setDate(calendar1.getTime())
                 .setGhosts(new ArrayList<GhostDTO>(){{add(ghostDTO1);}})
                 .setHauntedHouse(houseDTO1);
+
+        hauntingCreateDTO = new HauntingCreateDTO()
+                .setDate(hauntingDTO1.getDate())
+                .setNumberOfPeoplePresent(hauntingDTO1.getNumberOfPeoplePresent())
+                .setGhosts(hauntingDTO1.getGhosts())
+                .setHouse(hauntingDTO1.getHauntedHouse());
 
         when(ghostService.getById(ghost1.getId())).thenReturn(ghost1);
         when(ghostService.getById(ghost2.getId())).thenReturn(ghost2);
@@ -133,10 +149,7 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void shouldCreateHaunting(){
-        HauntingCreateDTO haunting = new HauntingCreateDTO()
-                .setDate(hauntingDTO1.getDate())
-                .setNumberOfPeoplePresent(hauntingDTO1.getNumberOfPeoplePresent());
-        Long id = hauntingFacade.createHaunting(haunting);
+        Long id = hauntingFacade.createHaunting(hauntingCreateDTO);
         assertThat(id).isNotNull();
     }
 }

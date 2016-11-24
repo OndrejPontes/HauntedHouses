@@ -1,6 +1,5 @@
 package cz.muni.fi.pa165.dto;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,9 @@ public class HouseDTO {
     private String history;
     private List<HauntingDTO> hauntings;
 
+    public HouseDTO() {
+    }
+
     public HouseDTO(Long id, String name, String address, Date hauntingFrom, String history, List<HauntingDTO> hauntings) {
         this.id = id;
         this.name = name;
@@ -29,48 +31,54 @@ public class HouseDTO {
         return id;
     }
 
+    public HouseDTO setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public HouseDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public HouseDTO setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public Date getHauntingFrom() {
         return hauntingFrom;
     }
 
-    public void setHauntingFrom(Date hauntingFrom) {
+    public HouseDTO setHauntingFrom(Date hauntingFrom) {
         this.hauntingFrom = hauntingFrom;
+        return this;
     }
 
     public String getHistory() {
         return history;
     }
 
-    public void setHistory(String history) {
+    public HouseDTO setHistory(String history) {
         this.history = history;
+        return this;
     }
 
     public List<HauntingDTO> getHauntings() {
-        return Collections.unmodifiableList(hauntings);
+        return hauntings;
     }
 
-    public void addHaunting(HauntingDTO haunting) {
-        hauntings.add(haunting);
-    }
-
-    public void removeHaunting(HauntingDTO haunting) {
-        hauntings.remove(haunting);
+    public HouseDTO setHauntings(List<HauntingDTO> hauntings) {
+        this.hauntings = hauntings;
+        return this;
     }
 
     @Override
