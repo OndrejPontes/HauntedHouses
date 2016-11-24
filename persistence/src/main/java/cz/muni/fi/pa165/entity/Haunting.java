@@ -15,7 +15,7 @@ public class Haunting {
     private Long id;
 
     @Column(nullable = false)
-    @Temporal(TemporalType.TIME)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date;
 
     @Column(nullable = false)

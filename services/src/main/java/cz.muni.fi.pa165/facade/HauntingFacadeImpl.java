@@ -36,7 +36,8 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Override
     public HauntingDTO createHaunting(HauntingCreateDTO haunting) {
         Haunting hauntingToCreate = mappingService.mapObject(haunting, Haunting.class);
-        return mappingService.mapObject(hauntingService.create(hauntingToCreate), HauntingDTO.class);
+        hauntingService.create(hauntingToCreate);
+        return mappingService.mapObject(hauntingToCreate, HauntingDTO.class);
     }
 
     @Override
@@ -65,7 +66,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Override
     public HauntingDTO findHauntingById(Long id) {
         Haunting haunting = hauntingService.getById(id);
-        return mappingService.mapObject(haunting,HauntingDTO.class);
+        return mappingService.mapObject(haunting, HauntingDTO.class);
     }
 
     @Override
