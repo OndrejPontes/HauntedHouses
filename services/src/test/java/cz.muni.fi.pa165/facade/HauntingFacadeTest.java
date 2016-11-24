@@ -48,16 +48,9 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
 
     private HauntingDTO haunting;
 
-    private Ghost ghost1;
-    private Ghost ghost2;
-    private Ghost ghost3;
-
     private GhostDTO ghostDTO1;
     private GhostDTO ghostDTO2;
     private GhostDTO ghostDTO3;
-
-    private House house1;
-    private House house2;
 
     private HouseDTO houseDTO1;
     private HouseDTO houseDTO2;
@@ -70,17 +63,19 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
 
     private HauntingCreateDTO hauntingCreateDTO;
 
+    private Calendar calendar;
+
     @BeforeClass
     public void setup(){
         MockitoAnnotations.initMocks(this);
 
+        calendar = Calendar.getInstance();
         Calendar calendar1 = Calendar.getInstance();
         Calendar calendar2 = Calendar.getInstance();
 
         calendar1.set(2016,OCTOBER,27);
         calendar2.set(2016, OCTOBER,28);
-        ghost1 = new Ghost()
-                .setId(1L)
+        ghostDTO1 = new GhostDTO()
                 .setName("John")
                 .setDescription("Attractive ghost")
                 .setHauntsFrom(calendar1.getTime())
@@ -88,8 +83,7 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
 
         calendar1.set(2016,NOVEMBER,2);
         calendar2.set(2016, NOVEMBER,3);
-        ghost2 = new Ghost()
-                .setId(2L)
+        ghostDTO2 = new GhostDTO()
                 .setName("Hans")
                 .setDescription("Bad ghost")
                 .setHauntsFrom(calendar1.getTime())
@@ -97,30 +91,20 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
 
         calendar1.set(2016,DECEMBER,12);
         calendar2.set(2016, DECEMBER,13);
-        ghost3 = new Ghost()
-                .setId(3L)
+        ghostDTO3 = new GhostDTO()
                 .setName("Luis")
                 .setDescription("Angry ghost")
                 .setHauntsFrom(calendar1.getTime())
                 .setHauntsTo(calendar2.getTime());
 
-        house1 = new House()
-                .setId(1L)
+        houseDTO1 = new HouseDTO()
                 .setName("Lucky Hotel")
                 .setAddress("Kounicova DC")
                 .setHistory("Some history");
 
-        house2 = new House()
-                .setId(2L)
+        houseDTO2 = new HouseDTO()
                 .setName("Train station")
                 .setAddress("Silicon valley");
-
-        houseDTO1 = new HouseDTO()
-                .setId(house1.getId())
-                .setName(house1.getName())
-                .setAddress(house1.getAddress())
-                .setHauntingFrom(house1.getHauntingFrom())
-                .setHistory(house1.getHistory());
 
         calendar1.set(2016, JANUARY, 22);
         hauntingDTO1 = new HauntingDTO()
@@ -135,12 +119,12 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
                 .setGhosts(hauntingDTO1.getGhosts())
                 .setHouse(hauntingDTO1.getHauntedHouse());
 
-        when(ghostService.getById(ghost1.getId())).thenReturn(ghost1);
-        when(ghostService.getById(ghost2.getId())).thenReturn(ghost2);
-        when(ghostService.getById(ghost3.getId())).thenReturn(ghost3);
-
-        when(houseService.getById(house1.getId())).thenReturn(house1);
-        when(houseService.getById(house2.getId())).thenReturn(house2);
+//        when(ghostService.getById(ghostDTO1.getId())).thenReturn(ghost1);
+//        when(ghostService.getById(ghostDTO2.getId())).thenReturn(ghost2);
+//        when(ghostService.getById(ghostDTO3.getId())).thenReturn(ghost3);
+//
+//        when(houseService.getById(house1.getId())).thenReturn(house1);
+//        when(houseService.getById(house2.getId())).thenReturn(house2);
     }
 
     @BeforeMethod
@@ -151,22 +135,26 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void shouldCreateAndFindHaunting(){
         HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
-
-        assertThat(createdHaunting).isNotNull();
-
         HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
 
+        assertThat(createdHaunting).isNotNull();
         assertThat(createdHaunting).isEqualTo(foundHaunting);
-        assertThat(foundHaunting).hasFieldOrPropertyWithValue("date", foundHaunting.getDate());
-        assertThat(foundHaunting).hasFieldOrPropertyWithValue("numberOfPeoplePresent", foundHaunting.getNumberOfPeoplePresent());
-        assertThat(foundHaunting).hasFieldOrPropertyWithValue("ghosts", foundHaunting.getGhosts());
-        assertThat(foundHaunting).hasFieldOrPropertyWithValue("hauntedHouse", foundHaunting.getHauntedHouse());
     }
 
     @Test
     public void shouldCreateUpdateAndFindHaunting(){
         HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
         HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
+
+        calendar.set(1999, MARCH, 3);
+        foundHaunting
+                .setNumberOfPeoplePresent(30)
+                .setDate(calendar.getTime())
+                .setGhosts(new ArrayList<GhostDTO>(){{add(ghostDTO2);}})
+                .setHauntedHouse(houseDTO2);
         hauntingFacade.updateHaunting(foundHaunting);
+
+        HauntingDTO updatedHaunting = hauntingFacade.findHauntingById(foundHaunting.getId());
+        assertThat(updatedHaunting).isEqualTo(foundHaunting);
     }
 }
