@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.services;
 import cz.muni.fi.pa165.dao.GhostDao;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.exception.ScaryDataAccessException;
+import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +26,7 @@ public class GhostServiceImpl implements GhostService {
         try {
             return ghostDao.create(ghost);
         } catch (IllegalArgumentException | PersistenceException | ConstraintViolationException e) {
-            throw new ScaryDataAccessException("cannot create ghost", e);
+            throw new ServiceImplDAOException("cannot create ghost", e);
         }
     }
 
@@ -34,7 +35,7 @@ public class GhostServiceImpl implements GhostService {
         try {
             return ghostDao.update(ghost);
         } catch (ConstraintViolationException e) {
-            throw new ScaryDataAccessException("cannot update ghost", e);
+            throw new ServiceImplDAOException("cannot update ghost", e);
         }
     }
 
@@ -43,7 +44,7 @@ public class GhostServiceImpl implements GhostService {
         try {
             ghostDao.delete(ghost);
         } catch (ConstraintViolationException e) {
-            throw new ScaryDataAccessException("cannot delete ghost", e);
+            throw new ServiceImplDAOException("cannot delete ghost", e);
         }
     }
 
@@ -52,7 +53,7 @@ public class GhostServiceImpl implements GhostService {
         try {
             return ghostDao.getById(id);
         } catch (ConstraintViolationException e) {
-            throw new ScaryDataAccessException("cannot find ghost by id", e);
+            throw new ServiceImplDAOException("cannot find ghost by id", e);
         }
     }
 
@@ -61,7 +62,7 @@ public class GhostServiceImpl implements GhostService {
         try {
             return ghostDao.getByName(name);
         } catch (ConstraintViolationException e) {
-            throw new ScaryDataAccessException("cannot find ghost by name", e);
+            throw new ServiceImplDAOException("cannot find ghost by name", e);
         }
     }
 
@@ -70,7 +71,7 @@ public class GhostServiceImpl implements GhostService {
         try {
             return ghostDao.getAll();
         } catch (ConstraintViolationException e) {
-            throw new ScaryDataAccessException("cannot find all ghosts", e);
+            throw new ServiceImplDAOException("cannot find all ghosts", e);
         }
     }
 }
