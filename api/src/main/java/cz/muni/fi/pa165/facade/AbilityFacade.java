@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface AbilityFacade {
 
-    Long create(AbilityCreateDTO Ability);
+    AbilityDTO create(AbilityCreateDTO Ability);
 
     void update(AbilityUpdateDTO Ability);
 

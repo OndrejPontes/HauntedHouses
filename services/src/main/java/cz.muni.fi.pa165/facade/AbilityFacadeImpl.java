@@ -3,11 +3,11 @@ package cz.muni.fi.pa165.facade;
 import cz.muni.fi.pa165.dto.AbilityCreateDTO;
 import cz.muni.fi.pa165.dto.AbilityDTO;
 import cz.muni.fi.pa165.dto.AbilityUpdateDTO;
-import cz.muni.fi.pa165.dto.GhostDTO;
+
 import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.services.AbilityService;
 import cz.muni.fi.pa165.services.MappingService;
+import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +20,7 @@ import java.util.List;
 @Service
 @Transactional
 public class AbilityFacadeImpl implements AbilityFacade {
+
     @Autowired
     private MappingService mappingService;
 
@@ -28,10 +29,9 @@ public class AbilityFacadeImpl implements AbilityFacade {
 
 
     @Override
-    public Long create(AbilityCreateDTO abilityCreateDTO) {
+    public AbilityDTO create(AbilityCreateDTO abilityCreateDTO) {
         Ability ability = mappingService.mapObject(abilityCreateDTO, Ability.class);
-        abilityService.create(ability);
-        return ability.getId();
+        return mappingService.mapObject(abilityService.create(ability), AbilityDTO.class);
     }
 
     @Override

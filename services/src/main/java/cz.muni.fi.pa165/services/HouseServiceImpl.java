@@ -51,7 +51,7 @@ public class HouseServiceImpl implements HouseService {
     @Override
     public House getById(Long id) {
 
-        try {
+            try {
             return houseDao.getById(id);
         } catch (Exception e) {
             throw new ServiceImplDAOException("cannot getById house",e);
