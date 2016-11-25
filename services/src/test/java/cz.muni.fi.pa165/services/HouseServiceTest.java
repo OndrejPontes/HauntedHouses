@@ -59,7 +59,7 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
         h1.addHaunting(haunting);
     }
 
-    @Test
+
     public void getAllTest(){
         List<House> houses = new ArrayList<>();
         houses.add(h1);
@@ -67,23 +67,23 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
         when(houseDao.getAll()).thenReturn(houses);
         assertThat(houseService.getAll()).isEqualTo(2);
     }
-    @Test
+
     public void getByNameTest(){
         when(houseDao.getByName("a")).thenReturn(h1);
         assertThat(houseService.getByName("a")).isEqualTo(h1);
     }
-    @Test
+
     public void getByAddressTest(){
         when(houseDao.getByAddress("d")).thenReturn(h2);
         assertThat(houseService.getByName("a")).isEqualTo(h1);
     }
-    @Test
+
     public void getByIdTest(){
         long id = 123456;
         when(houseDao.getById(id)).thenReturn(h1);
         assertThat(houseService.getById(id)).isEqualTo(h1);
     }
-    @Test
+
     public void createTest(){
         houseService.create(h1);
         verify(houseDao).create(h1);
