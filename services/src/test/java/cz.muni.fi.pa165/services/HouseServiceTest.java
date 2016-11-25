@@ -43,8 +43,10 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
 
     private Haunting haunting;
 
-    @BeforeMethod
-    public void init() {
+    @BeforeClass
+    public void setup() throws ServiceException {
+        MockitoAnnotations.initMocks(this);
+
         h1 = new House();
         h2 = new House();
 
@@ -55,14 +57,8 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
         haunting.setHauntedHouse(h1).setDate(Calendar.getInstance().getTime()).setNumberOfPeoplePresent(123);
 
         h1.addHaunting(haunting);
-
-
     }
 
-    @BeforeClass
-    public void setup() throws ServiceException {
-        MockitoAnnotations.initMocks(this);
-    }
     @Test
     public void getAllTest(){
         List<House> houses = new ArrayList<>();
@@ -92,16 +88,16 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
         houseService.create(h1);
         verify(houseDao).create(h1);
     }
-    @Test
-    public void updateTest(){
-//        houseService.create(h1);
-//        h1.setAddress("192.168.1.1");
-//        houseService.update(h1);
-//        verify(houseDao).update(h1);
-    }
-    @Test
-    public void deleteTest(){
-        houseService.delete(h1.getId());
-        verify(houseDao).delete(h1.getId());
-    }
+//    @Test
+//    public void updateTest(){
+////        houseService.create(h1);
+////        h1.setAddress("192.168.1.1");
+////        houseService.update(h1);
+////        verify(houseDao).update(h1);
+//    }
+//    @Test
+//    public void deleteTest(){
+//        houseService.delete(h1.getId());
+//        verify(houseDao).delete(h1.getId());
+//    }
 }

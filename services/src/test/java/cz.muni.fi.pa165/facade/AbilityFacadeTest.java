@@ -8,10 +8,11 @@ import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.services.AbilityService;
 import cz.muni.fi.pa165.services.MappingService;
+import org.hibernate.service.spi.ServiceException;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.osgi.framework.ServiceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
