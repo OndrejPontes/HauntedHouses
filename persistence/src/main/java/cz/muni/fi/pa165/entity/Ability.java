@@ -22,7 +22,7 @@ public class Ability {
     @Column(nullable = false)
     private String description;
 
-    @ManyToMany(mappedBy = "abilities")
+    @ManyToMany(mappedBy = "abilities", fetch = FetchType.EAGER)
     private List<Ghost> ghosts = new ArrayList<>();
     
 
