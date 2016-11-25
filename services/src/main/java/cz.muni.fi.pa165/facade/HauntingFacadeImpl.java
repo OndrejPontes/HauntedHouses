@@ -31,14 +31,14 @@ public class HauntingFacadeImpl implements HauntingFacade{
     private MappingService mappingService;
 
     @Override
-    public HauntingDTO createHaunting(HauntingCreateDTO haunting) {
+    public HauntingDTO create(HauntingCreateDTO haunting) {
         Haunting hauntingToCreate = mappingService.mapObject(haunting, Haunting.class);
-        hauntingService.create(hauntingToCreate);
+        hauntingToCreate = hauntingService.create(hauntingToCreate);
         return mappingService.mapObject(hauntingToCreate, HauntingDTO.class);
     }
 
     @Override
-    public HauntingDTO updateHaunting(HauntingDTO haunting) {
+    public HauntingDTO update(HauntingDTO haunting) {
         Haunting hauntingToUpdate = mappingService.mapObject(haunting, Haunting.class);
         hauntingToUpdate = hauntingService.update(hauntingToUpdate);
         return mappingService.mapObject(hauntingToUpdate, HauntingDTO.class);
@@ -55,25 +55,25 @@ public class HauntingFacadeImpl implements HauntingFacade{
     }
 
     @Override
-    public void removeHaunting(HauntingDTO haunting) {
+    public void delete(HauntingDTO haunting) {
         Haunting hauntingToDelete = mappingService.mapObject(haunting, Haunting.class);
         hauntingService.remove(hauntingToDelete);
     }
 
 
     @Override
-    public HauntingDTO findHauntingById(Long id) {
+    public HauntingDTO getById(Long id) {
         Haunting haunting = hauntingService.getById(id);
         return mappingService.mapObject(haunting, HauntingDTO.class);
     }
 
     @Override
-    public List<HauntingDTO> findHauntingByDate(Date date) {
+    public List<HauntingDTO> getByDate(Date date) {
         return mappingService.mapCollection(hauntingService.getByDate(date), HauntingDTO.class);
     }
 
     @Override
-    public List<HauntingDTO> findAllHauntings() {
+    public List<HauntingDTO> getAll() {
         return mappingService.mapCollection(hauntingService.getAll(), HauntingDTO.class);
     }
 }

@@ -13,17 +13,17 @@ import java.util.List;
  */
 public interface HauntingFacade {
 
-    HauntingDTO createHaunting(HauntingCreateDTO haunting);
+    HauntingDTO create(HauntingCreateDTO haunting);
 
-    HauntingDTO updateHaunting(HauntingDTO haunting);
+    HauntingDTO update(HauntingDTO haunting);
 
     void addGhostsToHaunting(Long hauntingId, List<GhostDTO> ghosts);
 
-    void removeHaunting(HauntingDTO haunting);
+    void delete(HauntingDTO haunting);
 
-    HauntingDTO findHauntingById(Long id);
+    HauntingDTO getById(Long id);
 
-    List<HauntingDTO> findHauntingByDate (Date date);
+    List<HauntingDTO> getByDate(Date date);
 
-    List<HauntingDTO> findAllHauntings();
+    List<HauntingDTO> getAll();
 }

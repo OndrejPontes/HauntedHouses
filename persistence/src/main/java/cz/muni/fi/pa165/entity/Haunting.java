@@ -71,6 +71,11 @@ public class Haunting {
         return this;
     }
 
+    public Haunting setGhosts(List<Ghost> ghosts) {
+        this.ghosts = ghosts;
+        return this;
+    }
+
     public List<Ghost> getGhosts() {
         return Collections.unmodifiableList(ghosts);
     }
