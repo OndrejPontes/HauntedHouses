@@ -11,15 +11,21 @@ import java.util.List;
 public class HauntingDTO {
 
     private Long id;
-
     private Date date;
-
     private int numberOfPeoplePresent;
+    private Long hauntedHouse;
+    private List<Long> ghosts = new ArrayList<>();
 
-    private HouseDTO hauntedHouse;
+    public HauntingDTO() {
+    }
 
-    private List<GhostDTO> ghosts = new ArrayList<>();
-
+    public HauntingDTO(Long id, Date date, int numberOfPeoplePresent, Long hauntedHouse, List<Long> ghosts) {
+        this.id = id;
+        this.date = date;
+        this.numberOfPeoplePresent = numberOfPeoplePresent;
+        this.hauntedHouse = hauntedHouse;
+        this.ghosts = ghosts;
+    }
 
     public Long getId() {
         return id;
@@ -48,20 +54,20 @@ public class HauntingDTO {
         return this;
     }
 
-    public HouseDTO getHauntedHouse() {
+    public Long getHauntedHouse() {
         return hauntedHouse;
     }
 
-    public HauntingDTO setHauntedHouse(HouseDTO hauntedHouse) {
+    public HauntingDTO setHauntedHouse(Long hauntedHouse) {
         this.hauntedHouse = hauntedHouse;
         return this;
     }
 
-    public List<GhostDTO> getGhosts() {
-        return Collections.unmodifiableList(ghosts);
+    public List<Long> getGhosts() {
+        return ghosts;
     }
 
-    public HauntingDTO setGhosts(List<GhostDTO> ghosts) {
+    public HauntingDTO setGhosts(List<Long> ghosts) {
         this.ghosts = ghosts;
         return this;
     }
@@ -69,37 +75,36 @@ public class HauntingDTO {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !getClass().isInstance(o)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        HauntingDTO haunting = (HauntingDTO) o;
+        HauntingDTO that = (HauntingDTO) o;
 
-        if (getNumberOfPeoplePresent() != haunting.getNumberOfPeoplePresent()) return false;
-        if (getId() != null ? !getId().equals(haunting.getId()) : haunting.getId() != null) return false;
-        if (getDate() != null ? !getDate().equals(haunting.getDate()) : haunting.getDate() != null) return false;
-        if (getHauntedHouse() != null ? !getHauntedHouse().equals(haunting.getHauntedHouse()) : haunting.getHauntedHouse() != null)
-            return false;
-        return getGhosts() != null ? getGhosts().equals(haunting.getGhosts()) : haunting.getGhosts() == null;
+        if (numberOfPeoplePresent != that.numberOfPeoplePresent) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (hauntedHouse != null ? !hauntedHouse.equals(that.hauntedHouse) : that.hauntedHouse != null) return false;
+        return ghosts != null ? ghosts.equals(that.ghosts) : that.ghosts == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
-        result = 31 * result + (getDate() != null ? getDate().hashCode() : 0);
-        result = 31 * result + getNumberOfPeoplePresent();
-        result = 31 * result + (getHauntedHouse() != null ? getHauntedHouse().hashCode() : 0);
-        result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + numberOfPeoplePresent;
+        result = 31 * result + (hauntedHouse != null ? hauntedHouse.hashCode() : 0);
+        result = 31 * result + (ghosts != null ? ghosts.hashCode() : 0);
         return result;
     }
 
     @Override
-    public String toString(){
-        return "Haunting DTO{" +
-                "id =" + id +
-                ", date ='" + date.toString() + '\'' +
-                ", number of people present ='" + numberOfPeoplePresent + '\'' +
-                ", haunted house =" + hauntedHouse +
-                ", ghosts ='" + ghosts + '\'' +
+    public String toString() {
+        return "HauntingDTO{" +
+                "id=" + id +
+                ", date=" + date +
+                ", numberOfPeoplePresent=" + numberOfPeoplePresent +
+                ", hauntedHouse=" + hauntedHouse +
+                ", ghosts=" + ghosts +
                 '}';
     }
 }

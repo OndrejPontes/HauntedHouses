@@ -9,7 +9,7 @@ import java.util.Collection;
  * @author Ondrej Ponteš
  */
 public interface GhostFacade {
-    Long createGhost(GhostCreateDTO ghostCreateDTO);
+    GhostDTO createGhost(GhostCreateDTO ghostCreateDTO);
 
     Collection<GhostDTO> getAllGhosts();
 
@@ -17,7 +17,7 @@ public interface GhostFacade {
 
     GhostDTO getGhostById(Long ghostId);
 
-    void updateGhost(GhostDTO ghostDTO);
+    GhostDTO updateGhost(GhostDTO ghostDTO);
 
-    void deleteGhost(GhostDTO ghostId);
+    void deleteGhost(GhostDTO ghostDTO);
 }

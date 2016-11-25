@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -13,12 +14,12 @@ public class HouseDTO {
     private String address;
     private Date hauntingFrom;
     private String history;
-    private List<HauntingDTO> hauntings;
+    private List<Long> hauntings;
 
     public HouseDTO() {
     }
 
-    public HouseDTO(Long id, String name, String address, Date hauntingFrom, String history, List<HauntingDTO> hauntings) {
+    public HouseDTO(Long id, String name, String address, Date hauntingFrom, String history, List<Long> hauntings) {
         this.id = id;
         this.name = name;
         this.address = address;
@@ -72,11 +73,11 @@ public class HouseDTO {
         return this;
     }
 
-    public List<HauntingDTO> getHauntings() {
-        return hauntings;
+    public List<Long> getHauntings() {
+        return Collections.unmodifiableList(hauntings);
     }
 
-    public HouseDTO setHauntings(List<HauntingDTO> hauntings) {
+    public HouseDTO setHauntings(List<Long> hauntings) {
         this.hauntings = hauntings;
         return this;
     }

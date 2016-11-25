@@ -13,9 +13,12 @@ public class HouseCreateDTO {
     private String address;
     private Date hauntingFrom;
     private String history;
-    private List<HauntingDTO> hauntings;
+    private List<Long> hauntings;
 
-    public HouseCreateDTO(String name, String address, Date hauntingFrom, String history, List<HauntingDTO> hauntings) {
+    public HouseCreateDTO() {
+    }
+
+    public HouseCreateDTO(String name, String address, Date hauntingFrom, String history, List<Long> hauntings) {
         this.name = name;
         this.address = address;
         this.hauntingFrom = hauntingFrom;
@@ -55,15 +58,15 @@ public class HouseCreateDTO {
         this.history = history;
     }
 
-    public List<HauntingDTO> getHauntings() {
+    public List<Long> getHauntings() {
         return Collections.unmodifiableList(hauntings);
     }
 
-    public void addHaunting(HauntingDTO haunting) {
+    public void addHaunting(Long haunting) {
         hauntings.add(haunting);
     }
 
-    public void removeHaunting(HauntingDTO haunting) {
+    public void removeHaunting(Long haunting) {
         hauntings.remove(haunting);
     }
 

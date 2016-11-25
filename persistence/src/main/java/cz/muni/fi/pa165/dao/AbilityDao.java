@@ -12,7 +12,7 @@ public interface AbilityDao {
      * Create Ability
      * @param Ability Ability object for creating
      */
-     void create(Ability Ability);
+     Ability create(Ability Ability);
 
     /**
      * Updates Ability

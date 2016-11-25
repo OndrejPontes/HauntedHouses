@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,7 +15,7 @@ public interface HauntingFacade {
 
     HauntingDTO createHaunting(HauntingCreateDTO haunting);
 
-    void updateHaunting(HauntingDTO haunting);
+    HauntingDTO updateHaunting(HauntingDTO haunting);
 
     void addGhostsToHaunting(Long hauntingId, List<GhostDTO> ghosts);
 
@@ -22,7 +23,7 @@ public interface HauntingFacade {
 
     HauntingDTO findHauntingById(Long id);
 
-    List<HauntingDTO> findHauntingByDate (Calendar date);
+    List<HauntingDTO> findHauntingByDate (Date date);
 
     List<HauntingDTO> findAllHauntings();
 }

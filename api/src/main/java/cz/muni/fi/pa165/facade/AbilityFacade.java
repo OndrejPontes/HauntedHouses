@@ -10,13 +10,13 @@ import java.util.Collection;
  */
 public interface AbilityFacade {
 
-    Long create(AbilityCreateDTO Ability);
+    AbilityDTO create(AbilityCreateDTO abilityCreateDTO);
 
-    void update(AbilityDTO Ability);
+    AbilityDTO update(AbilityDTO abilityDTO);
 
-    void delete(AbilityDTO Ability);
+    void delete(AbilityDTO abilityDTO);
 
-    AbilityDTO getById(long id);
+    AbilityDTO getById(Long id);
 
     AbilityDTO getByName(String name);
 

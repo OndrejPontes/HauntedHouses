@@ -19,27 +19,19 @@ public class HauntingCreateDTO {
     private int numberOfPeoplePresent;
 
     @NotNull
-    private HouseDTO house;
+    private Long house;
 
     @NotNull
-    private List<GhostDTO> ghosts = new ArrayList<>();
+    private List<Long> ghosts = new ArrayList<>();
 
-    public HouseDTO getHouse() {
-        return house;
+    public HauntingCreateDTO() {
     }
 
-    public HauntingCreateDTO setHouse(HouseDTO house) {
+    public HauntingCreateDTO(Date date, int numberOfPeoplePresent, Long house, List<Long> ghosts) {
+        this.date = date;
+        this.numberOfPeoplePresent = numberOfPeoplePresent;
         this.house = house;
-        return this;
-    }
-
-    public List<GhostDTO> getGhosts() {
-        return ghosts;
-    }
-
-    public HauntingCreateDTO setGhosts(List<GhostDTO> ghosts) {
         this.ghosts = ghosts;
-        return this;
     }
 
     public Date getDate() {
@@ -60,6 +52,46 @@ public class HauntingCreateDTO {
         return this;
     }
 
+    public Long getHouse() {
+        return house;
+    }
+
+    public HauntingCreateDTO setHouse(Long house) {
+        this.house = house;
+        return this;
+    }
+
+    public List<Long> getGhosts() {
+        return ghosts;
+    }
+
+    public HauntingCreateDTO setGhosts(List<Long> ghosts) {
+        this.ghosts = ghosts;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        HauntingCreateDTO that = (HauntingCreateDTO) o;
+
+        if (numberOfPeoplePresent != that.numberOfPeoplePresent) return false;
+        if (date != null ? !date.equals(that.date) : that.date != null) return false;
+        if (house != null ? !house.equals(that.house) : that.house != null) return false;
+        return ghosts != null ? ghosts.equals(that.ghosts) : that.ghosts == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + numberOfPeoplePresent;
+        result = 31 * result + (house != null ? house.hashCode() : 0);
+        result = 31 * result + (ghosts != null ? ghosts.hashCode() : 0);
+        return result;
+    }
 
     @Override
     public String toString() {
@@ -69,28 +101,5 @@ public class HauntingCreateDTO {
                 ", house=" + house +
                 ", ghosts=" + ghosts +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || !getClass().isInstance(o)) return false;
-
-        HauntingCreateDTO that = (HauntingCreateDTO) o;
-
-        if (getNumberOfPeoplePresent() != that.getNumberOfPeoplePresent()) return false;
-        if (getDate() != null ? !getDate().equals(that.getDate()) : that.getDate() != null) return false;
-        if (getHouse() != null ? !getHouse().equals(that.getHouse()) : that.getHouse() != null) return false;
-        return getGhosts() != null ? getGhosts().equals(that.getGhosts()) : that.getGhosts() == null;
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = getDate() != null ? getDate().hashCode() : 0;
-        result = 31 * result + getNumberOfPeoplePresent();
-        result = 31 * result + (getHouse() != null ? getHouse().hashCode() : 0);
-        result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
-        return result;
     }
 }

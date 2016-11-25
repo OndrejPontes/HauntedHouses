@@ -10,21 +10,18 @@ import java.util.List;
 public class AbilityDTO {
 
     private Long id;
-
     private String name;
-
     private String description;
-
-    private List<GhostDTO> ghosts = new ArrayList<>();
-
+    private List<Long> ghosts = new ArrayList<>();
 
     public AbilityDTO() {
     }
 
-
-    public AbilityDTO(String name, String description) {
+    public AbilityDTO(Long id, String name, String description, List<Long> ghosts) {
+        this.id = id;
         this.name = name;
         this.description = description;
+        this.ghosts = ghosts;
     }
 
     public Long getId() {
@@ -54,11 +51,11 @@ public class AbilityDTO {
         return this;
     }
 
-    public List<GhostDTO> getGhosts() {
+    public List<Long> getGhosts() {
         return Collections.unmodifiableList(ghosts);
     }
 
-    public AbilityDTO setGhosts(List<GhostDTO> ghosts) {
+    public AbilityDTO setGhosts(List<Long> ghosts) {
         this.ghosts = ghosts;
         return this;
     }

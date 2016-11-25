@@ -12,7 +12,7 @@ public interface GhostDao {
      * Create ghost
      * @param ghost Ghost object for creating
      */
-     Long create(Ghost ghost);
+     Ghost create(Ghost ghost);
 
     /**
      * Updates ghost
