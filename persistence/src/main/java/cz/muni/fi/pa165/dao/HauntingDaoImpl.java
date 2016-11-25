@@ -21,8 +21,9 @@ public class HauntingDaoImpl implements HauntingDao {
     @PersistenceContext
     private EntityManager em;
 
-    public void create(Haunting haunting) {
+    public Haunting create(Haunting haunting) {
         em.persist(haunting);
+        return haunting;
     }
 
     public Haunting update(Haunting haunting) {

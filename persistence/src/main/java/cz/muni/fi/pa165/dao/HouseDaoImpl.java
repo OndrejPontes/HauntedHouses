@@ -20,8 +20,9 @@ public class HouseDaoImpl implements HouseDao {
     private EntityManager em;
 
     @Override
-    public void create(House house) {
+    public House create(House house) {
         em.persist(house);
+        return house;
     }
 
     @Override

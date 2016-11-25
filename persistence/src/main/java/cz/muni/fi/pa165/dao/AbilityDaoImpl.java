@@ -26,13 +26,13 @@ public class AbilityDaoImpl implements AbilityDao {
     }
 
     @Override
-    public Ability update(Ability Ability) {
-        return em.merge(Ability);
+    public Ability update(Ability ability) {
+        return em.merge(ability);
     }
 
     @Override
-    public void delete(Ability Ability) {
-        em.remove(Ability);
+    public void delete(Ability ability) {
+        em.remove(ability);
     }
 
     @Override

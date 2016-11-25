@@ -13,7 +13,7 @@ public interface HouseDao {
      * Saves the entity into the database
      * @param house - the entity
      */
-    void create(House house);
+    House create(House house);
 
     /**
      * Updates the entity in the database and returns it

@@ -10,13 +10,11 @@ import java.util.List;
  * @author Monika Mociarikova
  */
 public interface HauntingDao {
-
-
     /**
      * Create haunting
      * @param haunting Haunting object for creating
      */
-     void create(Haunting haunting);
+    Haunting create(Haunting haunting);
 
     /**
      * Updates haunting
