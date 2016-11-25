@@ -2,18 +2,16 @@ package cz.muni.fi.pa165.facade;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cz.muni.fi.pa165.config.ServiceConfig;
-import cz.muni.fi.pa165.dto.AbilityCreateDTO;
-import cz.muni.fi.pa165.dto.AbilityDTO;
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HouseCreateDTO;
@@ -39,7 +37,7 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
     private GhostCreateDTO ghostCreateDTO;
     private GhostDTO ghostDTO;
 
-    @BeforeMethod
+    @BeforeClass
     public void setup() throws ParseException {
         SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 
@@ -47,18 +45,18 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
                 .setName("house")
                 .setAddress("somewhere");
 
-        AbilityCreateDTO abilityCreateDTO = new AbilityCreateDTO()
-                .setName("abilityname")
-                .setDescription("abiltiy desc");
+//        AbilityCreateDTO abilityCreateDTO = new AbilityCreateDTO()
+//                .setName("abilityname")
+//                .setDescription("abiltiy desc");
 
-        AbilityDTO abilityDTO = abilityFacade.create(abilityCreateDTO);
+//        AbilityDTO abilityDTO = abilityFacade.create(abilityCreateDTO);
 
         ghostCreateDTO = new GhostCreateDTO()
                 .setName("name")
                 .setDescription("desc")
                 .setHauntsFrom(time.parse("8:00"))
-                .setHauntsTo(time.parse("16:00"))
-                .setAbilities(new ArrayList<Long>(){{add(abilityDTO.getId());}});
+                .setHauntsTo(time.parse("16:00"));
+//                .setAbilities(new ArrayList<Long>(){{add(abilityDTO.getId());}});
         ghostDTO = ghostFacade.createGhost(ghostCreateDTO);
     }
 
@@ -70,35 +68,49 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void updateTest() {
-        AbilityDTO abilityDTO = abilityFacade.create(
-                new AbilityCreateDTO()
-                .setDescription("desc 2")
-                .setName("ability 2")
+        GhostDTO ghostToUpdate = ghostFacade.createGhost(
+                new GhostCreateDTO()
+                .setName("some name")
+                .setDescription("some desc")
+                .setHauntsFrom(new Date(0))
+                .setHauntsTo(new Date(1))
         );
-        ghostDTO.setName("othername")
-                .setAbilities(new ArrayList<Long>() {{ add( abilityDTO.getId()); }});
 
-        GhostDTO updateGhost = ghostFacade.updateGhost(ghostDTO);
-        assertThat(ghostDTO.equals(updateGhost));
+        ghostToUpdate.setName("a different name");
+
+        GhostDTO updateGhost = ghostFacade.updateGhost(ghostToUpdate);
+        assertThat(ghostToUpdate.equals(updateGhost));
     }
 
     @Test
     public void deleteByIdTest() {
-        Long id = ghostDTO.getId();
-        ghostFacade.getGhostById(id);
+        GhostDTO ghostToDelete = ghostFacade.createGhost(
+                new GhostCreateDTO()
+                        .setName("some name")
+                        .setDescription("some desc")
+                        .setHauntsFrom(new Date(0))
+                        .setHauntsTo(new Date(1))
+        );
+
+        Long id = ghostToDelete.getId();
+        ghostFacade.deleteGhost(ghostToDelete);
 
         assertThat(ghostFacade.getGhostById(id) == null);
     }
 
     @Test
     public void getAllTest() {
-        ghostCreateDTO.setName("ghost 2")
-                .setAbilities(null)
-                .setDescription("desc 2");
-        GhostDTO createdGhost = ghostFacade.createGhost(ghostCreateDTO);
+        GhostDTO anotherGhost = ghostFacade.createGhost(
+                new GhostCreateDTO()
+                        .setName("some name")
+                        .setDescription("some desc")
+                        .setHauntsFrom(new Date(0))
+                        .setHauntsTo(new Date(1))
+        );
+
         Collection<GhostDTO> ghosts = ghostFacade.getAllGhosts();
         assertThat(ghosts.size() == 2);
-        assertThat(ghosts.contains(createdGhost));
+        assertThat(ghosts.contains(anotherGhost));
         assertThat(ghosts.contains(ghostDTO));
     }
 
