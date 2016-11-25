@@ -24,7 +24,7 @@ public class GhostServiceImpl implements GhostService {
     @Override
     public Long create(Ghost ghost) {
         try {
-            return ghostDao.create(ghost);
+            return ghostDao.create(ghost).getId();
         } catch (IllegalArgumentException | PersistenceException | ConstraintViolationException e) {
             throw new ServiceImplDAOException("cannot create ghost", e);
         }

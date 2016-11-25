@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,9 +38,10 @@ public class HauntingFacadeImpl implements HauntingFacade{
     }
 
     @Override
-    public void updateHaunting(HauntingDTO haunting) {
+    public HauntingDTO updateHaunting(HauntingDTO haunting) {
         Haunting hauntingToUpdate = mappingService.mapObject(haunting, Haunting.class);
         hauntingService.update(hauntingToUpdate);
+        return mappingService.mapObject(hauntingToUpdate, HauntingDTO.class);
     }
 
     @Override
@@ -66,7 +68,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
     }
 
     @Override
-    public List<HauntingDTO> findHauntingByDate(Calendar date) {
+    public List<HauntingDTO> findHauntingByDate(Date date) {
         return mappingService.mapCollection(hauntingService.getByDate(date), HauntingDTO.class);
     }
 
