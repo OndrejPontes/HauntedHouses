@@ -47,7 +47,7 @@ public class AbilityServiceImpl implements AbilityService {
     }
 
     @Override
-    public Ability getById(long id) {
+    public Ability getById(Long id) {
         try {
             return abilityDao.getById(id);
         } catch (Exception e) {

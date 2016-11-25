@@ -69,10 +69,10 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void update(House house) {
+    public House update(House house) {
 
         try {
-            houseDao.update(house);
+            return houseDao.update(house);
         } catch (Exception e) {
             throw new ServiceImplDAOException("cannot update house",e);
         }

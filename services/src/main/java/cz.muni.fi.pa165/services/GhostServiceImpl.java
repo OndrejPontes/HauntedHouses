@@ -22,9 +22,9 @@ public class GhostServiceImpl implements GhostService {
     private GhostDao ghostDao;
 
     @Override
-    public Long create(Ghost ghost) {
+    public Ghost create(Ghost ghost) {
         try {
-            return ghostDao.create(ghost).getId();
+            return ghostDao.create(ghost);
         } catch (IllegalArgumentException | PersistenceException | ConstraintViolationException e) {
             throw new ServiceImplDAOException("cannot create ghost", e);
         }

@@ -40,7 +40,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
     @Override
     public HauntingDTO updateHaunting(HauntingDTO haunting) {
         Haunting hauntingToUpdate = mappingService.mapObject(haunting, Haunting.class);
-        hauntingService.update(hauntingToUpdate);
+        hauntingToUpdate = hauntingService.update(hauntingToUpdate);
         return mappingService.mapObject(hauntingToUpdate, HauntingDTO.class);
     }
 

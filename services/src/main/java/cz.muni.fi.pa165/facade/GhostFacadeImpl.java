@@ -29,14 +29,14 @@ public class GhostFacadeImpl implements GhostFacade {
     @Override
     public GhostDTO createGhost(GhostCreateDTO ghostCreateDTO) {
         Ghost ghost = mappingService.mapObject(ghostCreateDTO, Ghost.class);
-        ghostService.create(ghost);
+        ghost = ghostService.create(ghost);
         return mappingService.mapObject(ghost, GhostDTO.class);
     }
 
     @Override
     public GhostDTO updateGhost(GhostDTO ghostUpdateDTO) {
         Ghost ghost = mappingService.mapObject(ghostUpdateDTO, Ghost.class);
-        ghostService.update(ghost);
+        ghost = ghostService.update(ghost);
         return mappingService.mapObject(ghost, GhostDTO.class);
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
  * @author Ondrej Ponteš
  */
 public interface GhostService {
-    Long create(Ghost ghost);
+    Ghost create(Ghost ghost);
     Ghost update(Ghost ghost);
     void delete(Ghost ghost);
     Ghost getById(long id);

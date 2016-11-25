@@ -10,28 +10,28 @@ import java.util.List;
 public interface AbilityService {
     /**
      * Create Ability
-     * @param Ability Ability object for creating
+     * @param ability Ability object for creating
      */
-    Ability create(Ability Ability);
+    Ability create(Ability ability);
 
     /**
      * Updates Ability
-     * @param Ability Ability object for updating
+     * @param ability Ability object for updating
      */
-    Ability update(Ability Ability);
+    Ability update(Ability ability);
 
     /**
      * Removes Ability
-     * @param Ability Ability object for deleting
+     * @param ability Ability object for deleting
      */
-    void delete(Ability Ability);
+    void delete(Ability ability);
 
     /**
      * Gets Ability by id
      * @param id of Ability to be found
-     * @return Ability object with specified id
+     * @return ability object with specified id
      */
-    Ability getById(long id);
+    Ability getById(Long id);
 
     /**
      * Gets Ability by name

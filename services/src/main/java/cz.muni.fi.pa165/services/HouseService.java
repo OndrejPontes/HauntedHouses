@@ -19,7 +19,7 @@ public interface HouseService {
 
     House create(House house);
 
-    void update(House house);
+    House update(House house);
 
     void delete(Long id);
 
