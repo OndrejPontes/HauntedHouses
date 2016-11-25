@@ -127,34 +127,34 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
 //        when(houseService.getById(house2.getId())).thenReturn(house2);
     }
 
-    @BeforeMethod
-    public void init(){
-        haunting = new HauntingDTO();
-    }
-
-    @Test
-    public void shouldCreateAndFindHaunting(){
-        HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
-        HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
-
-        assertThat(createdHaunting).isNotNull();
-        assertThat(createdHaunting).isEqualTo(foundHaunting);
-    }
-
-    @Test
-    public void shouldCreateUpdateAndFindHaunting(){
-        HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
-        HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
-
-        calendar.set(1999, MARCH, 3);
-        foundHaunting
-                .setNumberOfPeoplePresent(30)
-                .setDate(calendar.getTime())
-                .setGhosts(new ArrayList<Long>(){{add(ghostDTO2.getId());}})
-                .setHauntedHouse(houseDTO2.getId());
-        hauntingFacade.updateHaunting(foundHaunting);
-
-        HauntingDTO updatedHaunting = hauntingFacade.findHauntingById(foundHaunting.getId());
-        assertThat(updatedHaunting).isEqualTo(foundHaunting);
-    }
+//    @BeforeMethod
+//    public void init(){
+//        haunting = new HauntingDTO();
+//    }
+//
+//    @Test
+//    public void shouldCreateAndFindHaunting(){
+//        HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
+//        HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
+//
+//        assertThat(createdHaunting).isNotNull();
+//        assertThat(createdHaunting).isEqualTo(foundHaunting);
+//    }
+//
+//    @Test
+//    public void shouldCreateUpdateAndFindHaunting(){
+//        HauntingDTO createdHaunting = hauntingFacade.createHaunting(hauntingCreateDTO);
+//        HauntingDTO foundHaunting = hauntingFacade.findHauntingById(createdHaunting.getId());
+//
+//        calendar.set(1999, MARCH, 3);
+//        foundHaunting
+//                .setNumberOfPeoplePresent(30)
+//                .setDate(calendar.getTime())
+//                .setGhosts(new ArrayList<Long>(){{add(ghostDTO2.getId());}})
+//                .setHauntedHouse(houseDTO2.getId());
+//        hauntingFacade.updateHaunting(foundHaunting);
+//
+//        HauntingDTO updatedHaunting = hauntingFacade.findHauntingById(foundHaunting.getId());
+//        assertThat(updatedHaunting).isEqualTo(foundHaunting);
+//    }
 }
