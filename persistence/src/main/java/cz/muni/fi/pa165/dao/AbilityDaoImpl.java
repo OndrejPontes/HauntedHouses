@@ -20,8 +20,9 @@ public class AbilityDaoImpl implements AbilityDao {
     private EntityManager em;
 
     @Override
-    public void create(Ability Ability) {
-        em.persist(Ability);
+    public Ability create(Ability ability) {
+        em.persist(ability);
+        return ability;
     }
 
     @Override

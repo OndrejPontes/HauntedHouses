@@ -30,44 +30,50 @@ public class HouseCreateDTO {
         return name;
     }
 
-    public void setName(String name) {
+    public HouseCreateDTO setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public HouseCreateDTO setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public Date getHauntingFrom() {
         return hauntingFrom;
     }
 
-    public void setHauntingFrom(Date hauntingFrom) {
+    public HouseCreateDTO setHauntingFrom(Date hauntingFrom) {
         this.hauntingFrom = hauntingFrom;
+        return this;
     }
 
     public String getHistory() {
         return history;
     }
 
-    public void setHistory(String history) {
+    public HouseCreateDTO setHistory(String history) {
         this.history = history;
+        return this;
     }
 
     public List<Long> getHauntings() {
         return Collections.unmodifiableList(hauntings);
     }
 
-    public void addHaunting(Long haunting) {
+    public HouseCreateDTO addHaunting(Long haunting) {
         hauntings.add(haunting);
+        return this;
     }
 
-    public void removeHaunting(Long haunting) {
+    public HouseCreateDTO removeHaunting(Long haunting) {
         hauntings.remove(haunting);
+        return this;
     }
 
     @Override

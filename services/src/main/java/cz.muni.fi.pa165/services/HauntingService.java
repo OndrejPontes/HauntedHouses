@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -28,7 +29,7 @@ public interface HauntingService {
 
     Haunting getById(Long id);
 
-    List<Haunting> getByDate(Calendar date);
+    List<Haunting> getByDate(Date date);
 
     List<Haunting> getAll();
 

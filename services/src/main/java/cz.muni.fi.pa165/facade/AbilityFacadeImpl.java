@@ -25,16 +25,17 @@ public class AbilityFacadeImpl implements AbilityFacade {
 
 
     @Override
-    public Long create(AbilityCreateDTO abilityCreateDTO) {
+    public AbilityDTO create(AbilityCreateDTO abilityCreateDTO) {
         Ability ability = mappingService.mapObject(abilityCreateDTO, Ability.class);
         abilityService.create(ability);
-        return ability.getId();
+        return mappingService.mapObject(ability, AbilityDTO.class);
     }
 
     @Override
-    public void update(AbilityDTO abilityUpdateDTO) {
+    public AbilityDTO update(AbilityDTO abilityUpdateDTO) {
         Ability ability = mappingService.mapObject(abilityUpdateDTO, Ability.class);
         abilityService.update(ability);
+        return mappingService.mapObject(ability, AbilityDTO.class);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class AbilityFacadeImpl implements AbilityFacade {
     }
 
     @Override
-    public AbilityDTO getById(long id) {
+    public AbilityDTO getById(Long id) {
         Ability ability = abilityService.getById(id);
         return mappingService.mapObject(ability, AbilityDTO.class);
     }

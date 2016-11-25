@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -85,9 +86,9 @@ public class HauntingServiceImpl implements HauntingService {
     }
 
     @Override
-    public List<Haunting> getByDate(Calendar date) {
+    public List<Haunting> getByDate(Date date) {
         try {
-            return hauntingDao.getByDate(date.getTime());
+            return hauntingDao.getByDate(date);
         }catch (Exception ex) {
             throw new ServiceImplDAOException("Cannot find haunting by date ", ex);
         }

@@ -110,8 +110,8 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
         hauntingDTO1 = new HauntingDTO()
                 .setNumberOfPeoplePresent(4)
                 .setDate(calendar1.getTime())
-                .setGhosts(new ArrayList<GhostDTO>(){{add(ghostDTO1);}})
-                .setHauntedHouse(houseDTO1);
+                .setGhosts(new ArrayList<Long>(){{add(ghostDTO1.getId());}})
+                .setHauntedHouse(houseDTO1.getId());
 
         hauntingCreateDTO = new HauntingCreateDTO()
                 .setDate(hauntingDTO1.getDate())
@@ -150,8 +150,8 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
         foundHaunting
                 .setNumberOfPeoplePresent(30)
                 .setDate(calendar.getTime())
-                .setGhosts(new ArrayList<GhostDTO>(){{add(ghostDTO2);}})
-                .setHauntedHouse(houseDTO2);
+                .setGhosts(new ArrayList<Long>(){{add(ghostDTO2.getId());}})
+                .setHauntedHouse(houseDTO2.getId());
         hauntingFacade.updateHaunting(foundHaunting);
 
         HauntingDTO updatedHaunting = hauntingFacade.findHauntingById(foundHaunting.getId());
