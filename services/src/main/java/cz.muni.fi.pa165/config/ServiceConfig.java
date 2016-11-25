@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.config;
 
 import cz.muni.fi.pa165.PersistenceApplicationContext;
-import cz.muni.fi.pa165.dto.AbilityDTO;
-import cz.muni.fi.pa165.dto.GhostDTO;
-import cz.muni.fi.pa165.dto.HauntingDTO;
-import cz.muni.fi.pa165.dto.HouseDTO;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
@@ -26,10 +23,6 @@ public class ServiceConfig {
     public Mapper dozer(){
         DozerBeanMapper dozer = new DozerBeanMapper();
         dozer.addMapping(new DozerConfig());
-//        dozer.addMapping(new GhostConfig());
-//        dozer.addMapping(new HauntingConfig());
-//        dozer.addMapping(new HouseConfig());
-//        dozer.addMapping(new AbilityConfig());
         return dozer;
     }
 
@@ -40,6 +33,10 @@ public class ServiceConfig {
             mapping(Haunting.class, HauntingDTO.class);
             mapping(House.class, HouseDTO.class);
             mapping(Ability.class, AbilityDTO.class);
+            mapping(Ability.class, AbilityCreateDTO.class);
+            mapping(House.class, HouseCreateDTO.class);
+            mapping(Haunting.class, HauntingCreateDTO.class);
+            mapping(Ghost.class, GhostCreateDTO.class);
         }
     }
 
