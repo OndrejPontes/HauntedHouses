@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.services.MappingService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.osgi.framework.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -50,7 +51,7 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
     private MappingService mapper;
 
     @BeforeClass
-    public void initClass() {
+    public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -61,7 +62,7 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
 
 
     @BeforeMethod
-    public void setUp(){
+    public void initData(){
 
         ability1 = new Ability()
                 .setName("Invisibility")
