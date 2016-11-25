@@ -2,7 +2,9 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
+import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.services.GhostService;
 import cz.muni.fi.pa165.services.MappingService;
 import org.springframework.beans.factory.annotation.Autowired;

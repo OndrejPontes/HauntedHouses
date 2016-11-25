@@ -14,13 +14,13 @@ public class GhostDTO {
     private Date hauntsFrom;
     private Date hauntsTo;
     private String description;
-    private List<Long> abilities = new ArrayList<>();
-    private List<Long> hauntings = new ArrayList<>();
+    private List<AbilityDTO> abilities = new ArrayList<>();
+    private List<HauntingDTO> hauntings = new ArrayList<>();
 
     public GhostDTO() {
     }
 
-    public GhostDTO(Long id, String name, Date hauntsFrom, Date hauntsTo, String description, List<Long> abilities, List<Long> hauntings) {
+    public GhostDTO(Long id, String name, Date hauntsFrom, Date hauntsTo, String description, List<AbilityDTO> abilities, List<HauntingDTO> hauntings) {
         this.id = id;
         this.name = name;
         this.hauntsFrom = hauntsFrom;
@@ -75,20 +75,20 @@ public class GhostDTO {
         return this;
     }
 
-    public List<Long> getAbilities() {
+    public List<AbilityDTO> getAbilities() {
         return Collections.unmodifiableList(abilities);
     }
 
-    public GhostDTO setAbilities(List<Long> abilities) {
+    public GhostDTO setAbilities(List<AbilityDTO> abilities) {
         this.abilities = abilities;
         return this;
     }
 
-    public List<Long> getHauntings() {
+    public List<HauntingDTO> getHauntings() {
         return Collections.unmodifiableList(hauntings);
     }
 
-    public GhostDTO setHauntings(List<Long> hauntings) {
+    public GhostDTO setHauntings(List<HauntingDTO> hauntings) {
         this.hauntings = hauntings;
         return this;
     }

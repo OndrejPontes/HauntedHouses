@@ -22,6 +22,9 @@ public class MappingServiceImpl implements MappingService {
     }
 
     public  <T> List<T> mapCollection(Collection<?> collection, Class<T> classToBeMapped) {
+        if (collection == null) {
+            return null;
+        }
         List<T> mappedCollection = new ArrayList<>();
         for (Object object : collection) {
             mappedCollection.add(mapper.map(object, classToBeMapped));
@@ -31,6 +34,9 @@ public class MappingServiceImpl implements MappingService {
 
     public  <T> T mapObject(Object object, Class<T> classToBeMapped)
     {
+        if (object == null) {
+            return null;
+        }
         return mapper.map(object,classToBeMapped);
     }
 
