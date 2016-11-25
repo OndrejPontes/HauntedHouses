@@ -35,7 +35,7 @@ public class Ghost {
     @ManyToMany
     private List<Ability> abilities = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "ghosts")
+    @ManyToMany(mappedBy = "ghosts", cascade = CascadeType.REMOVE)
     private List<Haunting> hauntings = new ArrayList<>();
 
     public Ghost() {

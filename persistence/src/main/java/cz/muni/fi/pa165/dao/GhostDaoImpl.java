@@ -28,7 +28,7 @@ public class GhostDaoImpl implements GhostDao {
     }
 
     public void delete(Ghost ghost) {
-        em.remove(ghost);
+        em.remove(em.contains(ghost) ? ghost : em.merge(ghost));
     }
 
     public Ghost getById(long id) {

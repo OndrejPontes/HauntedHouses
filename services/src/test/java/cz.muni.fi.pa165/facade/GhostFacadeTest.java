@@ -95,7 +95,7 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
         Long id = ghostToDelete.getId();
         ghostFacade.deleteGhost(ghostToDelete);
 
-        assertThat(ghostFacade.getGhostById(id) == null);
+        assertThat(ghostFacade.getGhostById(id)).isNull();
     }
 
     @Test
