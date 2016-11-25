@@ -8,9 +8,11 @@ import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.services.AbilityService;
 import cz.muni.fi.pa165.services.MappingService;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.osgi.framework.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -33,25 +35,23 @@ import static org.mockito.Mockito.when;
  * @author MonikaMociarikova
  */
 
-@Test
 @ContextConfiguration(classes = {ServiceConfig.class})
+//@RunWith(MockitoJUnitRunner.class)
 public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
 
-    @Mock
-    private AbilityDao abilityDao;
-
-    @Autowired
-    private final AbilityFacade abilityFacade = new AbilityFacadeImpl();
 
     @InjectMocks
     @Autowired
+    private AbilityFacade abilityFacade;
+
+    @Mock
     private AbilityService abilityService;
 
     @Autowired
     private MappingService mapper;
 
     @BeforeClass
-    public void setup() throws ServiceException {
+    public void init() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -62,7 +62,7 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
 
 
     @BeforeMethod
-    public void initData(){
+    public void setUp(){
 
         ability1 = new Ability()
                 .setName("Invisibility")
@@ -80,31 +80,31 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testCreate(){
         abilityFacade.create(abilityCreateDto);
-        verify(abilityDao).create(ability1);
+        verify(abilityService).create(ability1);
     }
 
     @Test
     public void testDelete(){
         abilityFacade.delete(abilityDTO);
-        verify(abilityDao).delete(ability1);
+        verify(abilityService).delete(ability1);
     }
 
     @Test
     public void testUpdate(){
         abilityFacade.update(abilityDTO);
-        verify(abilityDao).update(ability1);
+        verify(abilityService).update(ability1);
     }
 
     @Test
     public void testGetById() {
-        when(abilityDao.getById(1)).thenReturn(ability1);
+        when(abilityService.getById(1L)).thenReturn(ability1);
         assertThat(ability1.getName()).isEqualTo(abilityFacade.getById(1L).getName());
         assertThat(ability1.getDescription()).isEqualTo(abilityFacade.getById(1L).getDescription());
     }
 
     @Test
     public void testGetByName(){
-        when(abilityDao.getByName("Overshadowing")).thenReturn(ability2);
+        when(abilityService.getByName("Overshadowing")).thenReturn(ability2);
         assertThat(ability2.getDescription()).isEqualTo(abilityFacade.getByName("Overshadowing").getDescription());
     }
 
@@ -113,6 +113,8 @@ public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
         List<Ability> expected = new ArrayList<>();
         expected.add(ability1);
         expected.add(ability2);
+
+        when(abilityService.getAll()).thenReturn(expected);
 
         List<AbilityDTO> actual = new ArrayList<>();
         actual.addAll(abilityFacade.getAll());
