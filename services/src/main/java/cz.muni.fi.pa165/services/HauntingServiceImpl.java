@@ -1,19 +1,17 @@
 package cz.muni.fi.pa165.services;
 
-import cz.muni.fi.pa165.dao.HauntingDao;
-import cz.muni.fi.pa165.entity.Ghost;
-import cz.muni.fi.pa165.entity.Haunting;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import cz.muni.fi.pa165.exception.HauntingDataAccessException;
-import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import cz.muni.fi.pa165.dao.HauntingDao;
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
+import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 
 /**
  * @author MonikaMociarikova

@@ -1,16 +1,17 @@
 package cz.muni.fi.pa165.services;
 
-import cz.muni.fi.pa165.dao.GhostDao;
-import cz.muni.fi.pa165.entity.Ghost;
-import cz.muni.fi.pa165.exception.ScaryDataAccessException;
-import cz.muni.fi.pa165.exception.ServiceImplDAOException;
+import java.util.List;
+
+import javax.persistence.PersistenceException;
+import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.PersistenceException;
-import javax.validation.ConstraintViolationException;
-import java.util.List;
+import cz.muni.fi.pa165.dao.GhostDao;
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 
 /**
  * @author Ondrej Ponteš

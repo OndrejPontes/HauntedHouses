@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -13,13 +12,13 @@ public class HauntingDTO {
     private Long id;
     private Date date;
     private int numberOfPeoplePresent;
-    private Long hauntedHouse;
-    private List<Long> ghosts = new ArrayList<>();
+    private HouseDTO hauntedHouse;
+    private List<GhostDTO> ghosts = new ArrayList<>();
 
     public HauntingDTO() {
     }
 
-    public HauntingDTO(Long id, Date date, int numberOfPeoplePresent, Long hauntedHouse, List<Long> ghosts) {
+    public HauntingDTO(Long id, Date date, int numberOfPeoplePresent, HouseDTO hauntedHouse, List<GhostDTO> ghosts) {
         this.id = id;
         this.date = date;
         this.numberOfPeoplePresent = numberOfPeoplePresent;
@@ -54,20 +53,20 @@ public class HauntingDTO {
         return this;
     }
 
-    public Long getHauntedHouse() {
+    public HouseDTO getHauntedHouse() {
         return hauntedHouse;
     }
 
-    public HauntingDTO setHauntedHouse(Long hauntedHouse) {
+    public HauntingDTO setHauntedHouse(HouseDTO hauntedHouse) {
         this.hauntedHouse = hauntedHouse;
         return this;
     }
 
-    public List<Long> getGhosts() {
+    public List<GhostDTO> getGhosts() {
         return ghosts;
     }
 
-    public HauntingDTO setGhosts(List<Long> ghosts) {
+    public HauntingDTO setGhosts(List<GhostDTO> ghosts) {
         this.ghosts = ghosts;
         return this;
     }

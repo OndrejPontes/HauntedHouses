@@ -1,12 +1,12 @@
 package cz.muni.fi.pa165.services;
 
-import cz.muni.fi.pa165.entity.Ghost;
-import cz.muni.fi.pa165.entity.Haunting;
-import org.springframework.stereotype.Service;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
 
 /**
  * @author MonikaMociarikova

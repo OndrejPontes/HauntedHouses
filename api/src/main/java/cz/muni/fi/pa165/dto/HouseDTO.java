@@ -1,8 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Jirka Kruml
@@ -14,18 +12,16 @@ public class HouseDTO {
     private String address;
     private Date hauntingFrom;
     private String history;
-    private List<Long> hauntings;
 
     public HouseDTO() {
     }
 
-    public HouseDTO(Long id, String name, String address, Date hauntingFrom, String history, List<Long> hauntings) {
+    public HouseDTO(Long id, String name, String address, Date hauntingFrom, String history) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.hauntingFrom = hauntingFrom;
         this.history = history;
-        this.hauntings = hauntings;
     }
 
     public Long getId() {
@@ -73,15 +69,6 @@ public class HouseDTO {
         return this;
     }
 
-    public List<Long> getHauntings() {
-        return Collections.unmodifiableList(hauntings);
-    }
-
-    public HouseDTO setHauntings(List<Long> hauntings) {
-        this.hauntings = hauntings;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,9 +80,7 @@ public class HouseDTO {
         if (!name.equals(houseDTO.name)) return false;
         if (!address.equals(houseDTO.address)) return false;
         if (hauntingFrom != null ? !hauntingFrom.equals(houseDTO.hauntingFrom) : houseDTO.hauntingFrom != null) return false;
-        if (history != null ? !history.equals(houseDTO.history) : houseDTO.history != null) return false;
-        return hauntings != null ? hauntings.equals(houseDTO.hauntings) : houseDTO.hauntings == null;
-
+        return history != null ? history.equals(houseDTO.history) : houseDTO.history == null;
     }
 
     @Override
@@ -105,7 +90,6 @@ public class HouseDTO {
         result = 31 * result + address.hashCode();
         result = 31 * result + (hauntingFrom != null ? hauntingFrom.hashCode() : 0);
         result = 31 * result + (history != null ? history.hashCode() : 0);
-        result = 31 * result + (hauntings != null ? hauntings.hashCode() : 0);
         return result;
     }
 
@@ -117,7 +101,6 @@ public class HouseDTO {
                 ", address='" + address + '\'' +
                 ", hauntingFrom=" + hauntingFrom +
                 ", history='" + history + '\'' +
-                ", hauntings=" + hauntings +
                 '}';
     }
 }

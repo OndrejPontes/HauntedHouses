@@ -1,9 +1,7 @@
 package cz.muni.fi.pa165.facade;
 
-import cz.muni.fi.pa165.config.ServiceConfig;
-import cz.muni.fi.pa165.entity.House;
-import cz.muni.fi.pa165.services.GhostService;
-import cz.muni.fi.pa165.services.HouseService;
+import java.util.Calendar;
+
 import org.hibernate.service.spi.ServiceException;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -14,7 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Calendar;
+import cz.muni.fi.pa165.config.ServiceConfig;
+import cz.muni.fi.pa165.entity.House;
+import cz.muni.fi.pa165.services.HouseService;
 
 /**
  * @author Vojta David, vojtadavid
@@ -26,9 +26,17 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests {
     @Mock
     private HouseService houseService;
 
-    @Mock
     @Autowired
     private HouseFacade houseFacade;
+
+    @Autowired
+    private HauntingFacade hauntingFacade;
+
+    @Autowired
+    private AbilityFacade abilityFacade;
+
+    @Autowired
+    private GhostFacade ghostFacade;
 
     private House h1;
     private House h2;
@@ -41,11 +49,15 @@ public class HouseFacadeTest extends AbstractTestNGSpringContextTests {
         h1.setName("a").setAddress("b").setHistory("xxx").setHauntingFrom(Calendar.getInstance().getTime());
         h2.setName("c").setAddress("d").setHistory("yyyy").setHauntingFrom(Calendar.getInstance().getTime());
 
+
     }
 
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
+
+    @Test
+    public void test() { }
 
 }

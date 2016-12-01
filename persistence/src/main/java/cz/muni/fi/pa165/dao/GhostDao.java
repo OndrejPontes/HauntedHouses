@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.dao;
 
-import cz.muni.fi.pa165.entity.Ghost;
-
 import java.util.List;
+
+import cz.muni.fi.pa165.entity.Ghost;
 
 /**
  * @author Ondrej Ponteš

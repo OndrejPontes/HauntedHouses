@@ -1,12 +1,11 @@
 package cz.muni.fi.pa165.facade;
 
+import java.util.Date;
+import java.util.List;
+
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
-
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author MonikaMociarikova

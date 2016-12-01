@@ -1,17 +1,17 @@
 package cz.muni.fi.pa165.facade;
 
-import cz.muni.fi.pa165.dto.HouseCreateDTO;
-import cz.muni.fi.pa165.dto.HouseDTO;
-import cz.muni.fi.pa165.entity.Haunting;
-import cz.muni.fi.pa165.entity.House;
-import cz.muni.fi.pa165.services.HauntingService;
-import cz.muni.fi.pa165.services.HouseService;
-import cz.muni.fi.pa165.services.MappingService;
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
+import cz.muni.fi.pa165.dto.HouseCreateDTO;
+import cz.muni.fi.pa165.dto.HouseDTO;
+import cz.muni.fi.pa165.entity.House;
+import cz.muni.fi.pa165.services.HauntingService;
+import cz.muni.fi.pa165.services.HouseService;
+import cz.muni.fi.pa165.services.MappingService;
 
 /**
  * @author Jirka Kruml
@@ -45,31 +45,16 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public HouseDTO getById(Long id) {
+    public HouseDTO getById(long id) {
         return mappingService.mapObject(houseService.getById(id), HouseDTO.class);
     }
 
     @Override
     public HouseDTO create(HouseCreateDTO house) {
-        return mappingService.mapObject(houseService.create(mappingService.mapObject(house, House.class)), HouseDTO.class);
-    }
-
-    @Override
-    public void addHaunting(Long hauntingId, Long houseId) {
-        Haunting haunting = hauntingService.getById(hauntingId);
-        House house = houseService.getById(houseId);
-
-        house.addHaunting(haunting);
-        houseService.update(house);
-    }
-
-    @Override
-    public void removeHaunting(Long hauntingId, Long houseId) {
-        Haunting haunting = hauntingService.getById(hauntingId);
-        House house = houseService.getById(houseId);
-
-        house.removeHaunting(haunting);
-        houseService.update(house);
+        House housea = mappingService.mapObject(house, House.class);
+        housea = houseService.create(housea);
+        HouseDTO houseDTO = mappingService.mapObject(housea, HouseDTO.class);
+        return houseDTO;
     }
 
     @Override
@@ -78,7 +63,7 @@ public class HouseFacadeImpl implements HouseFacade {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
         houseService.delete(id);
     }
 }

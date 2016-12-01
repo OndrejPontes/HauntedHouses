@@ -1,7 +1,10 @@
 package cz.muni.fi.pa165.facade;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 
@@ -12,11 +15,10 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import cz.muni.fi.pa165.config.ServiceConfig;
+import cz.muni.fi.pa165.dto.AbilityCreateDTO;
+import cz.muni.fi.pa165.dto.AbilityDTO;
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
-import cz.muni.fi.pa165.dto.HouseCreateDTO;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * @author Jirka Kruml
@@ -29,34 +31,29 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
     private GhostFacade ghostFacade;
 
     @Autowired
-    private HouseFacade houseFacade;
-
-    @Autowired
     private AbilityFacade abilityFacade;
 
     private GhostCreateDTO ghostCreateDTO;
     private GhostDTO ghostDTO;
+    private AbilityDTO abilityDTO;
 
     @BeforeClass
     public void setup() throws ParseException {
         SimpleDateFormat time = new SimpleDateFormat("hh:mm");
 
-        HouseCreateDTO houseCreateDTO = new HouseCreateDTO()
-                .setName("house")
-                .setAddress("somewhere");
+        AbilityCreateDTO abilityCreateDTO = new AbilityCreateDTO()
+                .setName("ability name")
+                .setDescription("ability desc");
 
-//        AbilityCreateDTO abilityCreateDTO = new AbilityCreateDTO()
-//                .setName("abilityname")
-//                .setDescription("abiltiy desc");
-
-//        AbilityDTO abilityDTO = abilityFacade.create(abilityCreateDTO);
+        abilityDTO = abilityFacade.create(abilityCreateDTO);
 
         ghostCreateDTO = new GhostCreateDTO()
                 .setName("name")
                 .setDescription("desc")
                 .setHauntsFrom(time.parse("8:00"))
-                .setHauntsTo(time.parse("16:00"));
-//                .setAbilities(new ArrayList<Long>(){{add(abilityDTO.getId());}});
+                .setHauntsTo(time.parse("16:00"))
+                .setAbilities(new ArrayList<AbilityDTO>(){{add(abilityDTO);}});
+
         ghostDTO = ghostFacade.createGhost(ghostCreateDTO);
     }
 
@@ -76,7 +73,8 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
                 .setHauntsTo(new Date(1))
         );
 
-        ghostToUpdate.setName("a different name");
+        ghostToUpdate.setName("a different name")
+                .setAbilities(new ArrayList<AbilityDTO>(){{add(abilityDTO);}});
 
         GhostDTO updateGhost = ghostFacade.updateGhost(ghostToUpdate);
         assertThat(ghostToUpdate.equals(updateGhost));
@@ -90,6 +88,7 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
                         .setDescription("some desc")
                         .setHauntsFrom(new Date(0))
                         .setHauntsTo(new Date(1))
+                        .setAbilities(new ArrayList<AbilityDTO>(){{add(abilityDTO);}})
         );
 
         Long id = ghostToDelete.getId();
