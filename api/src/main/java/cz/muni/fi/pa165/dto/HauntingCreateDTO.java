@@ -1,7 +1,5 @@
 package cz.muni.fi.pa165.dto;
 
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,23 +9,15 @@ import java.util.List;
  */
 public class HauntingCreateDTO {
 
-    @NotNull
     private Date date;
-
-    @NotNull
-    @Min(0)
     private int numberOfPeoplePresent;
-
-    @NotNull
-    private Long house;
-
-    @NotNull
-    private List<Long> ghosts = new ArrayList<>();
+    private HouseDTO house;
+    private List<GhostDTO> ghosts = new ArrayList<>();
 
     public HauntingCreateDTO() {
     }
 
-    public HauntingCreateDTO(Date date, int numberOfPeoplePresent, Long house, List<Long> ghosts) {
+    public HauntingCreateDTO(Date date, int numberOfPeoplePresent, HouseDTO house, List<GhostDTO> ghosts) {
         this.date = date;
         this.numberOfPeoplePresent = numberOfPeoplePresent;
         this.house = house;
@@ -52,20 +42,20 @@ public class HauntingCreateDTO {
         return this;
     }
 
-    public Long getHouse() {
+    public HouseDTO getHouse() {
         return house;
     }
 
-    public HauntingCreateDTO setHouse(Long house) {
+    public HauntingCreateDTO setHouse(HouseDTO house) {
         this.house = house;
         return this;
     }
 
-    public List<Long> getGhosts() {
+    public List<GhostDTO> getGhosts() {
         return ghosts;
     }
 
-    public HauntingCreateDTO setGhosts(List<Long> ghosts) {
+    public HauntingCreateDTO setGhosts(List<GhostDTO> ghosts) {
         this.ghosts = ghosts;
         return this;
     }

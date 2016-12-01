@@ -1,19 +1,18 @@
 package cz.muni.fi.pa165.facade;
 
-import cz.muni.fi.pa165.dto.GhostCreateDTO;
-import cz.muni.fi.pa165.dto.GhostDTO;
-import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.entity.Ghost;
-import cz.muni.fi.pa165.entity.Haunting;
-import cz.muni.fi.pa165.services.GhostService;
-import cz.muni.fi.pa165.services.MappingService;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import cz.muni.fi.pa165.dto.GhostCreateDTO;
+import cz.muni.fi.pa165.dto.GhostDTO;
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.services.GhostService;
+import cz.muni.fi.pa165.services.MappingService;
 
 /**
  * @author Ondrej Ponteš

@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.facade;
 
+import java.util.Collection;
+
 import cz.muni.fi.pa165.dto.UserAuthenticateDTO;
 import cz.muni.fi.pa165.dto.UserDTO;
-
-import java.util.Collection;
 
 /**
  * @author Ondrej Ponteš

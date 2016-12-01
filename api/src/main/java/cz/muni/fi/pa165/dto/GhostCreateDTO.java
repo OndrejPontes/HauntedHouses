@@ -1,11 +1,11 @@
 package cz.muni.fi.pa165.dto;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * @author Ondrej Ponteš
@@ -22,19 +22,18 @@ public class GhostCreateDTO {
     private Date hauntsTo;
 
     private String description;
-    private List<Long> abilities = new ArrayList<>();
-    private List<Long> hauntings = new ArrayList<>();
+
+    private List<AbilityDTO> abilities = new ArrayList<>();
 
     public GhostCreateDTO() {
     }
 
-    public GhostCreateDTO(String name, Date hauntsFrom, Date hauntsTo, String description, List<Long> abilities, List<Long> hauntings) {
+    public GhostCreateDTO(String name, Date hauntsFrom, Date hauntsTo, String description, List<AbilityDTO> abilities) {
         this.name = name;
         this.hauntsFrom = hauntsFrom;
         this.hauntsTo = hauntsTo;
         this.description = description;
         this.abilities = abilities;
-        this.hauntings = hauntings;
     }
 
     public String getName() {
@@ -73,21 +72,12 @@ public class GhostCreateDTO {
         return this;
     }
 
-    public List<Long> getAbilities() {
-        return Collections.unmodifiableList(abilities);
+    public List<AbilityDTO> getAbilities() {
+        return abilities;
     }
 
-    public GhostCreateDTO setAbilities(List<Long> abilities) {
+    public GhostCreateDTO setAbilities(List<AbilityDTO> abilities) {
         this.abilities = abilities;
-        return this;
-    }
-
-    public List<Long> getHauntings() {
-        return Collections.unmodifiableList(hauntings);
-    }
-
-    public GhostCreateDTO setHauntings(List<Long> hauntings) {
-        this.hauntings = hauntings;
         return this;
     }
 
@@ -102,9 +92,7 @@ public class GhostCreateDTO {
         if (hauntsFrom != null ? !hauntsFrom.equals(that.hauntsFrom) : that.hauntsFrom != null) return false;
         if (hauntsTo != null ? !hauntsTo.equals(that.hauntsTo) : that.hauntsTo != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
-        if (abilities != null ? !abilities.equals(that.abilities) : that.abilities != null) return false;
-        return hauntings != null ? hauntings.equals(that.hauntings) : that.hauntings == null;
-
+        return abilities != null ? abilities.equals(that.abilities) : that.abilities != null;
     }
 
     @Override
@@ -114,7 +102,6 @@ public class GhostCreateDTO {
         result = 31 * result + (hauntsTo != null ? hauntsTo.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (abilities != null ? abilities.hashCode() : 0);
-        result = 31 * result + (hauntings != null ? hauntings.hashCode() : 0);
         return result;
     }
 
@@ -126,7 +113,6 @@ public class GhostCreateDTO {
                 ", hauntsTo=" + hauntsTo +
                 ", description='" + description + '\'' +
                 ", abilities=" + abilities +
-                ", hauntings=" + hauntings +
                 '}';
     }
 }

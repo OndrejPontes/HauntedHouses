@@ -1,13 +1,12 @@
 package cz.muni.fi.pa165;
 
-import cz.muni.fi.pa165.dao.AbilityDao;
-import cz.muni.fi.pa165.dao.GhostDao;
-import cz.muni.fi.pa165.dao.HauntingDao;
-import cz.muni.fi.pa165.dao.HouseDao;
-import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.entity.Ghost;
-import cz.muni.fi.pa165.entity.Haunting;
-import cz.muni.fi.pa165.entity.House;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Calendar;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -17,13 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import cz.muni.fi.pa165.dao.HouseDao;
+import cz.muni.fi.pa165.entity.House;
 
 
 /**

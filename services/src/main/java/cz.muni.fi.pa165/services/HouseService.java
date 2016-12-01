@@ -16,7 +16,7 @@ public interface HouseService {
 
     House getByAddress(String address);
 
-    House getById(Long id);
+    House getById(long id);
 
     /**
      * Get all abilities from haunting history of house.
@@ -42,6 +42,6 @@ public interface HouseService {
 
     House update(House house);
 
-    void delete(Long id);
+    void delete(long id);
 
 }

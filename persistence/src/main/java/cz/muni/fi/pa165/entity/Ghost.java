@@ -1,10 +1,18 @@
 package cz.muni.fi.pa165.entity;
 
-import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * @author Ondrej Ponteš
@@ -34,9 +42,6 @@ public class Ghost {
 
     @ManyToMany
     private List<Ability> abilities = new ArrayList<>();
-
-    @ManyToMany(mappedBy = "ghosts", cascade = CascadeType.REMOVE)
-    private List<Haunting> hauntings = new ArrayList<>();
 
     public Ghost() {
     }
@@ -103,24 +108,12 @@ public class Ghost {
     }
 
     public List<Ability> getAbilities() {
-        return Collections.unmodifiableList(abilities);
+        return abilities;
     }
 
     public Ghost setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
         return this;
-    }
-
-    public List<Haunting> getHauntings() {
-        return Collections.unmodifiableList(hauntings);
-    }
-
-    public void addHaunting(Haunting haunting) {
-        hauntings.add(haunting);
-    }
-
-    public void removeHaunting(Haunting haunting) {
-        hauntings.remove(haunting);
     }
 
     @Override
@@ -140,10 +133,7 @@ public class Ghost {
             return false;
         if (getHauntedHouse() != null ? !getHauntedHouse().equals(ghost.getHauntedHouse()) : ghost.getHauntedHouse() != null)
             return false;
-        if (getAbilities() != null ? !getAbilities().equals(ghost.getAbilities()) : ghost.getAbilities() != null)
-            return false;
-        return getHauntings() != null ? getHauntings().equals(ghost.getHauntings()) : ghost.getHauntings() == null;
-
+        return getAbilities() != null ? getAbilities().equals(ghost.getAbilities()) : ghost.getAbilities() != null;
     }
 
     @Override
@@ -155,7 +145,6 @@ public class Ghost {
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
         result = 31 * result + (getHauntedHouse() != null ? getHauntedHouse().hashCode() : 0);
         result = 31 * result + (getAbilities() != null ? getAbilities().hashCode() : 0);
-        result = 31 * result + (getHauntings() != null ? getHauntings().hashCode() : 0);
         return result;
     }
 
@@ -169,7 +158,6 @@ public class Ghost {
                 ", description='" + description + '\'' +
                 ", hauntedHouse=" + hauntedHouse +
                 ", abilities=" + abilities +
-                ", hauntings=" + hauntings +
                 '}';
     }
 }

@@ -1,7 +1,13 @@
 package cz.muni.fi.pa165;
 
-import cz.muni.fi.pa165.dao.AbilityDao;
-import cz.muni.fi.pa165.entity.Ability;
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -11,12 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import cz.muni.fi.pa165.dao.AbilityDao;
+import cz.muni.fi.pa165.entity.Ability;
 
 
 /**

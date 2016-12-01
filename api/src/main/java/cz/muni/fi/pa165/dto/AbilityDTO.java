@@ -1,9 +1,5 @@
 package cz.muni.fi.pa165.dto;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * @author Ondrej Ponteš
  */
@@ -12,16 +8,14 @@ public class AbilityDTO {
     private Long id;
     private String name;
     private String description;
-    private List<Long> ghosts = new ArrayList<>();
 
     public AbilityDTO() {
     }
 
-    public AbilityDTO(Long id, String name, String description, List<Long> ghosts) {
+    public AbilityDTO(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.ghosts = ghosts;
     }
 
     public Long getId() {
@@ -51,15 +45,6 @@ public class AbilityDTO {
         return this;
     }
 
-    public List<Long> getGhosts() {
-        return Collections.unmodifiableList(ghosts);
-    }
-
-    public AbilityDTO setGhosts(List<Long> ghosts) {
-        this.ghosts = ghosts;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -69,10 +54,7 @@ public class AbilityDTO {
 
         if (getId() != null ? !getId().equals(ability.getId()) : ability.getId() != null) return false;
         if (getName() != null ? !getName().equals(ability.getName()) : ability.getName() != null) return false;
-        if (getDescription() != null ? !getDescription().equals(ability.getDescription()) : ability.getDescription() != null)
-            return false;
-        return getGhosts() != null ? getGhosts().equals(ability.getGhosts()) : ability.getGhosts() == null;
-
+        return getDescription() != null ? getDescription().equals(ability.getDescription()) : ability.getDescription() == null;
     }
 
     @Override
@@ -80,7 +62,6 @@ public class AbilityDTO {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
         return result;
     }
 
@@ -90,7 +71,6 @@ public class AbilityDTO {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", ghosts=" + ghosts +
                 '}';
     }
 }

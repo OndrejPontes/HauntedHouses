@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.dao;
 
-import cz.muni.fi.pa165.entity.House;
-
 import java.util.List;
+
+import cz.muni.fi.pa165.entity.House;
 
 /**
  * @author Jirka Kruml
@@ -32,7 +32,7 @@ public interface HouseDao {
     /**
      * Removes the entity from the database by its id
      */
-    void delete(Long id);
+    void delete(long id);
     /**
      * Finds the entity in the database by it's id
      * @param id - the id of the entity

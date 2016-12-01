@@ -1,26 +1,24 @@
 package cz.muni.fi.pa165.services;
 
-import cz.muni.fi.pa165.config.ServiceConfig;
-import cz.muni.fi.pa165.dao.AbilityDao;
-import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.entity.Ghost;
-import org.assertj.core.api.Assertions;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.assertj.core.api.Assertions;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import cz.muni.fi.pa165.config.ServiceConfig;
+import cz.muni.fi.pa165.dao.AbilityDao;
+import cz.muni.fi.pa165.entity.Ability;
 
 /**
  * @author MonikaMociarikova
@@ -28,12 +26,10 @@ import static org.mockito.Mockito.when;
 @ContextConfiguration(classes = {ServiceConfig.class})
 public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
 
-    @Autowired
     @InjectMocks
-    private AbilityService abilityService;
+    private AbilityService abilityService = new AbilityServiceImpl();
 
     @Mock
-    @Autowired
     private AbilityDao abilityDao;
 
     private Ability ability1;
@@ -42,7 +38,6 @@ public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
 
     @BeforeClass
     public void setUp(){
-
         MockitoAnnotations.initMocks(this);
 
         ability1 = new Ability()
@@ -66,21 +61,25 @@ public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
     @Test
     public void testCreate(){
         assertThat(abilityService.create(ability1)).isEqualTo(ability1);
+        verify(abilityDao).create(ability1);
     }
 
     @Test
     public void testGetById() {
         Assertions.assertThat(abilityService.getById(1L).equals(ability1));
+        verify(abilityDao).getById(1L);
     }
 
     @Test
     public void testGetByName(){
         Assertions.assertThat(abilityService.getByName("Invisibility").equals(ability1));
+        verify(abilityDao).getByName("Invisibility");
     }
 
     @Test
     public void testGetAll(){
         Assertions.assertThat(abilityService.getAll().equals(abilities));
+        verify(abilityDao).getAll();
     }
 
 

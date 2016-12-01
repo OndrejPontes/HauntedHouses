@@ -1,8 +1,8 @@
 package cz.muni.fi.pa165.dao;
 
-import cz.muni.fi.pa165.entity.Ability;
-
 import java.util.List;
+
+import cz.muni.fi.pa165.entity.Ability;
 
 /**
  * @author Vojta David

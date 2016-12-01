@@ -1,9 +1,9 @@
 package cz.muni.fi.pa165.facade;
 
+import java.util.Collection;
+
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
-
-import java.util.Collection;
 
 /**
  * @author Ondrej Ponteš

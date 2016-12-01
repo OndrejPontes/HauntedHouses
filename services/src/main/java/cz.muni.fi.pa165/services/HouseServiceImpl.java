@@ -3,17 +3,16 @@ package cz.muni.fi.pa165.services;
 import java.util.Collection;
 import java.util.HashSet;
 
-import cz.muni.fi.pa165.dao.GhostDao;
-import cz.muni.fi.pa165.entity.Ability;
-import cz.muni.fi.pa165.entity.Ghost;
-import cz.muni.fi.pa165.entity.Haunting;
-import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import cz.muni.fi.pa165.dao.GhostDao;
 import cz.muni.fi.pa165.dao.HouseDao;
+import cz.muni.fi.pa165.entity.Ability;
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.House;
+import cz.muni.fi.pa165.exception.ServiceImplDAOException;
 
 /**
  * @author Jirka Kruml
@@ -35,9 +34,6 @@ public class HouseServiceImpl implements HouseService {
     public Collection<Ability> getAllAbilities(House house) {
         Collection<Ghost> ghosts = new HashSet<>();
         Collection<Ability> abilities = new HashSet<>();
-        for(Haunting haunting : house.getHauntings()) {
-            ghosts.addAll(haunting.getGhosts());
-        }
 
         for(Ghost ghost : ghosts) {
             abilities.addAll(ghost.getAbilities());
@@ -92,7 +88,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public House getById(Long id) {
+    public House getById(long id) {
 
         try {
             return houseDao.getById(id);
@@ -122,7 +118,7 @@ public class HouseServiceImpl implements HouseService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(long id) {
 
         try {
             houseDao.delete(id);

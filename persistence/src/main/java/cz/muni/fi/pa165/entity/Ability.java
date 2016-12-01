@@ -1,9 +1,10 @@
 package cz.muni.fi.pa165.entity;
 
-import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * @author Vojta David
@@ -21,10 +22,6 @@ public class Ability {
 
     @Column(nullable = false)
     private String description;
-
-    @ManyToMany(mappedBy = "abilities", fetch = FetchType.EAGER)
-    private List<Ghost> ghosts = new ArrayList<>();
-    
 
     public Ability() {
     }
@@ -62,15 +59,6 @@ public class Ability {
         return this;
     }
 
-    public List<Ghost> getGhosts() {
-        return Collections.unmodifiableList(ghosts);
-    }
-
-    public Ability setGhosts(List<Ghost> ghosts) {
-        this.ghosts = ghosts;
-        return this;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,10 +68,7 @@ public class Ability {
 
         if (getId() != null ? !getId().equals(ability.getId()) : ability.getId() != null) return false;
         if (getName() != null ? !getName().equals(ability.getName()) : ability.getName() != null) return false;
-        if (getDescription() != null ? !getDescription().equals(ability.getDescription()) : ability.getDescription() != null)
-            return false;
-        return getGhosts() != null ? getGhosts().equals(ability.getGhosts()) : ability.getGhosts() == null;
-
+        return getDescription() != null ? getDescription().equals(ability.getDescription()) : ability.getDescription() == null;
     }
 
     @Override
@@ -91,7 +76,6 @@ public class Ability {
         int result = getId() != null ? getId().hashCode() : 0;
         result = 31 * result + (getName() != null ? getName().hashCode() : 0);
         result = 31 * result + (getDescription() != null ? getDescription().hashCode() : 0);
-        result = 31 * result + (getGhosts() != null ? getGhosts().hashCode() : 0);
         return result;
     }
 }

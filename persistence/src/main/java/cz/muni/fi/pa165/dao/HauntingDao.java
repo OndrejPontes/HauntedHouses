@@ -1,10 +1,9 @@
 package cz.muni.fi.pa165.dao;
 
-import cz.muni.fi.pa165.entity.Haunting;
-
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import cz.muni.fi.pa165.entity.Haunting;
 
 /**
  * @author Monika Mociarikova

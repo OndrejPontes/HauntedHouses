@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -15,19 +14,17 @@ public class GhostDTO {
     private Date hauntsTo;
     private String description;
     private List<AbilityDTO> abilities = new ArrayList<>();
-    private List<HauntingDTO> hauntings = new ArrayList<>();
 
     public GhostDTO() {
     }
 
-    public GhostDTO(Long id, String name, Date hauntsFrom, Date hauntsTo, String description, List<AbilityDTO> abilities, List<HauntingDTO> hauntings) {
+    public GhostDTO(Long id, String name, Date hauntsFrom, Date hauntsTo, String description, List<AbilityDTO> abilities) {
         this.id = id;
         this.name = name;
         this.hauntsFrom = hauntsFrom;
         this.hauntsTo = hauntsTo;
         this.description = description;
         this.abilities = abilities;
-        this.hauntings = hauntings;
     }
 
     public Long getId() {
@@ -76,20 +73,11 @@ public class GhostDTO {
     }
 
     public List<AbilityDTO> getAbilities() {
-        return Collections.unmodifiableList(abilities);
+        return abilities;
     }
 
     public GhostDTO setAbilities(List<AbilityDTO> abilities) {
         this.abilities = abilities;
-        return this;
-    }
-
-    public List<HauntingDTO> getHauntings() {
-        return Collections.unmodifiableList(hauntings);
-    }
-
-    public GhostDTO setHauntings(List<HauntingDTO> hauntings) {
-        this.hauntings = hauntings;
         return this;
     }
 
@@ -106,8 +94,7 @@ public class GhostDTO {
         if (hauntsTo != null ? !hauntsTo.equals(ghostDTO.hauntsTo) : ghostDTO.hauntsTo != null) return false;
         if (description != null ? !description.equals(ghostDTO.description) : ghostDTO.description != null)
             return false;
-        if (abilities != null ? !abilities.equals(ghostDTO.abilities) : ghostDTO.abilities != null) return false;
-        return hauntings != null ? hauntings.equals(ghostDTO.hauntings) : ghostDTO.hauntings == null;
+        return abilities != null ? abilities.equals(ghostDTO.abilities) : ghostDTO.abilities != null;
 
     }
 
@@ -119,7 +106,6 @@ public class GhostDTO {
         result = 31 * result + (hauntsTo != null ? hauntsTo.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (abilities != null ? abilities.hashCode() : 0);
-        result = 31 * result + (hauntings != null ? hauntings.hashCode() : 0);
         return result;
     }
 
@@ -132,7 +118,6 @@ public class GhostDTO {
                 ", hauntsTo=" + hauntsTo +
                 ", description='" + description + '\'' +
                 ", abilities=" + abilities +
-                ", hauntings=" + hauntings +
                 '}';
     }
 }
