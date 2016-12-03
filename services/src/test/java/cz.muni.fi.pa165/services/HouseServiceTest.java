@@ -68,7 +68,7 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getAllTest(){
+    public void getAllTest() {
         Collection<House> all = houseService.getAll();
         assertThat(all.size()).isEqualTo(2);
         assertThat(all).contains(h1);
@@ -76,30 +76,31 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void getByNameTest(){
+    public void getByNameTest() {
         assertThat(houseService.getByName("a")).isEqualTo(h1);
     }
 
     @Test
-    public void getByAddressTest(){
+    public void getByAddressTest() {
         assertThat(houseService.getByName("a")).isEqualTo(h1);
     }
 
     @Test
-    public void getByIdTest(){
+    public void getByIdTest() {
         House house = houseService.getById(1);
         assertThat(house).isEqualTo(h1);
         verify(houseDao).getById(1);
     }
 
     @Test
-    public void createTest(){
+    public void createTest() {
         House created = houseService.create(h1);
         assertThat(created).isEqualTo(h1);
         verify(houseDao).create(h1);
     }
+
     @Test
-    public void updateTest(){
+    public void updateTest() {
         houseService.create(h1);
         h1.setAddress("192.168.1.1");
         houseService.update(h1);
@@ -107,7 +108,7 @@ public class HouseServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void deleteTest(){
+    public void deleteTest() {
         houseService.delete(1);
         verify(houseDao).delete(1);
     }

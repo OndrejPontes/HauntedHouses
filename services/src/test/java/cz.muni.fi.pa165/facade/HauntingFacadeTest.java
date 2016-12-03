@@ -137,15 +137,13 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
                 }});
 
 
-        List<Long> ghosts = new ArrayList<>();
-        haunting.getGhosts().forEach(ghost -> ghosts.add(ghost.getId()));
 
         hauntingDTO1 = new HauntingDTO()
                 .setId(haunting.getId())
                 .setNumberOfPeoplePresent(haunting.getNumberOfPeoplePresent())
                 .setDate(haunting.getDate())
-                .setHauntedHouse(haunting.getHauntedHouse().getId())
-                .setGhosts(ghosts);
+                .setHauntedHouse(new HouseDTO())
+                .setGhosts(new ArrayList<>());
 
         hauntingCreateDTO = new HauntingCreateDTO()
                 .setDate(hauntingDTO1.getDate())
@@ -163,14 +161,13 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
                 }})
                 .setHauntedHouse(house2);
 
-        updateHaunting.getGhosts().forEach(ghost -> ghosts.add(ghost.getId()));
 
         updateHauntingDTO = new HauntingDTO()
                 .setId(updateHaunting.getId())
                 .setNumberOfPeoplePresent(updateHaunting.getNumberOfPeoplePresent())
                 .setDate(updateHaunting.getDate())
-                .setGhosts(ghosts)
-                .setHauntedHouse(updateHaunting.getHauntedHouse().getId());
+                .setGhosts(new ArrayList<>())
+                .setHauntedHouse(new HouseDTO());
 
         when(ghostService.getById(ghostDTO1.getId())).thenReturn(ghost1);
         when(ghostService.getById(ghostDTO2.getId())).thenReturn(ghost2);
@@ -203,8 +200,8 @@ public class HauntingFacadeTest extends AbstractTestNGSpringContextTests {
         foundHaunting
                 .setNumberOfPeoplePresent(30)
                 .setDate(calendar.getTime())
-                .setGhosts(new ArrayList<Long>(){{add(ghostDTO2.getId());}})
-                .setHauntedHouse(houseDTO2.getId());
+                .setGhosts(new ArrayList<GhostDTO>(){{add(ghostDTO2);}})
+                .setHauntedHouse(houseDTO2);
         hauntingFacade.update(foundHaunting);
 
         HauntingDTO updatedHaunting = hauntingFacade.getById(foundHaunting.getId());

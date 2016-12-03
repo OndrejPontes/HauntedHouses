@@ -24,7 +24,7 @@ import cz.muni.fi.pa165.entity.Ability;
  * @author MonikaMociarikova
  */
 @ContextConfiguration(classes = {ServiceConfig.class})
-public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
+public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
 
     @InjectMocks
     private AbilityService abilityService = new AbilityServiceImpl();
@@ -37,7 +37,7 @@ public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
     private List<Ability> abilities;
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
 
         ability1 = new Ability()
@@ -59,7 +59,7 @@ public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testCreate(){
+    public void testCreate() {
         assertThat(abilityService.create(ability1)).isEqualTo(ability1);
         verify(abilityDao).create(ability1);
     }
@@ -71,17 +71,16 @@ public class AbilityServiceTest  extends AbstractTestNGSpringContextTests {
     }
 
     @Test
-    public void testGetByName(){
+    public void testGetByName() {
         Assertions.assertThat(abilityService.getByName("Invisibility").equals(ability1));
         verify(abilityDao).getByName("Invisibility");
     }
 
     @Test
-    public void testGetAll(){
+    public void testGetAll() {
         Assertions.assertThat(abilityService.getAll().equals(abilities));
         verify(abilityDao).getAll();
     }
-
 
 
 }
