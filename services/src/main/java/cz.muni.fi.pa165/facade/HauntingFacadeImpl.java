@@ -1,13 +1,5 @@
 package cz.muni.fi.pa165.facade;
 
-import java.util.Date;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
@@ -15,19 +7,23 @@ import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.services.HauntingService;
 import cz.muni.fi.pa165.services.MappingService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
+import java.util.Date;
+import java.util.List;
 
 /**
  * @author MonikaMociarikova
  */
 @Service
 @Transactional
-public class HauntingFacadeImpl implements HauntingFacade{
-
+public class HauntingFacadeImpl implements HauntingFacade {
 
     @Inject
     private HauntingService hauntingService;
 
-    //@Autowired
     @Inject
     private MappingService mappingService;
 
@@ -49,7 +45,7 @@ public class HauntingFacadeImpl implements HauntingFacade{
     public void addGhostsToHaunting(Long hauntingId, List<GhostDTO> ghosts) {
         Haunting haunting = hauntingService.getById(hauntingId);
         for (GhostDTO ghostDto : ghosts) {
-            Ghost ghost = mappingService.mapObject(ghostDto,Ghost.class);
+            Ghost ghost = mappingService.mapObject(ghostDto, Ghost.class);
             hauntingService.addGhost(haunting, ghost);
         }
 
