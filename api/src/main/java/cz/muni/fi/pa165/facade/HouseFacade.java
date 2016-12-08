@@ -20,7 +20,7 @@ public interface HouseFacade {
 
     HouseDTO create(HouseCreateDTO house);
 
-    void update(HouseDTO house);
+    HouseDTO update(HouseDTO house);
 
     void delete(long id);
 

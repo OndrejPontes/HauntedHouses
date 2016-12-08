@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.controller;
 
+import cz.muni.fi.pa165.ApiUris;
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.facade.GhostFacade;
 import org.hibernate.mapping.Collection;
@@ -17,7 +18,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
  * @author opontes
  */
 @RestController
-//@RequestMapping(ApiUris.ROOT_URI_GHOSTS)
+@RequestMapping(ApiUris.ROOT_URI_GHOSTS)
 public class GhostController {
     @Autowired
     private GhostFacade ghostFacade;

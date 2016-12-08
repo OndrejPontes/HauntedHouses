@@ -51,15 +51,12 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public HouseDTO create(HouseCreateDTO house) {
-        House housea = mappingService.mapObject(house, House.class);
-        housea = houseService.create(housea);
-        HouseDTO houseDTO = mappingService.mapObject(housea, HouseDTO.class);
-        return houseDTO;
+        return mappingService.mapObject(houseService.create(mappingService.mapObject(house, House.class)), HouseDTO.class);
     }
 
     @Override
-    public void update(HouseDTO house) {
-        houseService.update(mappingService.mapObject(house, House.class));
+    public HouseDTO update(HouseDTO house) {
+        return mappingService.mapObject(houseService.update(mappingService.mapObject(house, House.class)), HouseDTO.class);
     }
 
     @Override
