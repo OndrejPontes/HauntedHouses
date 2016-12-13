@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.controller;
 
+import java.util.Arrays;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,11 @@ public class HouseController {
 
     @RequestMapping(method = RequestMethod.GET)
     public Collection<HouseDTO> getAll() {
-        return houseFacade.getAll();
+        return Arrays.asList(
+                new HouseDTO().setId(1L).setAddress("New York").setName("Scary house").setHistory("history1"),
+                new HouseDTO().setId(2L).setAddress("Washington DC").setName("New house").setHistory("history2")
+                );
+//        return houseFacade.getAll();
     }
 
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
