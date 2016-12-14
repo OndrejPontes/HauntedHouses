@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.controller;
 import java.util.Arrays;
 import java.util.Collection;
 
+import cz.muni.fi.pa165.ApiUris;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,7 +20,7 @@ import cz.muni.fi.pa165.facade.HouseFacade;
  * @author Jirka Kruml
  */
 @RestController
-@RequestMapping(value = "/houses")
+@RequestMapping(ApiUris.ROOT_URI_HOUSES)
 public class HouseController {
 
     @Autowired
