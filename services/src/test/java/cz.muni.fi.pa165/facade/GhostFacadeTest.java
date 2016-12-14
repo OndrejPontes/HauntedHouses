@@ -54,18 +54,18 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
                 .setHauntsTo(time.parse("16:00"))
                 .setAbilities(new ArrayList<AbilityDTO>(){{add(abilityDTO);}});
 
-        ghostDTO = ghostFacade.createGhost(ghostCreateDTO);
+        ghostDTO = ghostFacade.create(ghostCreateDTO);
     }
 
     @Test
     public void findGhostTest() {
-        GhostDTO foundGhost = ghostFacade.getGhostById(ghostDTO.getId());
+        GhostDTO foundGhost = ghostFacade.getById(ghostDTO.getId());
         assertThat(ghostDTO.equals(foundGhost));
     }
 
     @Test
     public void updateTest() {
-        GhostDTO ghostToUpdate = ghostFacade.createGhost(
+        GhostDTO ghostToUpdate = ghostFacade.create(
                 new GhostCreateDTO()
                 .setName("some name")
                 .setDescription("some desc")
@@ -76,13 +76,13 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
         ghostToUpdate.setName("a different name")
                 .setAbilities(new ArrayList<AbilityDTO>(){{add(abilityDTO);}});
 
-        GhostDTO updateGhost = ghostFacade.updateGhost(ghostToUpdate);
+        GhostDTO updateGhost = ghostFacade.update(ghostToUpdate);
         assertThat(ghostToUpdate.equals(updateGhost));
     }
 
     @Test
     public void deleteByIdTest() {
-        GhostDTO ghostToDelete = ghostFacade.createGhost(
+        GhostDTO ghostToDelete = ghostFacade.create(
                 new GhostCreateDTO()
                         .setName("some name")
                         .setDescription("some desc")
@@ -92,14 +92,14 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
         );
 
         Long id = ghostToDelete.getId();
-        ghostFacade.deleteGhost(ghostToDelete);
+        ghostFacade.delete(ghostToDelete);
 
-        assertThat(ghostFacade.getGhostById(id)).isNull();
+        assertThat(ghostFacade.getById(id)).isNull();
     }
 
     @Test
     public void getAllTest() {
-        GhostDTO anotherGhost = ghostFacade.createGhost(
+        GhostDTO anotherGhost = ghostFacade.create(
                 new GhostCreateDTO()
                         .setName("some name")
                         .setDescription("some desc")
@@ -107,7 +107,7 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
                         .setHauntsTo(new Date(1))
         );
 
-        Collection<GhostDTO> ghosts = ghostFacade.getAllGhosts();
+        Collection<GhostDTO> ghosts = ghostFacade.getAll();
         assertThat(ghosts.size() == 2);
         assertThat(ghosts.contains(anotherGhost));
         assertThat(ghosts.contains(ghostDTO));
@@ -115,11 +115,11 @@ public class GhostFacadeTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getGhostByNameTest() {
-        Collection<GhostDTO> ghosts = ghostFacade.getGhostsByName("name");
+        Collection<GhostDTO> ghosts = ghostFacade.getByName("name");
         assertThat(ghosts.contains(ghostDTO));
         assertThat(ghosts.size() == 1);
 
-        ghosts = ghostFacade.getGhostsByName("inexisting name");
+        ghosts = ghostFacade.getByName("inexisting name");
         assertThat(ghosts.isEmpty());
     }
 }

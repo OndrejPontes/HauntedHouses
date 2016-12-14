@@ -28,21 +28,21 @@ public class GhostFacadeImpl implements GhostFacade {
     private GhostService ghostService;
 
     @Override
-    public GhostDTO createGhost(GhostCreateDTO ghostCreateDTO) {
+    public GhostDTO create(GhostCreateDTO ghostCreateDTO) {
         Ghost ghost = mappingService.mapObject(ghostCreateDTO, Ghost.class);
         ghost = ghostService.create(ghost);
         return mappingService.mapObject(ghost, GhostDTO.class);
     }
 
     @Override
-    public GhostDTO updateGhost(GhostDTO ghostUpdateDTO) {
+    public GhostDTO update(GhostDTO ghostUpdateDTO) {
         Ghost ghost = mappingService.mapObject(ghostUpdateDTO, Ghost.class);
         ghost = ghostService.update(ghost);
         return mappingService.mapObject(ghost, GhostDTO.class);
     }
 
     @Override
-    public Collection<GhostDTO> getAllGhosts() {
+    public Collection<GhostDTO> getAll() {
         List<GhostDTO> result = new ArrayList<>();
         for (Ghost ghost : ghostService.getAll()) {
             result.add(mappingService.mapObject(ghost, GhostDTO.class));
@@ -51,7 +51,7 @@ public class GhostFacadeImpl implements GhostFacade {
     }
 
     @Override
-    public Collection<GhostDTO> getGhostsByName(String ghostName) {
+    public Collection<GhostDTO> getByName(String ghostName) {
         List<GhostDTO> result = new ArrayList<>();
         for (Ghost ghost : ghostService.getByName(ghostName)) {
             result.add(mappingService.mapObject(ghost, GhostDTO.class));
@@ -60,13 +60,13 @@ public class GhostFacadeImpl implements GhostFacade {
     }
 
     @Override
-    public GhostDTO getGhostById(Long ghostId) {
+    public GhostDTO getById(Long ghostId) {
         Ghost ghost = ghostService.getById(ghostId);
         return mappingService.mapObject(ghost, GhostDTO.class);
     }
 
     @Override
-    public void deleteGhost(GhostDTO ghostDTO) {
+    public void delete(GhostDTO ghostDTO) {
         Ghost ghost = mappingService.mapObject(ghostDTO, Ghost.class);
         ghostService.delete(ghost);
     }

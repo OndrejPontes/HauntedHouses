@@ -1,8 +1,17 @@
 import React, {Component} from 'react';
 import { Table } from 'react-bootstrap'
-
+import axios from 'axios'
 
 class Houses extends Component {
+  componentDidMount() {
+    axios.get(`/houses`)
+      .then(res => {
+        console.log(res);
+        // const posts = res.data.data.children.map(obj => obj.data);
+        // this.setState({ posts });
+      });
+  }
+
   render() {
     return (
       <div>
