@@ -6,11 +6,7 @@ import java.util.Collection;
 import cz.muni.fi.pa165.ApiUris;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import cz.muni.fi.pa165.dto.HouseCreateDTO;
 import cz.muni.fi.pa165.dto.HouseDTO;
@@ -26,6 +22,7 @@ public class HouseController {
     @Autowired
     private HouseFacade houseFacade;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.GET)
     public Collection<HouseDTO> getAll() {
         return Arrays.asList(
