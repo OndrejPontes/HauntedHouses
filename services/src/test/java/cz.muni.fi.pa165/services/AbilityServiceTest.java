@@ -65,6 +65,15 @@ public class AbilityServiceTest extends AbstractTestNGSpringContextTests {
     }
 
     @Test
+    public void testUpdate() {
+        ability1.setName("Total invisibility");
+        abilityService.update(ability1);
+        assertThat(abilityService.getById(1L)).isEqualTo(ability1);
+        verify(abilityDao).update(ability1);
+    }
+
+
+    @Test
     public void testGetById() {
         Assertions.assertThat(abilityService.getById(1L).equals(ability1));
         verify(abilityDao).getById(1L);
