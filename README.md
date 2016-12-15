@@ -4,6 +4,8 @@ PA165 project
 # Instalation\Run
 ```bash
 mvn clean install
+cd rest && mvn tomcat7:run
+http://localhost:8080/pa165
 ```
 
 # Description
