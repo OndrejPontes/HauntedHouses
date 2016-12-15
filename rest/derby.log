@@ -1,0 +1,19 @@
+----------------------------------------------------------------
+Thu Dec 15 16:56:07 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0159-0332-a30e-00000926ba98 
+on database directory memory:/home/opontes/Documents/MUNI/PA165/HauntedHouses/rest/testdb with class loader WebappClassLoader
+  context: /pa165
+  delegate: false
+  repositories:
+----------> Parent Classloader:
+ClassRealm[plugin>org.apache.tomcat.maven:tomcat7-maven-plugin:2.2, parent: sun.misc.Launcher$AppClassLoader@5c647e05]
+ 
+Loaded from file:/home/opontes/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_72-b15
+user.dir=/home/opontes/Documents/MUNI/PA165/HauntedHouses/rest
+os.name=Linux
+os.arch=amd64
+os.version=4.8.6-201.fc24.x86_64
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
