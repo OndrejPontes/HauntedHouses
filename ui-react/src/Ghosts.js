@@ -14,7 +14,8 @@ const Ghosts = React.createClass({
             name: "",
             description: "",
             hauntsFrom: 0,
-            hauntsTo: 0
+            hauntsTo: 0,
+            abilities: []
         };
     },
 

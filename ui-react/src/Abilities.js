@@ -20,7 +20,8 @@ const Abilities = React.createClass({
             showUpdateModal: false,
             id: 0,
             name: "",
-            description: ""
+            description: "",
+
         };
     },
 
@@ -48,7 +49,8 @@ const Abilities = React.createClass({
     createHouse(){
             axios.post(`http://localhost:8080/pa165/abilities`, {
             name: this.state.name,
-            description: this.state.description
+            description: this.state.description,
+
         })
             .then(res => {
                 console.log("Ability " + res.data.id + " was created");
