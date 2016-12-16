@@ -10,33 +10,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>sample-data</artifactId>
+    <packaging>jar</packaging>
+    <name>Sample Data for PA165 project</name>
+
     <dependencies>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
         </dependency>
         <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>4.3.3.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>4.3.3.RELEASE</version>
-        </dependency>
-        <dependency>
             <groupId>cz.muni.fi.pa165</groupId>
             <artifactId>services</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 
