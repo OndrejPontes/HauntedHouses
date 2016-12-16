@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Thu Dec 15 16:56:07 CET 2016:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0159-0332-a30e-00000926ba98 
+Fri Dec 16 02:29:19 CET 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0159-053f-6ad9-00000cd90f40 
 on database directory memory:/home/opontes/Documents/MUNI/PA165/HauntedHouses/rest/testdb with class loader WebappClassLoader
   context: /pa165
   delegate: false
