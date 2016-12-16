@@ -8,6 +8,13 @@ cd rest && mvn tomcat7:run
 http://localhost:8080/pa165
 ```
 # Rest examples
+REST is available at these addresses:
+```
+localhost:8080/pa165/ghosts
+localhost:8080/pa165/abilities
+localhost:8080/pa165/houses
+localhost:8080/pa165/hauntings
+```
 example of getAll() methods using GET 
 ```
 curl -u admin:admin -i -X GET localhost:8080/pa165/ghosts/ | json
