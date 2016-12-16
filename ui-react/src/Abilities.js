@@ -107,9 +107,9 @@ const Abilities = React.createClass({
     componentDidMount() {
         axios.get(`http://localhost:8080/pa165/abilities`)
             .then(res => {
-                // console.log(res.data);
+                console.log(res.data);
                 // const houses = res.data;
-                this.setState({ ability: res.data });
+                this.setState({ abilities: res.data });
                 // const posts = res.data.data.children.map(obj => obj.data);
                 // this.setState({ posts });
             });
@@ -160,25 +160,6 @@ const Abilities = React.createClass({
                             </FormGroup>
 
 
-                            {/*<FormGroup controlId="houseHistory">*/}
-                                {/*<Col componentClass={ControlLabel} sm={3}>*/}
-                                    {/*History*/}
-                                {/*</Col>*/}
-                                {/*<Col sm={7}>*/}
-                                    {/*<FormControl type="text" placeholder="House history" value={this.state.history}*/}
-                                                 {/*onChange={this.handleChange.bind(this, 'history')}/>*/}
-                                {/*</Col>*/}
-                            {/*</FormGroup>*/}
-
-                            {/*<FormGroup controlId="houseHistory">*/}
-                                {/*<Col componentClass={ControlLabel} sm={3}>*/}
-                                    {/*Haunting from*/}
-                                {/*</Col>*/}
-                                {/*<Col sm={7}>*/}
-                                    {/*<DateTimeField id="datetimepicker" defaultText="Date when everything begin" mode="date"*/}
-                                                   {/*onChange={x => this.setState({hauntingFrom: x})}/>*/}
-                                {/*</Col>*/}
-                            {/*</FormGroup>*/}
                         </Form>
                     </Modal.Body>
                     <Modal.Footer>
