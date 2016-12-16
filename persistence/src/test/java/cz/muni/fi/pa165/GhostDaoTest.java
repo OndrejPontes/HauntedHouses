@@ -113,15 +113,14 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
         ghostDao.create(ghost);
         ghostDao.delete(ghost);
 
-        assertThat(ghostDao.getByName("Pepa").size()).isEqualTo(0);
+        assertThat(ghostDao.getByName("Pepa")).isNull();
     }
 
     @Test
     public void getByNameTest() {
         ghostDao.create(ghost);
-        List<Ghost> ghosts = ghostDao.getByName("Pepa");
-        assertThat(ghosts.size()).isEqualTo(1);
-        assertThat(ghostDao.getByName("Pepa").get(0)).isEqualTo(ghost);
+        Ghost ghosts = ghostDao.getByName("Pepa");
+        assertThat(ghostDao.getByName("Pepa")).isEqualTo(ghost);
     }
 
     @Test
@@ -159,6 +158,13 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
     public void hauntingToCannotBeNull() {
         ghost.setHauntsTo(null);
         ghostDao.create(ghost);
+    }
+
+    @Test(expectedExceptions = PersistenceException.class)
+    public void uniqueNameTest() {
+        ghostDao.create(ghost);
+        ghost2.setName("Pepa");
+        ghostDao.create(ghost2);
     }
 
     @Test

@@ -12,6 +12,6 @@ public interface GhostService {
     Ghost update(Ghost ghost);
     void delete(Ghost ghost);
     Ghost getById(long id);
-    List<Ghost> getByName(String name);
+    Ghost getByName(String name);
     List<Ghost> getAll();
 }

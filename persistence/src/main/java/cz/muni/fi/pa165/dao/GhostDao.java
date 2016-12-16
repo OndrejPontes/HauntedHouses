@@ -36,9 +36,9 @@ public interface GhostDao {
     /**
      * Gets ghost by name
      * @param name of ghost to be found
-     * @return list of Ghost object with specified name
+     * @return Ghost object with specified name
      */
-     List<Ghost> getByName(String name);
+     Ghost getByName(String name);
 
     /**
      * Gets all ghosts

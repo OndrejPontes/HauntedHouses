@@ -68,12 +68,9 @@ public class GhostServiceTest extends AbstractTestNGSpringContextTests {
         ghosts.add(ghost);
         ghosts.add(ghost2);
 
-        List<Ghost> singleGhost = new ArrayList<>();
-        singleGhost.add(ghost);
-
         when(ghostDao.create(ghost)).thenReturn(ghost);
         when(ghostDao.getById(1)).thenReturn(ghost);
-        when(ghostDao.getByName("name")).thenReturn(singleGhost);
+        when(ghostDao.getByName("name")).thenReturn(ghost);
         when(ghostDao.getAll()).thenReturn(ghosts);
     }
 
@@ -97,7 +94,7 @@ public class GhostServiceTest extends AbstractTestNGSpringContextTests {
 
     @Test
     public void getByNameTest() {
-        assertThat(ghostService.getByName("name")).contains(ghost);
+        assertThat(ghostService.getByName("name")).isEqualTo(ghost);
         verify(ghostDao).getByName("name");
     }
 }
