@@ -1,7 +1,9 @@
 package cz.muni.fi.pa165.controller;
 
 import cz.muni.fi.pa165.ApiUris;
+import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.facade.GhostFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,34 +23,45 @@ public class GhostController {
     @Autowired
     private GhostFacade ghostFacade;
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/ghost")
-    public GhostDTO createGhost(@RequestParam(value = "name", defaultValue = "Ghost") String name){
-        return new GhostDTO().setName(name);
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST)
+    public GhostDTO createGhost(@RequestBody GhostCreateDTO ghostDTO){
+        return ghostFacade.create(ghostDTO);
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE)
-    public Collection<GhostDTO> getAllGhosts() {
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET)
+    public Collection<GhostDTO> getAll() {
         return ghostFacade.getAll();
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/name/{name}")
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
     public GhostDTO getGhostByName(@PathVariable String name) {
         return ghostFacade.getByName(name);
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/{id}")
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public GhostDTO getGhostById(@PathVariable long id) {
         return ghostFacade.getById(id);
     }
 
-    @RequestMapping(method = DELETE)
-    public HttpStatus deleteGhost(@RequestBody GhostDTO ghostDTO) {
-        ghostFacade.delete(ghostDTO);
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public HttpStatus deleteGhost(@PathVariable long id) {
+        System.out.println("deleteGhost");
+        ghostFacade.delete(getGhostById(id));
         return HttpStatus.OK;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = PUT)
     public GhostDTO updateGhost(@RequestBody GhostDTO ghostDTO) {
         return ghostFacade.update(ghostDTO);
     }
+
+    
 }
