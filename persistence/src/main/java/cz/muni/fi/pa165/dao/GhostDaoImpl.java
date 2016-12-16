@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
@@ -37,13 +38,16 @@ public class GhostDaoImpl implements GhostDao {
         return em.find(Ghost.class, id);
     }
 
-    public List<Ghost> getByName(String name) {
+    public Ghost getByName(String name) {
         if(name == null)
             throw new IllegalArgumentException("name cannot be null");
-
-        return em.createQuery("select ghost from Ghost ghost where ghost.name = :name", Ghost.class)
-                .setParameter("name", name)
-                .getResultList();
+        try {
+            return em.createQuery("select ghost from Ghost ghost where ghost.name = :name", Ghost.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
+        } catch (NoResultException ex) {
+            return null;
+        }
     }
 
     public List<Ghost> getAll() {

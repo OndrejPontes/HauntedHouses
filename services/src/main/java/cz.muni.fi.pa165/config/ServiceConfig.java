@@ -50,6 +50,10 @@ public class ServiceConfig {
             mapping(Haunting.class, HauntingCreateDTO.class);
             mapping(House.class, HouseCreateDTO.class);
 
+            mapping(AbilityCreateDTO.class, AbilityDTO.class);
+            mapping(GhostCreateDTO.class, GhostDTO.class);
+            mapping(HauntingCreateDTO.class, HauntingDTO.class);
+            mapping(HouseCreateDTO.class, HouseDTO.class);
 
         }
     }

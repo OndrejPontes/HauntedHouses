@@ -32,7 +32,7 @@ public class GhostController {
     }
 
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/name/{name}")
-    public Collection<GhostDTO> getGhostByName(@PathVariable String name) {
+    public GhostDTO getGhostByName(@PathVariable String name) {
         return ghostFacade.getByName(name);
     }
 

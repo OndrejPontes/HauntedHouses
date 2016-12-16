@@ -51,12 +51,8 @@ public class GhostFacadeImpl implements GhostFacade {
     }
 
     @Override
-    public Collection<GhostDTO> getByName(String ghostName) {
-        List<GhostDTO> result = new ArrayList<>();
-        for (Ghost ghost : ghostService.getByName(ghostName)) {
-            result.add(mappingService.mapObject(ghost, GhostDTO.class));
-        }
-        return result;
+    public GhostDTO getByName(String ghostName) {
+        return mappingService.mapObject(ghostService.getByName(ghostName), GhostDTO.class);
     }
 
     @Override

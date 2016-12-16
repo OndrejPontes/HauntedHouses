@@ -13,7 +13,7 @@ public interface GhostFacade {
 
     Collection<GhostDTO> getAll();
 
-    Collection<GhostDTO> getByName(String ghostName);
+    GhostDTO getByName(String ghostName);
 
     GhostDTO getById(Long ghostId);
 

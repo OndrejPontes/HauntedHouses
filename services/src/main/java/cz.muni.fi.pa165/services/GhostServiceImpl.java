@@ -59,7 +59,7 @@ public class GhostServiceImpl implements GhostService {
     }
 
     @Override
-    public List<Ghost> getByName(String name) {
+    public Ghost getByName(String name) {
         try {
             return ghostDao.getByName(name);
         } catch (ConstraintViolationException e) {
