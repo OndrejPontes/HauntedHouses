@@ -7,8 +7,12 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "jquery": "^3.1.1",
     "react": "^15.4.1",
     "react-bootstrap": "^0.30.7",
+    "react-bootstrap-datetimepicker": "0.0.22",
+    "react-bootstrap-form": "^0.1.4-beta6",
+    "react-datetimepicker-bootstrap": "^1.1.2",
     "react-dom": "^15.4.1",
     "react-router": "^3.0.0"
   },
