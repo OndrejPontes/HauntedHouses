@@ -16,6 +16,8 @@ public interface AbilityFacade {
 
     void delete(AbilityDTO abilityDTO);
 
+    void delete(long id);
+
     AbilityDTO getById(Long id);
 
     AbilityDTO getByName(String name);

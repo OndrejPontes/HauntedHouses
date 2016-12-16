@@ -48,6 +48,15 @@ public class AbilityServiceImpl implements AbilityService {
     }
 
     @Override
+    public void delete(long id) {
+        try {
+            abilityDao.delete(id);
+        } catch (Exception e) {
+            throw new ServiceImplDAOException("cannot delete ability with ID",e);
+        }
+    }
+
+    @Override
     public Ability getById(Long id) {
         try {
             return abilityDao.getById(id);

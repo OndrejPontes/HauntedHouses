@@ -1,13 +1,17 @@
 package cz.muni.fi.pa165.controller;
 
 import cz.muni.fi.pa165.ApiUris;
+import cz.muni.fi.pa165.dto.AbilityCreateDTO;
 import cz.muni.fi.pa165.dto.AbilityDTO;
+import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.facade.AbilityFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -21,32 +25,39 @@ public class AbilityController {
     @Autowired
     private AbilityFacade abilityFacade;
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/ability")
-    public AbilityDTO createGhost(@RequestParam(value = "name", defaultValue = "Ability") String name){
-        return new AbilityDTO().setName(name);
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.POST)
+    public AbilityDTO createAbility(@RequestBody AbilityCreateDTO abilityCreateDTO) {
+        return abilityFacade.create(abilityCreateDTO);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE)
     public Collection<AbilityDTO> getAllAbilities() {
         return abilityFacade.getAll();
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/name/{name}")
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
     public AbilityDTO getAbilityByName(@PathVariable String name) {
         return abilityFacade.getByName(name);
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/{id}")
-    public AbilityDTO getGhostById(@PathVariable long id) {
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public AbilityDTO getHouse(@PathVariable long id) {
         return abilityFacade.getById(id);
     }
 
-    @RequestMapping(method = DELETE)
-    public HttpStatus deleteAbility(@RequestBody AbilityDTO abilityDTO) {
-        abilityFacade.delete(abilityDTO);
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public HttpStatus deleteAbility(@PathVariable long id) {
+        abilityFacade.delete(id);
         return HttpStatus.OK;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = PUT)
     public AbilityDTO updateAbility(@RequestBody AbilityDTO abilityDTO) {
         return abilityFacade.update(abilityDTO);

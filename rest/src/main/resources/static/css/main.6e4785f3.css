@@ -1,2 +1,47 @@
-.App{text-align:center}.App-header,.App-logo{height:150px}.App-header{background-color:#222;padding:20px;color:#fff}.App-intro{font-size:large}@-webkit-keyframes App-logo-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}@keyframes App-logo-spin{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}to{-webkit-transform:rotate(1turn);transform:rotate(1turn)}}body{margin:0;padding:0;font-family:sans-serif}
+.App {
+    text-align: center
+}
+
+.App-header, .App-logo {
+    height: 150px
+}
+
+.App-header {
+    background-color: #222;
+    padding: 20px;
+    color: #fff
+}
+
+.App-intro {
+    font-size: large
+}
+
+@-webkit-keyframes App-logo-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+@keyframes App-logo-spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg)
+    }
+    to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn)
+    }
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif
+}
+
 /*# sourceMappingURL=main.6e4785f3.css.map*/
