@@ -26,6 +26,8 @@ public interface AbilityDao {
      */
      void delete(Ability Ability);
 
+    void delete(long id);
+
     /**
      * Gets Ability by id
      * @param id of Ability to be found

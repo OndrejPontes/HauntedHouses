@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.facade;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,11 @@ public class AbilityFacadeImpl implements AbilityFacade {
     }
 
     @Override
+    public void delete(long id) {
+        abilityService.delete(id);
+    }
+
+    @Override
     public AbilityDTO getById(Long id) {
         Ability ability = abilityService.getById(id);
         return mappingService.mapObject(ability, AbilityDTO.class);
@@ -58,8 +65,13 @@ public class AbilityFacadeImpl implements AbilityFacade {
     }
 
     @Override
-    public List<AbilityDTO> getAll() {
-        List<AbilityDTO> abilityDTOs = mappingService.mapCollection(abilityService.getAll(), AbilityDTO.class);
-        return abilityDTOs;
+    public Collection<AbilityDTO> getAll() {
+//        List<AbilityDTO> abilityDTOs = mappingService.mapCollection(abilityService.getAll(), AbilityDTO.class);
+//        return abilityDTOs;
+        List<AbilityDTO> result = new ArrayList<>();
+        for (Ability ability : abilityService.getAll()) {
+            result.add(mappingService.mapObject(ability, AbilityDTO.class));
+        }
+        return result;
     }
 }
