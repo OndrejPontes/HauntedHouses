@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.validation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cz.muni.fi.pa165.dto.AbilityCreateDTO;
 import cz.muni.fi.pa165.dto.AbilityDTO;
@@ -16,6 +17,7 @@ import cz.muni.fi.pa165.facade.GhostFacade;
 import cz.muni.fi.pa165.facade.HouseFacade;
 import cz.muni.fi.pa165.services.MappingService;
 
+@Component
 public class Validator {
 
     @Autowired

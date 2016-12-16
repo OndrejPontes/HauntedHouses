@@ -18,7 +18,7 @@ import org.springframework.http.HttpMethod;
  */
 @SpringBootApplication
 @ComponentScan(
-        basePackages = {"cz.muni.fi.pa165.controller", "cz.muni.fi.pa165.facade", "cz.muni.fi.pa165.services", "cz.muni.fi.pa165.dao"})
+        basePackages = {"cz.muni.fi.pa165.controller", "cz.muni.fi.pa165.facade", "cz.muni.fi.pa165.services", "cz.muni.fi.pa165.dao", "cz.muni.fi.pa165.validation"})
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
