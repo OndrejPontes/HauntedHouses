@@ -66,12 +66,12 @@ const Ghosts = React.createClass({
         this.closeModal();
     },
 
-    removeGhost(ghost){
-        axios.delete("http://localhost:8080/pa165/ghosts/" + ghost)
+    removeGhost(ghostId){
+        axios.delete("http://localhost:8080/pa165/ghosts/" + ghostId)
             .then(res => {
-                console.log("Ghost " + ghost.id + " was deleted");
+                console.log("Ghost " + ghostId + " was deleted");
                 const object = this.state.ghosts.filter((g) => {
-                    return g !== ghost
+                    return g.id !== ghostId
                 });
                 this.setState({ghosts: object});
             })
@@ -121,7 +121,6 @@ const Ghosts = React.createClass({
             });
     },
 
-
     render() {
         let tableLines = [];
         this.state.ghosts.forEach(function (ghost, i) {
@@ -134,7 +133,7 @@ const Ghosts = React.createClass({
                     <th>{ ghost.hauntsTo }</th>
                     <th>
                         <Button onClick={() => this.openUpdateModal(ghost)}><Glyphicon glyph="pencil"/></Button>
-                        <Button onClick={() => this.removeGhost(ghost)}><Glyphicon glyph="remove"/></Button>
+                        <Button onClick={() => this.removeGhost(ghost.id)}><Glyphicon glyph="remove"/></Button>
                     </th>
                 </tr>
             )

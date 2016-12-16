@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.controller;
 import cz.muni.fi.pa165.ApiUris;
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.facade.GhostFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +38,7 @@ public class GhostController {
 
     @CrossOrigin(origins = "*")
     @RequestMapping(value = "/name/{name}", method = RequestMethod.GET)
-    public Collection<GhostDTO> getGhostByName(@PathVariable String name) {
+    public GhostDTO getGhostByName(@PathVariable String name) {
         return ghostFacade.getByName(name);
     }
 
@@ -49,10 +50,10 @@ public class GhostController {
     }
 
     @CrossOrigin(origins = "*")
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public HttpStatus deleteGhost(@PathVariable long id) {
         System.out.println("deleteGhost");
-        ghostFacade.delete(ghostFacade.getById(id));
+        ghostFacade.delete(getGhostById(id));
         return HttpStatus.OK;
     }
 
