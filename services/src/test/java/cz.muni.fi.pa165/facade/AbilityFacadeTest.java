@@ -9,10 +9,12 @@ import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.services.AbilityService;
 import cz.muni.fi.pa165.services.MappingService;
 import org.hibernate.service.spi.ServiceException;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -35,92 +37,90 @@ import static org.mockito.Mockito.when;
  */
 
 @Test
+@RunWith(MockitoJUnitRunner.class)
 @ContextConfiguration(classes = {ServiceConfig.class})
 public class AbilityFacadeTest extends AbstractTestNGSpringContextTests {
 
-    @Mock
-    private AbilityDao abilityDao;
-
-    @Autowired
-    private final AbilityFacade abilityFacade = new AbilityFacadeImpl();
 
     @InjectMocks
-    @Autowired
+    private final AbilityFacade abilityFacade = new AbilityFacadeImpl();
+
+    @Mock
     private AbilityService abilityService;
 
-    @Autowired
-    private MappingService mapper;
+    @Mock
+    private MappingService mappingService;
+
+    private AbilityCreateDTO abilityCreateDto;
+    private AbilityDTO abilityDTO;
+    private Ability ability;
+    private List<Ability> abilities;
+    private List<AbilityDTO> abilitiesDto = new ArrayList<>();;
+
 
     @BeforeClass
     public void setup() throws ServiceException {
         MockitoAnnotations.initMocks(this);
     }
 
-    private AbilityCreateDTO abilityCreateDto;
-    private AbilityDTO abilityDTO;
-    private Ability ability1;
-    private Ability ability2;
+    @BeforeMethod
+    public void initData(){
+
+        abilityDTO = new AbilityDTO()
+                .setName("Invisibility")
+                .setDescription("The power that causes the ghost to become completely transparent to all forms of vision.");
 
 
-//    @BeforeMethod
-//    public void initData(){
-//
-//        ability1 = new Ability()
-//                .setName("Invisibility")
-//                .setDescription("The power that causes the ghost to become completely transparent to all forms of vision.");
-//
-//        ability2 = new Ability()
-//                .setName("Overshadowing")
-//                .setDescription("The power to take over another body");
-//
-//        abilityCreateDto = mapper.mapObject(ability1, AbilityCreateDTO.class);
-//        abilityDTO = mapper.mapObject(ability1, AbilityDTO.class);
-//
-//    }
-//
-////    @Test
-//    public void testCreate(){
-//        abilityFacade.create(abilityCreateDto);
-//        verify(abilityDao).create(ability1);
-//    }
-//
-////    @Test
-//    public void testDelete(){
-//        abilityFacade.delete(abilityDTO);
-//        verify(abilityDao).delete(ability1);
-//    }
-//
-////    @Test
-//    public void testUpdate(){
-//        abilityFacade.update(abilityDTO);
-//        verify(abilityDao).update(ability1);
-//    }
-//
-////    @Test
-//    public void testGetById() {
-//        when(abilityDao.getById(1)).thenReturn(ability1);
-//        assertThat(ability1.getName()).isEqualTo(abilityFacade.getById(1L).getName());
-//        assertThat(ability1.getDescription()).isEqualTo(abilityFacade.getById(1L).getDescription());
-//    }
-//
-//    @Test
-//    public void testGetByName(){
-//        when(abilityDao.getByName("Overshadowing")).thenReturn(ability2);
-//        assertThat(ability2.getDescription()).isEqualTo(abilityFacade.getByName("Overshadowing").getDescription());
-//    }
-//
-////    @Test
-//    public void testGetAll(){
-//        List<Ability> expected = new ArrayList<>();
-//        expected.add(ability1);
-//        expected.add(ability2);
-//
-//        List<AbilityDTO> actual = new ArrayList<>();
-//        actual.addAll(abilityFacade.getAll());
-//
-//        assertThat(actual).hasSize(2);
-//        assertThat(mapper.mapCollection(expected, AbilityDTO.class)).isEqualTo(actual);
-//    }
+        when(mappingService.mapObject(abilityCreateDto, Ability.class)).thenReturn(ability);
+        when(mappingService.mapObject(abilityDTO, Ability.class)).thenReturn(ability);
+        when(mappingService.mapObject(ability, AbilityDTO.class)).thenReturn(abilityDTO);
+        when(mappingService.mapCollection(abilities, AbilityDTO.class)).thenReturn(abilitiesDto);
+
+        when(abilityService.create(ability)).thenReturn(ability);
+        when(abilityService.update(ability)).thenReturn(ability);
+        when(abilityService.getById(1L)).thenReturn(ability);
+        when(abilityService.getByName("Invisibility")).thenReturn(ability);
+        when(abilityService.getAll()).thenReturn(abilities);
+
+    }
+
+    @Test
+    public void testCreate(){
+        assertThat(abilityFacade.create(abilityCreateDto)).isEqualTo(abilityDTO);
+        verify(abilityService).create(ability);
+    }
+
+    @Test
+    public void testDelete(){
+        abilityFacade.delete(abilityDTO);
+        verify(abilityService).delete(ability);
+    }
+
+    @Test
+    public void testUpdate(){
+        abilityDTO.setName("Total invisibility");
+        abilityFacade.update(abilityDTO);
+        assertThat(abilityFacade.getById(1L)).isEqualTo(abilityDTO);
+        verify(abilityService).update(ability);
+    }
+
+    @Test
+    public void testGetById() {
+        assertThat(abilityFacade.getById(1L)).isEqualTo(abilityDTO);
+        verify(abilityService).getById(1L);
+    }
+
+    @Test
+    public void testGetByName(){
+        assertThat(abilityFacade.getByName("Invisibility")).isEqualTo(abilityDTO);
+        verify(abilityService).getByName("Invisibility");
+    }
+
+    @Test
+    public void testGetAll(){
+        assertThat(abilityFacade.getAll()).isEqualTo(abilitiesDto);
+        verify(abilityService).getAll();
+    }
 
 
 
