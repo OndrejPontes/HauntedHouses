@@ -14,8 +14,7 @@ const Ghosts = React.createClass({
             name: "",
             description: "",
             hauntsFrom: 0,
-            hauntsTo: 0,
-            abilities: []
+            hauntsTo: 0
         };
     },
 
@@ -129,8 +128,8 @@ const Ghosts = React.createClass({
                     <th>{ ghost.id }</th>
                     <th>{ ghost.name }</th>
                     <th>{ ghost.description}</th>
-                    <th>{ ghost.hauntsFrom }</th>
-                    <th>{ ghost.hauntsTo }</th>
+                    <th>{ new Date(ghost.hauntsFrom).toLocaleDateString() + " " + new Date(ghost.hauntsFrom).toLocaleTimeString() }</th>
+                    <th>{ new Date(ghost.hauntsTo).toLocaleDateString() + " " + new Date(ghost.hauntsTo).toLocaleTimeString() }</th>
                     <th>
                         <Button onClick={() => this.openUpdateModal(ghost)}><Glyphicon glyph="pencil"/></Button>
                         <Button onClick={() => this.removeGhost(ghost.id)}><Glyphicon glyph="remove"/></Button>
