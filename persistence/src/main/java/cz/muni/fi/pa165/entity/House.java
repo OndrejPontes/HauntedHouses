@@ -30,7 +30,7 @@ public class House {
     @Temporal(TemporalType.DATE)
     private Date hauntingFrom;
 
-    @Column(nullable = true)
+    @Column(nullable = true, length = 2000)
     private String history;
 
     public House() {

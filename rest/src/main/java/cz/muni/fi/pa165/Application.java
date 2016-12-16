@@ -1,12 +1,15 @@
 package cz.muni.fi.pa165;
 
+import cz.muni.fi.pa165.sampledata.SampleDataConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
+import org.springframework.web.context.request.RequestContextListener;
 //import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 //import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,8 +20,8 @@ import org.springframework.http.HttpMethod;
  * @author opontes
  */
 @SpringBootApplication
-@ComponentScan(
-        basePackages = {"cz.muni.fi.pa165.controller", "cz.muni.fi.pa165.facade", "cz.muni.fi.pa165.services", "cz.muni.fi.pa165.dao", "cz.muni.fi.pa165.validation"})
+@Import(SampleDataConfiguration.class)
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.controller", "cz.muni.fi.pa165.facade", "cz.muni.fi.pa165.services", "cz.muni.fi.pa165.dao", "cz.muni.fi.pa165.validation"})
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
@@ -28,6 +31,12 @@ public class Application extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         return application.sources(Application.class);
+    }
+
+    @Override
+    public void onStartup(javax.servlet.ServletContext servletContext) throws javax.servlet.ServletException {
+        super.onStartup(servletContext);
+        servletContext.addListener(RequestContextListener.class);
     }
 
 //    @Configuration

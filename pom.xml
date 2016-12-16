@@ -14,6 +14,7 @@
         <module>services</module>
         <module>api</module>
         <module>rest</module>
+        <module>sample-data</module>
     </modules>
 
     <parent>
