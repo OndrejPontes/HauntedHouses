@@ -58,6 +58,7 @@ const Houses = React.createClass({
       .catch(error => {
         console.log(error)
       });
+    this.closeModal();
   },
 
   removeHouse(houseId){
@@ -95,6 +96,7 @@ const Houses = React.createClass({
       .catch(error => {
         console.log(error)
       });
+    this.closeModal();
   },
 
   handleChange: function(field, e) {
