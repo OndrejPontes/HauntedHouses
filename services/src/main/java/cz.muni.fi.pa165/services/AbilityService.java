@@ -25,6 +25,7 @@ public interface AbilityService {
      * @param ability Ability object for deleting
      */
     void delete(Ability ability);
+    void delete(long id);
 
     /**
      * Gets Ability by id

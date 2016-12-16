@@ -38,6 +38,11 @@ public class AbilityDaoImpl implements AbilityDao {
     }
 
     @Override
+    public void delete(long id) {
+        em.remove(getById(id));
+    }
+
+    @Override
     public Ability getById(long id) {
         return em.find(Ability.class, id);
     }
