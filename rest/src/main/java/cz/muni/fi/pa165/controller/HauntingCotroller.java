@@ -25,33 +25,40 @@ public class HauntingCotroller {
     @Autowired
     private HauntingFacade hauntingFacade;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public HauntingDTO createHaunting(@RequestBody HauntingCreateDTO haunting) {
         return hauntingFacade.create(haunting);
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE)
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.GET)
     public Collection<HauntingDTO> getAllHauntings() {
         return hauntingFacade.getAll();
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/date/{date}")
     public Collection<HauntingDTO> getHauntingByDate(@PathVariable Date date) {
         return hauntingFacade.getByDate(date);
     }
 
-    @RequestMapping(method = GET, produces = APPLICATION_JSON_VALUE, value = "/{id}")
+
+    @CrossOrigin(origins = "*")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public HauntingDTO getHauntingById(@PathVariable long id) {
         return hauntingFacade.getById(id);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(method = DELETE)
-    public HttpStatus deleteHaunting(@RequestBody HauntingDTO haunting) {
-        hauntingFacade.delete(haunting);
+    public HttpStatus deleteHaunting(@PathVariable long id) {
+        hauntingFacade.delete(getHauntingById(id));
         return HttpStatus.OK;
     }
 
-    @RequestMapping(method = PUT)
+    @CrossOrigin(origins = "*")
+    @RequestMapping(method = RequestMethod.PUT)
     public HauntingDTO updateHaunting(@RequestBody HauntingDTO haunting) {
         return hauntingFacade.update(haunting);
     }

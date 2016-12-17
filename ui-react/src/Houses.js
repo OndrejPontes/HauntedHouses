@@ -125,7 +125,7 @@ const Houses = React.createClass({
           <th>{ house.name }</th>
           <th>{ house.address }</th>
           <th>{ house.history }</th>
-          <th>{ house.hauntingFrom }</th>
+          <th>{ new Date(house.hauntingFrom).toLocaleDateString() }</th>
           <th>
             <Button onClick={() => this.openUpdateModal(house)}><Glyphicon glyph="pencil"/></Button>
             <Button onClick={() => this.removeHouse(house.id)}><Glyphicon glyph="remove"/></Button>
