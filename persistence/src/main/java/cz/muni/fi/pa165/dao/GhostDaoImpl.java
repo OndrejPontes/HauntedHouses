@@ -5,7 +5,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
+import cz.muni.fi.pa165.entity.Ability;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,5 +55,14 @@ public class GhostDaoImpl implements GhostDao {
     public List<Ghost> getAll() {
         return em.createQuery("select ghost from Ghost ghost", Ghost.class)
                 .getResultList();
+    }
+
+    @Override
+    public List<Ghost> getByAbility(Ability ability) {
+        TypedQuery<Ghost> query = em.createQuery(
+                "Select g from Ghost g where :ability member of g.abilities",
+                Ghost.class);
+        query.setParameter("ability", ability);
+        return query.getResultList();
     }
 }

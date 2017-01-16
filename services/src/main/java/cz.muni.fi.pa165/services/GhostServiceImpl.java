@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
 
+import cz.muni.fi.pa165.entity.Ability;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,6 +74,15 @@ public class GhostServiceImpl implements GhostService {
             return ghostDao.getAll();
         } catch (ConstraintViolationException e) {
             throw new ServiceImplDAOException("cannot find all ghosts", e);
+        }
+    }
+
+    @Override
+    public List<Ghost> getByAbility(Ability aiblity) {
+        try {
+            return ghostDao.getByAbility(aiblity);
+        } catch (ConstraintViolationException e) {
+            throw new ServiceImplDAOException("cannot find ghosts by ability", e);
         }
     }
 }
