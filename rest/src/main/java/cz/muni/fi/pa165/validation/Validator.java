@@ -1,5 +1,8 @@
 package cz.muni.fi.pa165.validation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -29,128 +32,140 @@ public class Validator {
     @Autowired
     private MappingService mappingService;
 
-    public void validate(HouseDTO houseDTO) {
+    public List<String> validate(HouseDTO houseDTO) {
+        List<String> errors = new ArrayList<>();
         if (houseDTO == null) {
-            throw new ScaryDataAccessException("house is null");
+            errors.add("The house cannot be null.");
+        } else if (houseDTO.getId() == null) {
+            errors.add("The house id cannot be null.");
+        } else {
+            HouseDTO byName = null;
+            if (houseDTO.getName() == null) {
+                errors.add("You must fill the name of the house.");
+            } else {
+                byName = houseFacade.getByName(houseDTO.getName());
+            }
+
+            HouseDTO byAddress = null;
+            if (houseDTO.getAddress() == null) {
+                errors.add("You must fill the address of the house.");
+            } else {
+                byAddress = houseFacade.getByAddress(houseDTO.getAddress());
+            }
+
+            if (byName != null && !byName.getId().equals(houseDTO.getId())) {
+                errors.add("A house with this name already exists.");
+            }
+
+            if (byAddress != null && !byAddress.getId().equals(houseDTO.getId())) {
+                errors.add("A house with this address already exists.");
+            }
         }
 
-        if (houseDTO.getId() == null) {
-            throw new ScaryDataAccessException("id is null");
-        }
-
-        if (houseDTO.getName() == null) {
-            throw new ScaryDataAccessException("name is null");
-        }
-
-        if (houseDTO.getAddress() == null) {
-            throw new ScaryDataAccessException("address is null");
-        }
-
-        HouseDTO byName = houseFacade.getByName(houseDTO.getName());
-        HouseDTO byAddress = houseFacade.getByAddress(houseDTO.getAddress());
-
-        if (byName != null && !byName.getId().equals(houseDTO.getId())) {
-            throw new ScaryDataAccessException("duplicit name");
-        }
-
-        if (byAddress != null && !byAddress.getId().equals(houseDTO.getId())) {
-            throw new ScaryDataAccessException("duplicit name");
-        }
+        return errors;
     }
 
-    public void validate(HouseCreateDTO houseCreateDTO) {
+    public List<String> validate(HouseCreateDTO houseCreateDTO) {
         HouseDTO houseDTO = mappingService.mapObject(houseCreateDTO, HouseDTO.class).setId(-1L);
-        validate(houseDTO);
+        return validate(houseDTO);
     }
 
-    public void validate(AbilityDTO abilityDTO) {
+    public List<String> validate(AbilityDTO abilityDTO) {
+        List<String> errors = new ArrayList<>();
         if (abilityDTO == null) {
-            throw new ScaryDataAccessException("ability is null");
-        }
+            errors.add("The ability cannot be null.");
+        } else if (abilityDTO.getId() == null) {
+            errors.add("The ability id cannot be null.");
+        } else {
+            AbilityDTO byName = null;
+            if (abilityDTO.getName() == null) {
+                errors.add("You must fill the name of the ability.");
+            } else {
+                byName = abilityFacade.getByName(abilityDTO.getName());
+            }
 
-        if (abilityDTO.getName() == null) {
-            throw new ScaryDataAccessException("name is null");
+            if (byName != null && !byName.getId().equals(abilityDTO.getId())) {
+                errors.add("An ability with this name already exists.");
+            }
         }
-
-        AbilityDTO byName = abilityFacade.getByName(abilityDTO.getName());
-
-        if (byName != null && !byName.getId().equals(abilityDTO.getId())) {
-            throw new ScaryDataAccessException("duplicit name");
-        }
+        return errors;
     }
 
-    public void validate(AbilityCreateDTO abilityCreateDTO) {
+    public List<String> validate(AbilityCreateDTO abilityCreateDTO) {
         AbilityDTO abilityDTO = mappingService.mapObject(abilityCreateDTO, AbilityDTO.class).setId(-1L);
-        validate(abilityDTO);
+        return validate(abilityDTO);
     }
 
-    public void validate(HauntingDTO hauntingDTO) {
-        if(hauntingDTO == null) {
-            throw new ScaryDataAccessException("haunting is null");
-        }
+    public List<String> validate(HauntingDTO hauntingDTO) {
+        List<String> errors = new ArrayList<>();
+        if (hauntingDTO == null) {
+            errors.add("The haunting cannot be null.");
+        } else if (hauntingDTO.getId() == null) {
+            errors.add("The id of the haunting cannot be null.");
+        } else {
 
-        if(hauntingDTO.getDate() == null) {
-            throw new ScaryDataAccessException("date is null");
-        }
+            if (hauntingDTO.getDate() == null) {
+                errors.add("You must fill the date.");
+            }
 
-        if(hauntingDTO.getHauntedHouse() == null) {
-            throw new ScaryDataAccessException("house is null");
-        }
+            if (hauntingDTO.getHauntedHouse() == null) {
+                errors.add("You must specify the house.");
+            }
 
-        if(hauntingDTO.getGhosts() == null || hauntingDTO.getGhosts().isEmpty()) {
-            throw new ScaryDataAccessException("ghosts are null or empty");
-        }
+            if (hauntingDTO.getGhosts() == null || hauntingDTO.getGhosts().isEmpty()) {
+                errors.add("At least one ghost must be present.");
+            }
 
-        if(hauntingDTO.getId() == null) {
-            throw new ScaryDataAccessException("id is null");
+            for (GhostDTO ghostDTO : hauntingDTO.getGhosts()) {
+                errors.addAll(validate(ghostDTO));
+            }
+            errors.addAll(validate(hauntingDTO.getHauntedHouse()));
         }
-
-        for(GhostDTO ghostDTO : hauntingDTO.getGhosts()) {
-            validate(ghostDTO);
-        }
-
-        validate(hauntingDTO.getHauntedHouse());
+        return errors;
     }
 
-    public void validate(HauntingCreateDTO hauntingCreateDTO) {
+    public List<String> validate(HauntingCreateDTO hauntingCreateDTO) {
         HauntingDTO hauntingDTO = mappingService.mapObject(hauntingCreateDTO, HauntingDTO.class).setId(-1L);
-        validate(hauntingDTO);
+        return validate(hauntingDTO);
     }
 
-    public void validate(GhostDTO ghostDTO) {
-        if(ghostDTO == null) {
-            throw new ScaryDataAccessException("ghost is null");
-        }
+    public List<String> validate(GhostDTO ghostDTO) {
+        List<String> errors = new ArrayList<>();
 
-        if(ghostDTO.getId() == null) {
-            throw new ScaryDataAccessException("id is null");
-        }
+        if (ghostDTO == null) {
+            errors.add("The ghost cannot be null.");
+        } else if (ghostDTO.getId() == null) {
+            errors.add("The ghost id cannot be null.");
+        } else {
+            GhostDTO byName = null;
+            if (ghostDTO.getName() == null) {
+                errors.add("You must fill the name of the ghost.");
+            } else {
+                byName = ghostFacade.getByName(ghostDTO.getName());
+            }
 
-        if(ghostDTO.getName() == null) {
-            throw new ScaryDataAccessException("name is null");
-        }
+            if (ghostDTO.getHauntsFrom() == null) {
+                errors.add("You must fill from when the ghost is haunting.");
+            }
 
-        if(ghostDTO.getHauntsFrom() == null) {
-            throw new ScaryDataAccessException("hauntsFrom is null");
-        }
+            if (ghostDTO.getHauntsTo() == null) {
+                errors.add("You must fill until when the ghost is haunting.");
+            }
 
-        if(ghostDTO.getHauntsTo() == null) {
-            throw new ScaryDataAccessException("hauntsTo is null");
-        }
+            if (ghostDTO.getDescription() == null) {
+                errors.add("You must enter a description of the ghost.");
+            }
 
-        if(ghostDTO.getDescription() == null) {
-            throw new ScaryDataAccessException("description is null");
-        }
 
-        GhostDTO byName = ghostFacade.getByName(ghostDTO.getName());
-
-        if(byName != null && !byName.getId().equals(ghostDTO.getId())) {
-            throw new ScaryDataAccessException("duplicit name");
+            if (byName != null && !byName.getId().equals(ghostDTO.getId())) {
+                errors.add("A ghost with this name already exists.");
+            }
         }
+        return errors;
     }
 
-    public void validate(GhostCreateDTO ghostCreateDTO) {
+    public List<String> validate(GhostCreateDTO ghostCreateDTO) {
         GhostDTO ghostDTO = mappingService.mapObject(ghostCreateDTO, GhostDTO.class).setId(-1L);
-        validate(ghostDTO);
+        return validate(ghostDTO);
     }
 }

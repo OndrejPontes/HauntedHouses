@@ -4,7 +4,10 @@ import cz.muni.fi.pa165.ApiUris;
 import cz.muni.fi.pa165.dto.AbilityCreateDTO;
 import cz.muni.fi.pa165.dto.AbilityDTO;
 import cz.muni.fi.pa165.entity.Ability;
+import cz.muni.fi.pa165.exception.ScaryDataAccessException;
 import cz.muni.fi.pa165.facade.AbilityFacade;
+import cz.muni.fi.pa165.validation.Validator;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +27,18 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 public class AbilityController {
     @Autowired
     private AbilityFacade abilityFacade;
+    @Autowired
+    private Validator validator;
 
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public AbilityDTO createAbility(@RequestBody AbilityCreateDTO abilityCreateDTO) {
-        return abilityFacade.create(abilityCreateDTO);
+        List<String> errors = validator.validate(abilityCreateDTO);
+        if (!errors.isEmpty()) {
+            throw new ScaryDataAccessException(errors);
+        } else {
+            return abilityFacade.create(abilityCreateDTO);
+        }
     }
 
     @CrossOrigin(origins = "*")
@@ -60,6 +70,12 @@ public class AbilityController {
     @CrossOrigin(origins = "*")
     @RequestMapping(method = PUT)
     public AbilityDTO updateAbility(@RequestBody AbilityDTO abilityDTO) {
-        return abilityFacade.update(abilityDTO);
+        List<String> errors = validator.validate(abilityDTO);
+        if (!errors.isEmpty()) {
+            throw new ScaryDataAccessException(errors);
+        } else {
+            return abilityFacade.update(abilityDTO);
+
+        }
     }
 }
