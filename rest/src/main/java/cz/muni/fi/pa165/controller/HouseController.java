@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.controller;
 import cz.muni.fi.pa165.ApiUris;
 import cz.muni.fi.pa165.dto.HouseCreateDTO;
 import cz.muni.fi.pa165.dto.HouseDTO;
+import cz.muni.fi.pa165.exception.ScaryDataAccessException;
 import cz.muni.fi.pa165.facade.HouseFacade;
 import cz.muni.fi.pa165.validation.Validator;
 
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Jirka Kruml
@@ -51,8 +53,12 @@ public class HouseController {
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.POST)
     public HouseDTO createHouse(@RequestBody HouseCreateDTO houseDTO) {
-        validator.validate(houseDTO);
-        return houseFacade.create(houseDTO);
+        List<String> errors = validator.validate(houseDTO);
+        if (!errors.isEmpty()) {
+            throw new ScaryDataAccessException(errors);
+        } else {
+            return houseFacade.create(houseDTO);
+        }
     }
 
     @CrossOrigin(origins = "*")
@@ -65,8 +71,12 @@ public class HouseController {
     @CrossOrigin(origins = "*")
     @RequestMapping(method = RequestMethod.PUT)
     public HouseDTO updateHouse(@RequestBody HouseDTO houseDTO) {
-        validator.validate(houseDTO);
-        return houseFacade.update(houseDTO);
+        List<String> errors = validator.validate(houseDTO);
+        if (!errors.isEmpty()) {
+            throw new ScaryDataAccessException(errors);
+        } else {
+            return houseFacade.update(houseDTO);
+        }
     }
 
 
