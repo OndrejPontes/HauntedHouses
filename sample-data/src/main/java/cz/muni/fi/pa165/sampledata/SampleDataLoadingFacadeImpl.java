@@ -72,10 +72,32 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         abilitiesOfNightmare.add(sizeChanging);
 
 
-        Ghost whiteLady = ghost("The Wihte Lady", "A woman in white with long black hair and face either completely blank or obscured by blood usually standing in the middle of the road", getTime(20,00), getTime(23,00), whaley, abilitiesOfWhiteLady);
-        Ghost mary = ghost("Bloody Mary", "Young girl all covered with blood that haunts at midnight", getTime(23,50), getTime(23,59), whaley, abilitiesOfMaryAndMirror );
-        Ghost nightmare = ghost("Nightmare ghost", "This horrible ghost does not let you sleep calm, he visits you at night, when you are sleeping and causes you worst nightmares!", getTime(20,00), getTime(23,30), sturdival, abilitiesOfNightmare);
-        Ghost mirror = ghost("Mirror ghost", "If you hear story about him, you will never ever look in the mirror again...", getTime(10,00), getTime(19,00), octagon, abilitiesOfMaryAndMirror);
+        Calendar timeFrom = Calendar.getInstance();
+        timeFrom.set(Calendar.HOUR_OF_DAY, 20);
+        timeFrom.set(Calendar.MINUTE, 0);
+        timeFrom.set(Calendar.SECOND, 0);
+        Calendar timeTo = Calendar.getInstance();
+        timeTo.set(Calendar.HOUR_OF_DAY, 23);
+        timeTo.set(Calendar.MINUTE, 0);
+        timeTo.set(Calendar.SECOND, 0);
+
+        Ghost whiteLady = ghost("The Wihte Lady", "A woman in white with long black hair and face either completely blank or obscured by blood usually standing in the middle of the road", timeFrom.getTime(), timeTo.getTime(), whaley, abilitiesOfWhiteLady);
+
+        timeTo.set(Calendar.MINUTE, 30);
+        Ghost nightmare = ghost("Nightmare ghost", "This horrible ghost does not let you sleep calm, he visits you at night, when you are sleeping and causes you worst nightmares!",timeFrom.getTime(), timeTo.getTime(), sturdival, abilitiesOfNightmare);
+
+        timeFrom.set(Calendar.HOUR_OF_DAY, 23);
+        timeFrom.set(Calendar.MINUTE, 50);
+        timeTo.set(Calendar.MINUTE, 59);
+        timeTo.set(Calendar.SECOND, 59);
+        Ghost mary = ghost("Bloody Mary", "Young girl all covered with blood that haunts at midnight", timeFrom.getTime(), timeTo.getTime(), whaley, abilitiesOfMaryAndMirror );
+
+        timeFrom.set(Calendar.HOUR_OF_DAY, 10);
+        timeFrom.set(Calendar.MINUTE, 0);
+        timeTo.set(Calendar.HOUR_OF_DAY, 19);
+        timeTo.set(Calendar.MINUTE, 19);
+        timeTo.set(Calendar.SECOND, 19);
+        Ghost mirror = ghost("Mirror ghost", "If you hear story about him, you will never ever look in the mirror again...", timeFrom.getTime(), timeTo.getTime(), octagon, abilitiesOfMaryAndMirror);
 
         List<Ghost> ghostsForh1 = new ArrayList<Ghost>();
         ghostsForh1.add(whiteLady);
@@ -90,7 +112,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Haunting h1 = haunting(getDate(16,12,2016), 3, whaley, ghostsForh1);
         Haunting h2 = haunting(getDate(16,12,2016), 10, sturdival, ghostsForh2);
         Haunting h3 = haunting(getDate(17,12,2016), 55, octagon, ghostsForh3);
-
     }
 
 
