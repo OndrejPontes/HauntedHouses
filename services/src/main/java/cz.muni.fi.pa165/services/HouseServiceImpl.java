@@ -2,7 +2,9 @@ package cz.muni.fi.pa165.services;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 
+import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +15,8 @@ import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.House;
 import cz.muni.fi.pa165.exception.ServiceImplDAOException;
+
+import javax.validation.ConstraintViolationException;
 
 /**
  * @author Jirka Kruml
@@ -124,6 +128,15 @@ public class HouseServiceImpl implements HouseService {
             houseDao.delete(id);
         } catch (Exception e) {
             throw new ServiceImplDAOException("cannot delete house",e);
+        }
+    }
+
+    @Override
+    public List<House> getByHaunting(Haunting haunting) {
+        try {
+            return houseDao.getByHaunting(haunting);
+        } catch (ConstraintViolationException e) {
+            throw new ServiceImplDAOException("cannot find houses by haunting", e);
         }
     }
 }

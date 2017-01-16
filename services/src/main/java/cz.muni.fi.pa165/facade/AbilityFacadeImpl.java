@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.services.GhostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,9 @@ public class AbilityFacadeImpl implements AbilityFacade {
     @Autowired
     private AbilityService abilityService;
 
+    @Autowired
+    private GhostService ghostService;
+
 
     @Override
     public AbilityDTO create(AbilityCreateDTO abilityCreateDTO) {
@@ -43,12 +48,21 @@ public class AbilityFacadeImpl implements AbilityFacade {
 
     @Override
     public void delete(AbilityDTO abilityDTO) {
-        Ability ghost = mappingService.mapObject(abilityDTO, Ability.class);
-        abilityService.delete(ghost);
+        Ability ability = mappingService.mapObject(abilityDTO, Ability.class);
+        List<Ghost> ghosts = ghostService.getByAbility(ability);
+        for (Ghost ghost : ghosts ) {
+            ghost.removeAbility(ability);
+        }
+        abilityService.delete(ability);
     }
 
     @Override
     public void delete(long id) {
+        Ability ability = abilityService.getById(id);
+        List<Ghost> ghosts = ghostService.getByAbility(ability);
+        for (Ghost ghost : ghosts ) {
+            ghost.removeAbility(ability);
+        }
         abilityService.delete(id);
     }
 

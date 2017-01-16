@@ -56,6 +56,7 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         House whaley = house("The Whaley house", "San Diego, California", getDate(20,4,1966), "The mid-19th century house. Part of the house was once rented out to the County of San Diego for use as a courtroom…which may explain the appearance of several unidentified ghosts within the house.  Apart from these unnamed apparitions, the original owner, Thomas Whaley, his wife, one of their children, a little girl, and a convict are repeatedly seen within the house.  The house was apparently haunted as soon as it was built, as the spirit of a man who had been convicted and hanged on the site took up residence in the house upon its completion.  The Whaley apparitions are often seen engaged in the normal activities of their former day to day lives.  Doors have been known to close and lock on their own, and footsteps are often heard throughout the house, along with music and the crying of a baby.");
         House octagon = house("The Octagon house", "Washington D.C.", getDate(15,9,1942), "Completed in 1801, this former mansion is one of the most historic in the nation.  Built for Colonel John Tayloe III, it was briefly the site of the French Embassy during the War of 1812, as well as the temporary residence of President Madison, who signed the Treaty of Ghent in its central parlor.  Today, the building is used by the American Institute of Architects as a museum, but it has also made quite a name for itself as a center for paranormal activity, as far back as the mid-19th century.  The central staircase is a major hotspot for the supernatural, as footsteps are often heard, along with the saddened voice of a woman.  Doors have been locked only to suddenly be found standing wide open.  Lights turn on and off on their own, and footsteps – and even faint footprints! – have been reported throughout the building, and objects often move without human interference.");
         House william = house("William Kehoe House", "Savvanah, Georgia", getDate(24,12,1892), "Formerly the home of William Kehoe and his family, this 1892 house later became a school, a funeral home, and today is operated as a historic inn.  The Kehoe family, however, seems to have remained in residence long after their deaths, going about their usual routines while also interacting with guests and staff.  Mrs. Kehoe has often been seen sitting at a desk, writing, or sitting on the beds of sleeping guests.  Mr. Kehoe has been seen throughout the house as well, and on one occasion opened all of the exterior locked doors on the first floor…simultaneously.  The young twin boys of the Kehoe’s, who died in a childhood accident, have also been seen roaming throughout the house, and their noisy footsteps heard as they run across the upper floors.");
+        House noHouse = house("No house", "Anywhere", null, "Ghosts in this house have not chosen a house to haunt in yet...but soon they will...");
 
         List<Ability> abilitiesOfWhiteLady = new ArrayList<Ability>();
         abilitiesOfWhiteLady.add(teleportation);
@@ -72,10 +73,32 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         abilitiesOfNightmare.add(sizeChanging);
 
 
-        Ghost whiteLady = ghost("The Wihte Lady", "A woman in white with long black hair and face either completely blank or obscured by blood usually standing in the middle of the road", getTime(20,00), getTime(23,00), whaley, abilitiesOfWhiteLady);
-        Ghost mary = ghost("Bloody Mary", "Young girl all covered with blood that haunts at midnight", getTime(23,50), getTime(23,59), whaley, abilitiesOfMaryAndMirror );
-        Ghost nightmare = ghost("Nightmare ghost", "This horrible ghost does not let you sleep calm, he visits you at night, when you are sleeping and causes you worst nightmares!", getTime(20,00), getTime(23,30), sturdival, abilitiesOfNightmare);
-        Ghost mirror = ghost("Mirror ghost", "If you hear story about him, you will never ever look in the mirror again...", getTime(10,00), getTime(19,00), octagon, abilitiesOfMaryAndMirror);
+        Calendar timeFrom = Calendar.getInstance();
+        timeFrom.set(Calendar.HOUR_OF_DAY, 20);
+        timeFrom.set(Calendar.MINUTE, 0);
+        timeFrom.set(Calendar.SECOND, 0);
+        Calendar timeTo = Calendar.getInstance();
+        timeTo.set(Calendar.HOUR_OF_DAY, 23);
+        timeTo.set(Calendar.MINUTE, 0);
+        timeTo.set(Calendar.SECOND, 0);
+
+        Ghost whiteLady = ghost("The Wihte Lady", "A woman in white with long black hair and face either completely blank or obscured by blood usually standing in the middle of the road", timeFrom.getTime(), timeTo.getTime(), whaley, abilitiesOfWhiteLady);
+
+        timeTo.set(Calendar.MINUTE, 30);
+        Ghost nightmare = ghost("Nightmare ghost", "This horrible ghost does not let you sleep calm, he visits you at night, when you are sleeping and causes you worst nightmares!",timeFrom.getTime(), timeTo.getTime(), sturdival, abilitiesOfNightmare);
+
+        timeFrom.set(Calendar.HOUR_OF_DAY, 23);
+        timeFrom.set(Calendar.MINUTE, 50);
+        timeTo.set(Calendar.MINUTE, 59);
+        timeTo.set(Calendar.SECOND, 59);
+        Ghost mary = ghost("Bloody Mary", "Young girl all covered with blood that haunts at midnight", timeFrom.getTime(), timeTo.getTime(), whaley, abilitiesOfMaryAndMirror );
+
+        timeFrom.set(Calendar.HOUR_OF_DAY, 10);
+        timeFrom.set(Calendar.MINUTE, 0);
+        timeTo.set(Calendar.HOUR_OF_DAY, 19);
+        timeTo.set(Calendar.MINUTE, 19);
+        timeTo.set(Calendar.SECOND, 19);
+        Ghost mirror = ghost("Mirror ghost", "If you hear story about him, you will never ever look in the mirror again...", timeFrom.getTime(), timeTo.getTime(), octagon, abilitiesOfMaryAndMirror);
 
         List<Ghost> ghostsForh1 = new ArrayList<Ghost>();
         ghostsForh1.add(whiteLady);
@@ -90,7 +113,6 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         Haunting h1 = haunting(getDate(16,12,2016), 3, whaley, ghostsForh1);
         Haunting h2 = haunting(getDate(16,12,2016), 10, sturdival, ghostsForh2);
         Haunting h3 = haunting(getDate(17,12,2016), 55, octagon, ghostsForh3);
-
     }
 
 

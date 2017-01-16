@@ -6,6 +6,7 @@ import java.util.List;
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.dto.HauntingCreateDTO;
 import cz.muni.fi.pa165.dto.HauntingDTO;
+import cz.muni.fi.pa165.dto.HouseDTO;
 
 /**
  * @author MonikaMociarikova
@@ -25,4 +26,8 @@ public interface HauntingFacade {
     List<HauntingDTO> getByDate(Date date);
 
     List<HauntingDTO> getAll();
+
+    List<HauntingDTO> getHauntingsOfGhost(GhostDTO ghost);
+
+    List<HauntingDTO> getHauntingsOfHouse(HouseDTO house);
 }

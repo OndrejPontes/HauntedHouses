@@ -13,17 +13,19 @@ public class GhostDTO {
     private Date hauntsFrom;
     private Date hauntsTo;
     private String description;
+    private HouseDTO hauntedHouse;
     private List<AbilityDTO> abilities = new ArrayList<>();
 
     public GhostDTO() {
     }
 
-    public GhostDTO(Long id, String name, Date hauntsFrom, Date hauntsTo, String description, List<AbilityDTO> abilities) {
+    public GhostDTO(Long id, String name, Date hauntsFrom, Date hauntsTo, String description, HouseDTO hauntedHouse, List<AbilityDTO> abilities) {
         this.id = id;
         this.name = name;
         this.hauntsFrom = hauntsFrom;
         this.hauntsTo = hauntsTo;
         this.description = description;
+        this.hauntedHouse = hauntedHouse;
         this.abilities = abilities;
     }
 
@@ -72,6 +74,15 @@ public class GhostDTO {
         return this;
     }
 
+    public HouseDTO getHauntedHouse() {
+        return hauntedHouse;
+    }
+
+    public GhostDTO setHauntedHouse(HouseDTO hauntedHouse) {
+        this.hauntedHouse = hauntedHouse;
+        return this;
+    }
+
     public List<AbilityDTO> getAbilities() {
         return abilities;
     }
@@ -94,6 +105,8 @@ public class GhostDTO {
         if (hauntsTo != null ? !hauntsTo.equals(ghostDTO.hauntsTo) : ghostDTO.hauntsTo != null) return false;
         if (description != null ? !description.equals(ghostDTO.description) : ghostDTO.description != null)
             return false;
+        if (hauntedHouse != null ? !hauntedHouse.equals(ghostDTO.hauntedHouse) : ghostDTO.hauntedHouse != null)
+            return false;
         return abilities != null ? abilities.equals(ghostDTO.abilities) : ghostDTO.abilities != null;
 
     }
@@ -105,6 +118,7 @@ public class GhostDTO {
         result = 31 * result + (hauntsFrom != null ? hauntsFrom.hashCode() : 0);
         result = 31 * result + (hauntsTo != null ? hauntsTo.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (hauntedHouse != null ? hauntedHouse.hashCode() : 0);
         result = 31 * result + (abilities != null ? abilities.hashCode() : 0);
         return result;
     }
@@ -117,6 +131,7 @@ public class GhostDTO {
                 ", hauntsFrom=" + hauntsFrom +
                 ", hauntsTo=" + hauntsTo +
                 ", description='" + description + '\'' +
+                ", haunted house=" + hauntedHouse +
                 ", abilities=" + abilities +
                 '}';
     }

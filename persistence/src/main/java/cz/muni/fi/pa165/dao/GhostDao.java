@@ -2,7 +2,10 @@ package cz.muni.fi.pa165.dao;
 
 import java.util.List;
 
+import cz.muni.fi.pa165.entity.Ability;
 import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
+import cz.muni.fi.pa165.entity.House;
 
 /**
  * @author Ondrej Ponteš
@@ -45,4 +48,14 @@ public interface GhostDao {
      * @return list of all ghosts.
      */
      List<Ghost> getAll();
+
+    /**
+     * Gets ghost by ability
+     * @param ability of ghost to be found
+     * @return Ghost collection with specified ability
+     */
+    List<Ghost> getByAbility(Ability ability);
+
+    List<Ghost> getGhostsOfHouse(House house);
+
 }

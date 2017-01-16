@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import cz.muni.fi.pa165.entity.Haunting;
+import cz.muni.fi.pa165.services.HauntingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,9 @@ public class GhostFacadeImpl implements GhostFacade {
 
     @Autowired
     private GhostService ghostService;
+
+    @Autowired
+    private HauntingService hauntingService;
 
     @Override
     public GhostDTO create(GhostCreateDTO ghostCreateDTO) {
@@ -64,6 +69,10 @@ public class GhostFacadeImpl implements GhostFacade {
     @Override
     public void delete(GhostDTO ghostDTO) {
         Ghost ghost = mappingService.mapObject(ghostDTO, Ghost.class);
+        List<Haunting> hauntings = hauntingService.getHauntingsOfGhost(ghost);
+        for (Haunting haunt : hauntings  ) {
+            hauntingService.remove(haunt);
+        }
         ghostService.delete(ghost);
     }
 }

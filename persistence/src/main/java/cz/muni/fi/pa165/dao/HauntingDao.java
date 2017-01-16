@@ -3,7 +3,9 @@ package cz.muni.fi.pa165.dao;
 import java.util.Date;
 import java.util.List;
 
+import cz.muni.fi.pa165.entity.Ghost;
 import cz.muni.fi.pa165.entity.Haunting;
+import cz.muni.fi.pa165.entity.House;
 
 /**
  * @author Monika Mociarikova
@@ -46,5 +48,10 @@ public interface HauntingDao {
      * @return list of all hauntings.
      */
      List<Haunting> getAll();
+
+     List<Haunting> getHauntingsOfGhost(Ghost ghost);
+
+     List<Haunting> getHauntingsOfHouse(House house);
+
 
 }

@@ -45,6 +45,7 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
 
     private Ghost ghost;
     private Ghost ghost2;
+    private Ability ability;
 
     @BeforeMethod
     public void init() throws ParseException {
@@ -59,7 +60,7 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
         houseDao.create(house);
 
         List<Ability> abilities = new ArrayList<>();
-        Ability ability = new Ability("Overshadowing", "The power to take over another body");
+        ability = new Ability("Overshadowing", "The power to take over another body");
         abilityDao.create(ability);
         abilities.add(ability);
 
@@ -121,6 +122,14 @@ public class GhostDaoTest extends AbstractTestNGSpringContextTests {
         ghostDao.create(ghost);
         Ghost ghosts = ghostDao.getByName("Pepa");
         assertThat(ghostDao.getByName("Pepa")).isEqualTo(ghost);
+    }
+
+    @Test
+    public void getByAbilityTest() {
+        ghostDao.create(ghost);
+        ghostDao.create(ghost2);
+        List<Ghost> ghosts = ghostDao.getByAbility(ability);
+        assertThat(ghosts.size()).isEqualTo(2);
     }
 
     @Test

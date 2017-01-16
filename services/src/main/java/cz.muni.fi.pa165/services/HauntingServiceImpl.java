@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import cz.muni.fi.pa165.entity.House;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -98,6 +99,24 @@ public class HauntingServiceImpl implements HauntingService {
             return hauntingDao.getAll();
         }catch (Exception ex) {
             throw new ServiceImplDAOException("Cannot find all hauntings ", ex);
+        }
+    }
+
+    @Override
+    public List<Haunting> getHauntingsOfGhost(Ghost ghost) {
+        try {
+            return hauntingDao.getHauntingsOfGhost(ghost);
+        }catch (Exception ex) {
+            throw new ServiceImplDAOException("Cannot find hauntings of ghost", ex);
+        }
+    }
+
+    @Override
+    public List<Haunting> getHauntingsOfHouse(House house) {
+        try {
+            return hauntingDao.getHauntingsOfHouse(house);
+        }catch (Exception ex) {
+            throw new ServiceImplDAOException("Cannot find hauntings of house", ex);
         }
     }
 }

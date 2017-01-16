@@ -4,15 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  * @author Ondrej Ponteš
@@ -38,6 +30,7 @@ public class Ghost {
     private String description;
 
     @ManyToOne
+    @JoinColumn
     private House hauntedHouse;
 
     @ManyToMany
@@ -113,6 +106,11 @@ public class Ghost {
 
     public Ghost setAbilities(List<Ability> abilities) {
         this.abilities = abilities;
+        return this;
+    }
+
+    public Ghost removeAbility(Ability ability) {
+        this.abilities.remove(ability);
         return this;
     }
 

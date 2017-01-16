@@ -1,8 +1,11 @@
 package cz.muni.fi.pa165.services;
 
 import java.util.Collection;
+import java.util.List;
 
 import cz.muni.fi.pa165.entity.Ability;
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.entity.House;
 
 /**
@@ -43,5 +46,7 @@ public interface HouseService {
     House update(House house);
 
     void delete(long id);
+
+    List<House> getByHaunting(Haunting haunting);
 
 }

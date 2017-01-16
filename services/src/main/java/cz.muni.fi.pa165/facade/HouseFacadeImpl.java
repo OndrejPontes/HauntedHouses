@@ -1,7 +1,11 @@
 package cz.muni.fi.pa165.facade;
 
 import java.util.Collection;
+import java.util.List;
 
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
+import cz.muni.fi.pa165.services.GhostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,6 +32,9 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Autowired
     private MappingService mappingService;
+
+    @Autowired
+    private GhostService ghostService;
 
     @Override
     public Collection<HouseDTO> getAll() {
@@ -61,6 +68,17 @@ public class HouseFacadeImpl implements HouseFacade {
 
     @Override
     public void delete(long id) {
+        House house = houseService.getById(id);
+        if (house.getName() == "No house") return;
+        List<Haunting> hauntings = hauntingService.getHauntingsOfHouse(house);
+        for (Haunting haunt : hauntings  ) {
+            hauntingService.remove(haunt);
+        }
+        House defaultHouse = houseService.getByName("No house");
+        List<Ghost> ghosts = ghostService.getGhostsOfHouse(house);
+        for (Ghost ghost : ghosts ) {
+            ghost.setHauntedHouse(defaultHouse);
+        }
         houseService.delete(id);
     }
 }
