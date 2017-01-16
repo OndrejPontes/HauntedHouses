@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import cz.muni.fi.pa165.entity.Ability;
+import cz.muni.fi.pa165.entity.Haunting;
+import cz.muni.fi.pa165.entity.House;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +65,15 @@ public class GhostDaoImpl implements GhostDao {
                 "Select g from Ghost g where :ability member of g.abilities",
                 Ghost.class);
         query.setParameter("ability", ability);
+        return query.getResultList();
+    }
+
+    @Override
+    public List<Ghost> getGhostsOfHouse(House house) {
+        TypedQuery<Ghost> query = em.createQuery(
+                "Select g from Ghost g where :house = g.hauntedHouse",
+                Ghost.class);
+        query.setParameter("house", house);
         return query.getResultList();
     }
 }

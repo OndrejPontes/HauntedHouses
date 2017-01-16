@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.services;
 import java.util.Date;
 import java.util.List;
 
+import cz.muni.fi.pa165.entity.House;
 import org.springframework.stereotype.Service;
 
 import cz.muni.fi.pa165.entity.Ghost;
@@ -33,5 +34,8 @@ public interface HauntingService {
 
     List<Haunting> getAll();
 
+    List<Haunting> getHauntingsOfGhost(Ghost ghost);
+
+    List<Haunting> getHauntingsOfHouse(House house);
 
 }

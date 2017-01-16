@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.dao;
 
 import java.util.List;
 
+import cz.muni.fi.pa165.entity.Haunting;
 import cz.muni.fi.pa165.entity.House;
 
 /**
@@ -58,4 +59,6 @@ public interface HouseDao {
      * @return a collection of all houses stored in the database
      */
     List<House> getAll();
+
+    List<House> getByHaunting(Haunting haunting);
 }

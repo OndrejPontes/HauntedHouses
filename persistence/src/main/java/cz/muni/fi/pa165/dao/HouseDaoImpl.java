@@ -5,7 +5,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
+import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.Haunting;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,5 +80,14 @@ public class HouseDaoImpl implements HouseDao {
     @Override
     public List<House> getAll() {
         return em.createQuery("select house from House house", House.class).getResultList();
+    }
+
+    @Override
+    public List<House> getByHaunting(Haunting haunting) {
+        TypedQuery<House> query = em.createQuery(
+                "Select h from House h where :haunting member of h.hauntings",
+                House.class);
+        query.setParameter("haunting", haunting);
+        return query.getResultList();
     }
 }
