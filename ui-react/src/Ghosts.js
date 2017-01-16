@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Button, Glyphicon, Modal, Form, FormGroup, Col, FormControl, ControlLabel} from 'react-bootstrap'
+import {Table, Button, Glyphicon, Modal, Form, FormGroup, Col, FormControl, ControlLabel, option} from 'react-bootstrap'
 import axios from 'axios'
 var DateTimeField = require('react-bootstrap-datetimepicker');
 var DateTimeField2 = require('react-bootstrap-datetimepicker');
@@ -15,6 +15,9 @@ const Ghosts = React.createClass({
             description: "",
             hauntsFrom: 0,
             hauntsTo: 0,
+            hauntedHouse : {
+                name: ""
+            },
             abilities: []
         };
     },
@@ -30,6 +33,9 @@ const Ghosts = React.createClass({
             description: "",
             hauntsFrom: 0,
             hauntsTo: 0,
+            hauntedHouse : {
+                name: ""
+            },
             abilities: []
         });
     },
@@ -42,7 +48,8 @@ const Ghosts = React.createClass({
             description: ghost.description,
             hauntsFrom: ghost.hauntsFrom,
             hauntsTo: ghost.hauntsTo,
-            abilities: []
+            hauntedHouse : ghost.hauntedHouse,
+            abilities: ghost.abilities
         });
     },
 
@@ -52,7 +59,8 @@ const Ghosts = React.createClass({
             description: this.state.description,
             hauntsFrom: this.state.hauntsFrom,
             hauntsTo: this.state.hauntsTo,
-            abilities: []
+            hauntedHouse : this.state.hauntedHouse,
+            abilities: this.state.abilities
         })
             .then(res => {
                 console.log("Ghost " + res.data.id + " was created");
@@ -87,7 +95,8 @@ const Ghosts = React.createClass({
             hauntsTo: this.state.hauntsTo,
             hauntsFrom: this.state.hauntsFrom,
             description: this.state.description,
-            abilities: []
+            hauntedHouse: this.state.hauntedHouse,
+            abilities: this.state.abilities
         };
         axios.put("http://localhost:8080/pa165/ghosts", ghost)
             .then(res => {
@@ -115,7 +124,14 @@ const Ghosts = React.createClass({
         axios.get(`http://localhost:8080/pa165/ghosts`)
             .then(res => {
                 this.setState({ghosts: res.data});
-                console.log("component did mount");
+                console.log("component ghosts did mount");
+                // const posts = res.data.data.children.map(obj => obj.data);
+                // this.setState({ posts });
+            });
+        axios.get(`http://localhost:8080/pa165/houses`)
+            .then(result => {
+                this.setState({hauntedHouses: result.data});
+                console.log("component houses did mount");
                 // const posts = res.data.data.children.map(obj => obj.data);
                 // this.setState({ posts });
             });
@@ -124,13 +140,19 @@ const Ghosts = React.createClass({
     render() {
         let tableLines = [];
         this.state.ghosts.forEach(function (ghost, i) {
-            tableLines.push(
+            var abilitiesOfGhost = ghost.abilities;
+                tableLines.push(
                 <tr key={i}>
                     <th>{ ghost.id }</th>
                     <th>{ ghost.name }</th>
                     <th>{ ghost.description}</th>
-                    <th>{ new Date(ghost.hauntsFrom).toLocaleDateString() + " " + new Date(ghost.hauntsFrom).toLocaleTimeString() }</th>
-                    <th>{ new Date(ghost.hauntsTo).toLocaleDateString() + " " + new Date(ghost.hauntsTo).toLocaleTimeString() }</th>
+                    <th>{ new Date(ghost.hauntsFrom).toLocaleTimeString('en-GB') }</th>
+                    <th>{ new Date(ghost.hauntsTo).toLocaleTimeString('en-GB') }</th>
+                    <th> {ghost.hauntedHouse.name}</th>
+                    <th> {abilitiesOfGhost.map(function (ability, index) {
+                        return <div key={index}> {ability.name} </div>;
+                    })}
+                    </th>
                     <th>
                         <Button onClick={() => this.openUpdateModal(ghost)}><Glyphicon glyph="pencil"/></Button>
                         <Button onClick={() => this.removeGhost(ghost.id)}><Glyphicon glyph="remove"/></Button>
@@ -172,7 +194,7 @@ const Ghosts = React.createClass({
                 Haunting from
                 </Col>
                 <Col sm={7}>
-                <DateTimeField id="datetimepicker" defaultText="Date when everything begin" mode="date" onChange={x => this.setState({hauntsFrom: x})}/>
+                <DateTimeField id="datetimepicker" defaultText="Time a ghost haunts from" mode="time" onChange={x => this.setState({hauntsFrom: x})}/>
                 </Col>
                 </FormGroup>
 
@@ -181,9 +203,10 @@ const Ghosts = React.createClass({
                 Haunting to
                 </Col>
                 <Col sm={7}>
-                <DateTimeField2 id="datetimepicker2" defaultText="Date when everything ended" mode="date" onChange={x => this.setState({hauntsTo: x})}/>
+                <DateTimeField id="datetimepicker2" defaultText="Time a ghost haunts to" mode="time" onChange={x => this.setState({hauntsTo: x})}/>
                 </Col>
                 </FormGroup>
+
 
                 </Form>
                 </Modal.Body>
@@ -205,6 +228,8 @@ const Ghosts = React.createClass({
                         <th>Description</th>
                         <th>Haunting from</th>
                         <th>Haunting to</th>
+                        <th>Haunted house</th>
+                        <th>Abilities</th>
                         <th><Button onClick={this.openCreateModal}>New <Glyphicon glyph="plus"/></Button></th>
                     </tr>
                     </thead>

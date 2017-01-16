@@ -156,7 +156,7 @@ const Abilities = React.createClass({
                                     Description
                                 </Col>
                                 <Col sm={7}>
-                                    <FormControl type="text" placeholder="Ability Description" value={this.state.address}
+                                    <FormControl type="text" placeholder="Ability Description" value={this.state.description}
                                                  onChange={this.handleChange.bind(this, 'description')}/>
                                 </Col>
                             </FormGroup>
