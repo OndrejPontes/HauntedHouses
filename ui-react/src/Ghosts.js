@@ -220,8 +220,6 @@ const Ghosts = React.createClass({
                     <th>
                         <Button onClick={() => this.openUpdateModal(ghost)}><Glyphicon glyph="pencil"/></Button>
                         <Button onClick={() => this.removeGhost(ghost.id)}><Glyphicon glyph="remove"/></Button>
-                        <br/>
-                        <Button onClick={() => this.createHaunting(ghost)}>Go haunting!</Button>
                     </th>
                 </tr>
             )
@@ -283,7 +281,6 @@ const Ghosts = React.createClass({
                                 {this.state.hauntedHouses.map(function (house, index) {
                                     return <option value={house} key={index}>{house.name}</option>;
                                 })}
-                                <option value="a">bka</option>
                             </FormControl>
                         </Col>
                     </FormGroup>
