@@ -13,7 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 import cz.muni.fi.pa165.dto.GhostCreateDTO;
 import cz.muni.fi.pa165.dto.GhostDTO;
 import cz.muni.fi.pa165.entity.Ghost;
+import cz.muni.fi.pa165.entity.House;
 import cz.muni.fi.pa165.services.GhostService;
+import cz.muni.fi.pa165.services.HouseService;
 import cz.muni.fi.pa165.services.MappingService;
 
 /**
@@ -30,11 +32,19 @@ public class GhostFacadeImpl implements GhostFacade {
     private GhostService ghostService;
 
     @Autowired
+    private HouseService houseService;
+
+    @Autowired
     private HauntingService hauntingService;
 
     @Override
     public GhostDTO create(GhostCreateDTO ghostCreateDTO) {
         Ghost ghost = mappingService.mapObject(ghostCreateDTO, Ghost.class);
+        House defaultHouse = houseService.getByName("No house");
+        if(ghost.getHauntedHouse() == null) {
+            System.out.println("house = null");
+            ghost.setHauntedHouse(defaultHouse);
+        }
         ghost = ghostService.create(ghost);
         return mappingService.mapObject(ghost, GhostDTO.class);
     }
