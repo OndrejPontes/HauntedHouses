@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Glyphicon, Modal, Form, FormGroup, Col, FormControl, ControlLabel } from 'react-bootstrap'
+import {Table, Button, Glyphicon, Modal, Form, FormGroup, Col, FormControl, ControlLabel} from 'react-bootstrap'
 import axios from 'axios'
 var DateTimeField = require('react-bootstrap-datetimepicker');
 
@@ -18,7 +18,7 @@ const Houses = React.createClass({
   },
 
   closeModal(){
-    this.setState({ showCreateModal: false, showUpdateModal: false });
+    this.setState({showCreateModal: false, showUpdateModal: false});
   },
 
   openCreateModal(){
@@ -99,7 +99,7 @@ const Houses = React.createClass({
     this.closeModal();
   },
 
-  handleChange: function(field, e) {
+  handleChange: function (field, e) {
     const object = {};
     object[field] = e.target.value;
     this.setState(object);
@@ -110,7 +110,7 @@ const Houses = React.createClass({
       .then(res => {
         // console.log(res.data);
         // const houses = res.data;
-        this.setState({ houses: res.data });
+        this.setState({houses: res.data});
         // const posts = res.data.data.children.map(obj => obj.data);
         // this.setState({ posts });
       });
@@ -186,8 +186,8 @@ const Houses = React.createClass({
           <Modal.Footer>
             {
               this.state.showCreateModal ?
-              <Button onClick={this.createHouse}>Create</Button> :
-              <Button onClick={this.updateHouse}>Update</Button>
+                <Button onClick={this.createHouse}>Create</Button> :
+                <Button onClick={this.updateHouse}>Update</Button>
             }
             <Button onClick={this.closeModal}>Close</Button>
           </Modal.Footer>
