@@ -1,13 +1,22 @@
 import React from 'react';
 import {Table, Button, Glyphicon, Modal, Form, FormGroup, Col, FormControl, ControlLabel, option} from 'react-bootstrap'
 import axios from 'axios'
+import $ from 'jquery'
 var DateTimeField = require('react-bootstrap-datetimepicker');
 var DateTimeField2 = require('react-bootstrap-datetimepicker');
 
 const Ghosts = React.createClass({
+
+    getDefaultProps: function(){
+        return {
+            ajaxApi: ['http://localhost:8080/pa165/ghosts','http://localhost:8080/pa165/houses']
+        };
+    },
+
     getInitialState(){
         return {
             ghosts: [],
+            hauntedHouses: [],
             showCreateModal: false,
             showUpdateModal: false,
             id: 0,
@@ -15,9 +24,7 @@ const Ghosts = React.createClass({
             description: "",
             hauntsFrom: 0,
             hauntsTo: 0,
-            hauntedHouse : {
-                name: ""
-            },
+            hauntedHouse :{},
             abilities: []
         };
     },
@@ -33,9 +40,7 @@ const Ghosts = React.createClass({
             description: "",
             hauntsFrom: 0,
             hauntsTo: 0,
-            hauntedHouse : {
-                name: ""
-            },
+            hauntedHouse : {},
             abilities: []
         });
     },
@@ -119,7 +124,44 @@ const Ghosts = React.createClass({
         object[field] = e.target.value;
         this.setState(object);
     },
+/*
+    componentDidMount() {
+        axios.all(this.props.ajaxApi.map(function(api) {
+            axios.get(api)
+        })).then(axios.spread(function(req1, req2) {
+            this.setState({
+                ghosts: req1,
+                hauntedHouses: req2
+            })
+        }));
+    },
+*/
+  componentDidMount: function() {
+    $.ajax({
+      url: 'http://localhost:8080/pa165/ghosts',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({ghosts: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error('http://localhost:8080/pa165/ghosts', status, err.toString());
+      }.bind(this)
+    });
+    $.ajax({
+      url: 'http://localhost:8080/pa165/houses',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({hauntedHouses: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
 
+/*
     componentDidMount() {
         axios.get(`http://localhost:8080/pa165/ghosts`)
             .then(res => {
@@ -136,6 +178,16 @@ const Ghosts = React.createClass({
                 // this.setState({ posts });
             });
     },
+*/
+
+  handleSelectChange: function(event){
+    this.setState({value: event.target.value});
+    this.setState({hauntedHouse: event.target.value});
+    console.log(this.state.hauntedHouse.name);
+    console.log(event.target.value.name);
+  },
+
+
 
     render() {
         let tableLines = [];
@@ -143,7 +195,7 @@ const Ghosts = React.createClass({
             var abilitiesOfGhost = ghost.abilities;
                 tableLines.push(
                 <tr key={i}>
-                    <th>{ ghost.id }</th>
+                    <th>{ ghost.id } </th>
                     <th>{ ghost.name }</th>
                     <th>{ ghost.description}</th>
                     <th>{ new Date(ghost.hauntsFrom).toLocaleTimeString('en-GB') }</th>
@@ -203,9 +255,24 @@ const Ghosts = React.createClass({
                 Haunting to
                 </Col>
                 <Col sm={7}>
-                <DateTimeField id="datetimepicker2" defaultText="Time a ghost haunts to" mode="time" onChange={x => this.setState({hauntsTo: x})}/>
+                  <DateTimeField2 id="datetimepicker2" defaultText="Time a ghost haunts to" mode="time" onChange={x => this.setState({hauntsTo: x})}/>
                 </Col>
                 </FormGroup>
+
+                    <FormGroup controlId="ghostHauntedHouse">
+                        <Col componentClass={ControlLabel} sm={3}>
+                            Haunted house
+                        </Col>
+                        <Col sm={7}>
+                            <FormControl componentClass="select" placeholder="Select a house for ghost"
+                                         onChange={x => this.setState({ hauntedHouse: x })}>
+                                {this.state.hauntedHouses.map(function (house, index) {
+                                    return <option value={house} key={index}>{house.name}</option>;
+                                })}
+                                <option value="a">bka</option>
+                            </FormControl>
+                        </Col>
+                    </FormGroup>
 
 
                 </Form>
