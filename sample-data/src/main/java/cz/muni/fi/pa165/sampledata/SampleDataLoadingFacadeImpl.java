@@ -104,6 +104,12 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         ghostsForh1.add(whiteLady);
         ghostsForh1.add(mary);
 
+        List<Ghost> onlyWhite = new ArrayList<Ghost>();
+        onlyWhite.add(whiteLady);
+
+        List<Ghost> onlyMary = new ArrayList<Ghost>();
+        onlyWhite.add(mary);
+
         List<Ghost> ghostsForh2 = new ArrayList<Ghost>();
         ghostsForh2.add(nightmare);
 
@@ -111,8 +117,13 @@ public class SampleDataLoadingFacadeImpl implements SampleDataLoadingFacade {
         ghostsForh3.add(mirror);
 
         Haunting h1 = haunting(getDate(16,12,2016), 3, whaley, ghostsForh1);
+        Haunting h11 = haunting(getDate(20,12,2016), 5, whaley, onlyWhite);
+        Haunting h12 = haunting(getDate(21,12,2016), 2, whaley, onlyMary);
+        Haunting h13 = haunting(getDate(22,12,2016), 6, whaley,ghostsForh1);
         Haunting h2 = haunting(getDate(16,12,2016), 10, sturdival, ghostsForh2);
+        Haunting h21 = haunting(getDate(24,12,2016), 8, sturdival, ghostsForh2);
         Haunting h3 = haunting(getDate(17,12,2016), 55, octagon, ghostsForh3);
+        Haunting h31 = haunting(getDate(3,1,2017), 1, octagon, ghostsForh3);
     }
 
 
