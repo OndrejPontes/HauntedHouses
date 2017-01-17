@@ -156,11 +156,22 @@ public class Validator {
                 errors.add("You must enter a description of the ghost.");
             }
 
-
             if (byName != null && !byName.getId().equals(ghostDTO.getId())) {
                 errors.add("A ghost with this name already exists.");
             }
+
+            if (ghostDTO.getHauntedHouse() != null) {
+                errors.addAll(validate(ghostDTO.getHauntedHouse()));
+            }
+
+            if (ghostDTO.getAbilities() != null) {
+                for(AbilityDTO ability : ghostDTO.getAbilities()) {
+                    errors.addAll(validate(ability));
+                }
+            }
         }
+
+
         return errors;
     }
 
